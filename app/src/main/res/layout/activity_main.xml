@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    tools:context=".ui.activities.MainActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_main_id"
+        android:id="@+id/toolbar_main_activity_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
         android:layout_height="0dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_main_id" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_main_activity_id" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottomNavigationView"

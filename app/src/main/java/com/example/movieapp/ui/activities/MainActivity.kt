@@ -1,4 +1,4 @@
-package com.example.movieapp.activities
+package com.example.movieapp.ui.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -18,8 +18,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpToolbarMain() {
-        setSupportActionBar(toolbar_main_id)
-        title = getString(R.string.app_name)
+        setSupportActionBar(toolbar_main_activity_id)
+        title = getString(R.string.main_activity_name)
         supportActionBar!!.setDisplayShowTitleEnabled(true)
     }
 
@@ -27,6 +27,5 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.my_nav_host_fragment)
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
     }
-
 }
 

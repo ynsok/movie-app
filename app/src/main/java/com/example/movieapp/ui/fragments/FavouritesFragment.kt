@@ -1,4 +1,4 @@
-package com.example.movieapp.fragments
+package com.example.movieapp.ui.fragments
 
 
 import android.os.Bundle
@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.movieapp.R
 
-class HomeFragment : Fragment() {
+class FavouritesFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_favourites, container, false)
     }
 }

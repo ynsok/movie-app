@@ -8,34 +8,30 @@
     <fragment
         android:id="@+id/navigation_menu_home_id"
         android:name="com.example.movieapp.ui.fragments.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_navigation_menu_home_id_to_genresActivity"
-            app:destination="@+id/genresActivity" />
-    </fragment>
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_menu_browse_id"
         android:name="com.example.movieapp.ui.fragments.BrowseFragment"
-        android:label="fragment_browse"
+        android:label="@string/browse_movies"
         tools:layout="@layout/fragment_browse" />
 
     <fragment
         android:id="@+id/navigation_menu_favourite_id"
         android:name="com.example.movieapp.ui.fragments.FavouritesFragment"
-        android:label="fragment_favourites"
+        android:label="@string/favourite_movies"
         tools:layout="@layout/fragment_favourites" />
 
     <fragment
         android:id="@+id/navigation_menu_search_id"
         android:name="com.example.movieapp.ui.fragments.SearchFragment"
-        android:label="fragment_search"
+        android:label="@string/search"
         tools:layout="@layout/fragment_search" />
     <activity
         android:id="@+id/genresActivity"
         android:name="com.example.movieapp.ui.activities.GenresActivity"
-        android:label="activity_genres"
+        android:label="@string/genres"
         tools:layout="@layout/activity_genres" />
 
 </navigation>

@@ -15,13 +15,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <fragment
-        android:id="@+id/my_nav_host_fragment"
+        android:id="@+id/nav_host_fragment_id"
         app:navGraph="@navigation/nav_graph"
+        app:defaultNavHost="true"
 
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_main_activity_id" />
 

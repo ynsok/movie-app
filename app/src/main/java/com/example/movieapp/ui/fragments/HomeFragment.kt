@@ -1,6 +1,5 @@
 package com.example.movieapp.ui.fragments
 
-
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -18,12 +17,13 @@ class HomeFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-       view.button.setOnClickListener {
-            activity?.startActivity(GenresActivity.getIntent(context!!))
 
-
-        }
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
     }
 }

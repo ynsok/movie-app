@@ -13,7 +13,7 @@
         android:id="@+id/navigation_menu_browse_id"
         android:enabled="true"
         android:icon="@drawable/ic_browse_blue"
-        android:title="@string/browse"
+        android:title="@string/browse_movies"
         app:showAsAction="ifRoom" />
 
     <item

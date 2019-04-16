@@ -13,19 +13,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setUpToolbarMain()
         setUpBottomNavigationView()
     }
 
-    private fun setUpToolbarMain() {
-        setSupportActionBar(toolbar_main_activity_id)
-        title = getString(R.string.main_activity_name)
-        supportActionBar!!.setDisplayShowTitleEnabled(true)
-    }
-
     private fun setUpBottomNavigationView() {
-        val navController = findNavController(R.id.my_nav_host_fragment)
+        val navController = findNavController(R.id.nav_host_fragment_id)
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
+        NavigationUI.setupWithNavController(toolbar_main_activity_id, navController)
     }
 }
 
+//TODO remove back arrows in fragments

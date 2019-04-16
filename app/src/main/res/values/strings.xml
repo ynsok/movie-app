@@ -4,11 +4,13 @@
     <string name="main_activity_name">Movie App</string>
     <string name="genre_activity_title">Genres</string>
 
-    <!-- Toolbar titles -->
-    <string name="search">Search</string>
-    <string name="browse">Browse</string>
-    <string name="home">Home</string>
-
+    <!-- Strings -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="favourites">Favourites</string>
+    <string name="favourite_movies">Favourite movies</string>
+    <string name="browse_movies">Browse movies</string>
+    <string name="search">Search</string>
+    <string name="genres">Genres</string>
+    <string name="home">Home</string>
+
 </resources>

@@ -1,7 +1,5 @@
 package com.example.movieapp.ui.activities
 
-import android.content.Context
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.movieapp.R
@@ -9,9 +7,8 @@ import kotlinx.android.synthetic.main.activity_genres.*
 
 class GenresActivity : AppCompatActivity() {
 
-    companion object {
-        fun getIntent(context: Context): Intent  = Intent(context, GenresActivity::class.java)
-    }
+    //TODO app should go back to 'browse' fragment 'onBackPress' instead of going to 'home' fragment
+    //TODO going back to home is set in manifest
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

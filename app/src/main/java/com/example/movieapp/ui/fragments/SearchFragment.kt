@@ -24,6 +24,7 @@ class SearchFragment : Fragment() {
 
 
     }
+    
 /*
     fun onBackPressed() {
         val currentFragment = nav_host_fragment_id.childFragmentManager.fragments[0]

@@ -83,6 +83,10 @@ dependencies {
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    //MaterialLeanBack
+    implementation 'com.github.florent37:materialleanback:1.0.2'
+    implementation 'com.nineoldandroids:library:2.4.0'
+
     detekt "io.gitlab.arturbosch.detekt:detekt-cli:1.0.0.RC9.2"
     ktlint "com.github.shyiko:ktlint:0.29.0"
     implementation "me.cassiano:ktlint-html-reporter:0.2.0"

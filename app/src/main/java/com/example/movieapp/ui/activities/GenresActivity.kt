@@ -19,7 +19,7 @@ class GenresActivity : AppCompatActivity() {
 
     private fun setUpToolbarGenresActivity() {
         setSupportActionBar(toolbar_genres_activity_id)
-        title = getString(R.string.genre_activity_title)
+       // title = getString(R.string.genre_activity_title)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(true)

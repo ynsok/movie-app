@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpBottomNavigationView() {
         val navController = findNavController(R.id.nav_host_fragment_id)
-        NavigationUI.setupWithNavController(bottomNavigationView, navController)
+        NavigationUI.setupWithNavController(bottom_navigation_view_id, navController)
         NavigationUI.setupWithNavController(toolbar_main_activity_id, navController)
     }
 }

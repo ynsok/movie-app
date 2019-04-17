@@ -24,4 +24,16 @@ class SearchFragment : Fragment() {
 
 
     }
+
+/*
+    fun onBackPressed() {
+        val currentFragment = nav_host_fragment_id.childFragmentManager.fragments[0]
+        val controller = Navigation.findNavController(context, R.id.nav_host_fragment_id)
+        if (currentFragment is OnBackPressedListener)
+            (currentFragment as OnBackPressedListener).onBackPressed()
+        else if (!controller.popBackStack())
+            finish()
+
+    }
+    */
 }

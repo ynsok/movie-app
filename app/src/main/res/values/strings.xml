@@ -14,4 +14,9 @@
     <string name="home">Home</string>
     <string name="poster_of_movie_desc">Poster of movie</string>
 
+    <!-- Names of categories in Home Fragment -->
+    <string name="category_popular">Popular</string>
+    <string name="category_top_rated">Top Rated</string>
+    <string name="category_upcoming">Upcoming</string>
+    <string name="category_now_playing">Now playing</string>
 </resources>

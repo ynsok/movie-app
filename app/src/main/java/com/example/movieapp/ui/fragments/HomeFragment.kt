@@ -1,6 +1,5 @@
 package com.example.movieapp.ui.fragments
 
-import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -10,19 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.movieapp.R
 import com.example.movieapp.models.MovieHome
-import com.example.movieapp.ui.adapters.MaterialLeanBackAdapter
-import com.github.florent37.materialleanback.MaterialLeanBack
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import android.widget.Toast
-
+import com.example.movieapp.ui.adapters.MasterRecyclerViewAdapter
+import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class HomeFragment : Fragment() {
 
-    lateinit var materialLeanBackAdapter: MaterialLeanBackAdapter
+    lateinit var masterRecyclerViewAdapter: MasterRecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,25 +29,27 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupRecyclerView(material_lean_back_id)
+        setupMasterRecyclerView(master_home_rv_id)
+        fillInnerRecyclerViews()
+    }
 
-        material_lean_back_id.setOnItemClickListener(object : MaterialLeanBack.OnItemClickListener {
-            override fun onTitleClicked(row: Int, text: String) {
-                Toast.makeText(
-                    context,
-                    "onTitleClicked $row $text",
-                    Toast.LENGTH_SHORT
-                ).show()
+
+    private fun fillInnerRecyclerViews() {
+        GlobalScope.launch (Dispatchers.Main){
+            masterRecyclerViewAdapter.createdFlag123 = { flag ->
+                if (flag) {
+                    masterRecyclerViewAdapter.popularInnerRecyclerViewAdapter.swapList(mockList1())
+                    masterRecyclerViewAdapter.topRatedInnerRecyclerViewAdapter.swapList(mockList2())
+                    masterRecyclerViewAdapter.upcomingInnerRecyclerViewAdapter.swapList(mockList1())
+                }
             }
 
-            override fun onItemClicked(row: Int, column: Int) {
-                Toast.makeText(
-                    context,
-                    "onItemClicked $row $column",
-                    Toast.LENGTH_SHORT
-                ).show()
+            masterRecyclerViewAdapter.createdFlag4 = { flag ->
+                if (flag) {
+                    masterRecyclerViewAdapter.nowPlayingInnerRecyclerViewAdapter.swapList(mockList2())
+                }
             }
-        })
+        }
     }
 
     private fun mockList1(): MutableList<MovieHome> {
@@ -90,21 +88,21 @@ class HomeFragment : Fragment() {
         return mockList
     }
 
-    private fun setupRecyclerView(materialLeanBackId: MaterialLeanBack) {
-        materialLeanBackAdapter = MaterialLeanBackAdapter()
-
-        GlobalScope.launch(Dispatchers.Main) {
-            materialLeanBackAdapter.updateList(mockList1())
-        }
-        setupTitleCategoryTextView()
-        materialLeanBackId.adapter = materialLeanBackAdapter
+    private fun fillMasterList(): ArrayList<String> {
+        val categoryPopular = getString(R.string.category_popular)
+        val categoryTopRanked = getString(R.string.category_top_rated)
+        val categoryUpcoming = getString(R.string.category_upcoming)
+        val categoryNowPlaying = getString(R.string.category_now_playing)
+        return arrayListOf(categoryPopular, categoryTopRanked, categoryUpcoming, categoryNowPlaying)
     }
 
-    private fun setupTitleCategoryTextView() {
-        material_lean_back_id.setCustomizer {
-            it.textSize = 21f
-            it.setTypeface(null, Typeface.BOLD)
+    private fun setupMasterRecyclerView(recyclerView: RecyclerView) {
+        masterRecyclerViewAdapter = MasterRecyclerViewAdapter()
+        GlobalScope.launch(Dispatchers.Main) {
+            masterRecyclerViewAdapter.swapList(fillMasterList())
         }
+        recyclerView.adapter = masterRecyclerViewAdapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
     }
 
 

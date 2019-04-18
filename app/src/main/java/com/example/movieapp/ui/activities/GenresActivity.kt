@@ -18,14 +18,17 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
     private val genresViewModel: GenresViewModel by instance()
     private val sorted_By = "popularity.desc"
     private val genreId = 28
-    // TODO app should go back to 'browse' fragment 'onBackPress' instead of going to 'home' fragment
-    // TODO going back to home is set in manifest
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_genres)
 
         fetchMovieByGenre()
-
+        go_to_details_btn_id.setOnClickListener {
+            startActivity(DetailsActivity.getIntent(this))
+            Log.i("genres", "click")
+        }
         getMovieByGenreError()
         getMovieByGenreException()
         getMovieByGenreSuccess()
@@ -35,7 +38,7 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
 
     private fun setUpToolbarGenresActivity() {
         setSupportActionBar(toolbar_genres_activity_id)
-        // title = getString(R.string.genre_activity_title)
+        title = getString(R.string.genre_activity_title)
 
         with(supportActionBar!!) {
             setDisplayHomeAsUpEnabled(true)
@@ -59,7 +62,8 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
     private fun getMovieByGenreSuccess() = genresViewModel.getMovieByGenreSuccess.observe(
         this,
         Observer {
-            Log.i("MovieByGenre", "succes") })
+            Log.i("MovieByGenre", "succes")
+        })
 
     private fun getMovieByGenreError() =
         genresViewModel.getMovieByGenreError.observe(

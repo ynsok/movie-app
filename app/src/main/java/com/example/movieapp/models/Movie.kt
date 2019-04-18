@@ -1,25 +1,20 @@
 package com.example.movieapp.models
 
+import com.google.gson.annotations.SerializedName
+
 data class Movie(
+    @SerializedName("page")
     val page: Int,
-    val results: List<Result>,
-    val total_pages: Int,
-    val total_results: Int
+    @SerializedName("results")
+    val results: List<Result>
 )
 
 data class Result(
-    val adult: Boolean,
-    val backdrop_path: String,
-    val genre_ids: List<Int>,
+    @SerializedName("id")
     val id: Int,
-    val original_language: String,
-    val original_title: String,
-    val overview: String,
-    val popularity: Double,
+    @SerializedName("poster_path")
     val poster_path: String,
-    val release_date: String,
-    val title: String,
-    val video: Boolean,
-    val vote_average: Double,
-    val vote_count: Int
+    @SerializedName("title")
+    val title: String
+
 )

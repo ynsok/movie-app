@@ -22,5 +22,4 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(toolbar_main_activity_id, navController)
     }
 }
-
-//TODO remove back arrows in fragments
+// TODO remove back arrows in fragments

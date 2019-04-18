@@ -22,6 +22,9 @@
         <activity android:name=".ui.activities.GenresActivity">
 
         </activity>
+        <activity
+            android:name=".ui.activities.DetailsActivity"
+            android:parentActivityName=".ui.activities.GenresActivity" />
 
     </application>
 

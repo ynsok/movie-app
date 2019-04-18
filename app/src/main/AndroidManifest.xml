@@ -19,9 +19,9 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ui.activities.GenresActivity"
-            android:parentActivityName=".ui.activities.MainActivity"></activity>
+        <activity android:name=".ui.activities.GenresActivity">
+
+        </activity>
 
     </application>
 

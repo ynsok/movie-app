@@ -36,8 +36,19 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
         setSupportActionBar(toolbar_genres_activity_id)
         // title = getString(R.string.genre_activity_title)
 
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowTitleEnabled(true)
+        with(supportActionBar!!) {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowTitleEnabled(true)
+        }
+    }
+
+    override fun onBackPressed() {
+        finish()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        finish()
+        return super.onOptionsItemSelected(item)
     }
 
     private fun fetchMovieByGenre() {

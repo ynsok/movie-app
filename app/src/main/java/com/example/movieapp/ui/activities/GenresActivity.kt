@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import com.example.movieapp.R
 import com.example.movieapp.view.model.Genres.GenresViewModel
 import kotlinx.android.synthetic.main.activity_genres.*

@@ -78,6 +78,12 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:1.1.1"
     kapt "android.arch.lifecycle:compiler:1.1.1"
 
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //Exo player
+    implementation 'com.google.android.exoplayer:exoplayer:2.8.2'
+
     //Constraint Layout
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 

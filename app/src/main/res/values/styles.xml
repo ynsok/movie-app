@@ -1,5 +1,6 @@
 <resources>
 
+    <!-- App themes. -->
     <!-- Dark application theme. -->
     <style name="DarkThemeNoActionBar" parent="Theme.AppCompat.NoActionBar">
         <item name="actionBarStyle">@style/Theme.AppCompat</item>
@@ -24,6 +25,11 @@
         <item name="android:fontFamily">@font/exo_regular</item>
     </style>
 
+    <!-- Toolbar colours -->
+    <style name="DarkToolbarStyle">
+        <item name="android:background">@color/titleBackground</item>
+    </style>
+
     <!-- Buttons. -->
     <style name="FavouritesFab" parent="Widget.Design.FloatingActionButton">
         <item name="maxImageSize">@dimen/maxFabImageSize</item>
@@ -37,6 +43,25 @@
         <item name="borderWidth">3dp</item>
         <item name="fabSize">normal</item>
 
+    </style>
+
+    <!-- Fonts. -->
+    <style name="ExoFont" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@font/exo_regular</item>
+    </style>
+
+    <style name="ToolbarExoFont">
+        <item name="android:fontFamily">@font/exo_regular</item>
+    </style>
+
+    <!-- Texts. -->
+    <style name="GrayedOutText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:fontFamily">@font/exo_regular</item>
+    </style>
+
+    <style name="FieldNameTxtSize" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/exo_regular</item>
     </style>
 
 

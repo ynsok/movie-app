@@ -38,6 +38,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:support-v4:28.0.0'
     testImplementation 'junit:junit:4.12'
@@ -73,9 +74,15 @@ dependencies {
     implementation 'android.arch.persistence.room:runtime:1.1.1'
     kapt "android.arch.persistence.room:compiler:1.1.1"
 
-//    LiveCycle
+    //LiveCycle
     implementation "android.arch.lifecycle:extensions:1.1.1"
     kapt "android.arch.lifecycle:compiler:1.1.1"
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //Exo player
+    implementation 'com.google.android.exoplayer:exoplayer:2.8.2'
 
     //Constraint Layout
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'

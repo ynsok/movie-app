@@ -13,15 +13,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.movieapp.R
 import com.example.movieapp.models.MovieHome
-import com.example.movieapp.ui.adapters.MaterialLeanBackAdapter
-import com.github.florent37.materialleanback.MaterialLeanBack
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import android.widget.Toast
-
+import com.example.movieapp.ui.adapters.MasterRecyclerViewAdapter
+import kotlinx.android.synthetic.main.fragment_home.*
 
 import com.example.movieapp.view.model.Home.HomeViewModel
 import com.example.movieapp.view.model.Home.HomeViewModelFactory
@@ -35,6 +31,7 @@ class HomeFragment : Fragment(), KodeinAware {
     private val homeViewModelFactory: HomeViewModelFactory by instance()
     private lateinit var homeViewModel: HomeViewModel
 
+    lateinit var masterRecyclerViewAdapter: MasterRecyclerViewAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         instantiateHomeViewModel()
@@ -55,7 +52,27 @@ class HomeFragment : Fragment(), KodeinAware {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupRecyclerView(home_recommendations_rv_id)
+        setupMasterRecyclerView(master_home_rv_id)
+        fillInnerRecyclerViews()
+    }
+
+
+    private fun fillInnerRecyclerViews() {
+        GlobalScope.launch (Dispatchers.Main){
+            masterRecyclerViewAdapter.createdFlag123 = { flag ->
+                if (flag) {
+                    masterRecyclerViewAdapter.popularInnerRecyclerViewAdapter.swapList(mockList1())
+                    masterRecyclerViewAdapter.topRatedInnerRecyclerViewAdapter.swapList(mockList2())
+                    masterRecyclerViewAdapter.upcomingInnerRecyclerViewAdapter.swapList(mockList1())
+                }
+            }
+
+            masterRecyclerViewAdapter.createdFlag4 = { flag ->
+                if (flag) {
+                    masterRecyclerViewAdapter.nowPlayingInnerRecyclerViewAdapter.swapList(mockList2())
+                }
+            }
+        }
     }
 
     private fun mockList1(): MutableList<MovieHome> {
@@ -100,20 +117,22 @@ class HomeFragment : Fragment(), KodeinAware {
         return mockList
     }
 
-    private fun setupRecyclerView(materialLeanBackId: MaterialLeanBack) {
-        materialLeanBackAdapter = MaterialLeanBackAdapter()
-    private fun setupRecyclerView(recyclerView: RecyclerView) {
-        homeRecyclerAdapter = HomeRecyclerViewAdapter()
-    private fun getMoviesError() {
-        getPopularMovieError()
-        getTopRatedMovieError()
-        getUpcomingMovieError()
-        getNowPlayingMovieError()
+    private fun fillMasterList(): ArrayList<String> {
+        val categoryPopular = getString(R.string.category_popular)
+        val categoryTopRanked = getString(R.string.category_top_rated)
+        val categoryUpcoming = getString(R.string.category_upcoming)
+        val categoryNowPlaying = getString(R.string.category_now_playing)
+        return arrayListOf(categoryPopular, categoryTopRanked, categoryUpcoming, categoryNowPlaying)
     }
 
+    private fun setupMasterRecyclerView(recyclerView: RecyclerView) {
+        masterRecyclerViewAdapter = MasterRecyclerViewAdapter()
         GlobalScope.launch(Dispatchers.Main) {
+            masterRecyclerViewAdapter.swapList(fillMasterList())
             homeRecyclerAdapter.updateList(mockList())
         }
+        recyclerView.adapter = masterRecyclerViewAdapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
 
         recyclerView.adapter = homeRecyclerAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)

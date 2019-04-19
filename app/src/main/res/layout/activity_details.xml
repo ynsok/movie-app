@@ -67,7 +67,6 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="8dp"
                 android:background="@android:color/darker_gray"
                 app:layout_constraintBottom_toTopOf="@+id/overview_dl_txt_details"
                 app:layout_constraintTop_toBottomOf="@+id/rating_dl_txt_details"
@@ -98,13 +97,12 @@
 
             <TextView
                 android:id="@+id/overview_dl_txt_details"
-                android:fontFamily="@font/exo_regular"
-
                 android:layout_width="0dp"
+
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="12dp"
+                android:fontFamily="@font/exo_regular"
                 android:text='A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.'
                 android:textColor="@color/white"
                 android:textSize="18sp"
@@ -127,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.18" />
+                app:layout_constraintGuide_percent="0.15" />
 
             <TextView
                 android:id="@+id/rating_dl_txt_details"
@@ -135,7 +133,7 @@
 
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="24dp"
                 android:fontFamily="@font/exo_regular"
                 android:text="8.0"
                 android:textSize="16sp"
@@ -202,7 +200,7 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:text="08-08-2018"
                 android:textSize="16sp"
@@ -252,19 +250,19 @@
 
             <TextView
                 android:id="@+id/watch_trailer_txt_details"
-                android:fontFamily="@font/exo_regular"
-
                 android:layout_width="0dp"
+
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/exo_regular"
                 android:gravity="center"
                 android:text="Watch movie trailer:"
+                android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/revenue_dl_txt_details"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/revenue_txt_details"
                 app:layout_constraintTop_toBottomOf="@+id/revenue_dl_txt_details" />
 
             <TextView
@@ -281,12 +279,12 @@
 
             <TextView
                 android:id="@+id/production_company_dl_txt_details"
-                android:fontFamily="@font/exo_regular"
-
                 android:layout_width="0dp"
+
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="6dp"
+                android:fontFamily="@font/exo_regular"
                 android:text="Regency Enterprises"
                 app:layout_constraintEnd_toEndOf="@+id/origin_country_dl_txt_details"
                 app:layout_constraintStart_toEndOf="@+id/production_company_txt_details"
@@ -298,37 +296,38 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
                 android:text="Revenue:"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/revenue_dl_txt_details"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/production_company_txt_details"
                 app:layout_constraintTop_toTopOf="@+id/revenue_dl_txt_details" />
 
             <TextView
                 android:id="@+id/revenue_dl_txt_details"
-                android:fontFamily="@font/exo_regular"
-
                 android:layout_width="0dp"
+
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="6dp"
+                android:fontFamily="@font/exo_regular"
                 android:text="50 złoty PLN"
                 app:layout_constraintEnd_toEndOf="@+id/production_company_dl_txt_details"
                 app:layout_constraintStart_toEndOf="@+id/revenue_txt_details"
                 app:layout_constraintTop_toBottomOf="@+id/production_company_dl_txt_details" />
 
             <com.google.android.exoplayer2.ui.PlayerView
+                android:id="@+id/exo_player_details_id"
+
+                app:resize_mode="fill"
                 android:layout_width="0dp"
                 android:layout_height="240dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/watch_trailer_txt_details"></com.google.android.exoplayer2.ui.PlayerView>
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/watch_trailer_txt_details"
+                app:layout_constraintStart_toStartOf="@+id/watch_trailer_txt_details"
+                app:layout_constraintTop_toBottomOf="@+id/watch_trailer_txt_details">
+
+
+            </com.google.android.exoplayer2.ui.PlayerView>
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>

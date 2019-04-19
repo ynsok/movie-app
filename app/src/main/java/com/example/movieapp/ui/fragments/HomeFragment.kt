@@ -9,8 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.movieapp.R
-import com.example.movieapp.view.model.Home.HomeViewModel
-import com.example.movieapp.view.model.Home.HomeViewModelFactory
+import com.example.movieapp.view.model.home.HomeViewModel
+import com.example.movieapp.view.model.home.HomeViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.support.kodein

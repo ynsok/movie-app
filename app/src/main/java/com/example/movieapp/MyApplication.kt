@@ -4,11 +4,11 @@ import android.app.Application
 import com.example.movieapp.BuildConfig.KEY_API
 import com.example.movieapp.network.MovieApiService
 import com.example.movieapp.repositories.Repository
-import com.example.movieapp.view.model.Browse.BrowseViewModelFactory
-import com.example.movieapp.view.model.Detail.DetailViewModel
-import com.example.movieapp.view.model.Genres.GenresViewModel
-import com.example.movieapp.view.model.Home.HomeViewModelFactory
 import com.example.movieapp.view.model.search.SearchViewModelFactory
+import com.example.movieapp.view.model.browse.BrowseViewModelFactory
+import com.example.movieapp.view.model.detail.DetailViewModel
+import com.example.movieapp.view.model.genres.GenresViewModel
+import com.example.movieapp.view.model.home.HomeViewModelFactory
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -68,6 +68,5 @@ class MyApplication : Application(), KodeinAware {
         bind() from provider { BrowseViewModelFactory(instance()) }
         bind() from provider { GenresViewModel(instance()) }
         bind() from provider { DetailViewModel(instance()) }
-        bind() from provider { SearchViewModelFactory(instance()) }
     }
 }

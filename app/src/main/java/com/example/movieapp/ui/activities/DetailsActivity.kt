@@ -51,9 +51,7 @@ class DetailsActivity : AppCompatActivity() {
         Picasso.get().load("https://image.tmdb.org/t/p/w500/adw6Lq9FiC9zjYEpOqfq03ituwp.jpg")
             .into(movie_image_dl_img_details)
 
-
-
-        //Movie address here
+        // Movie address here
         initializeExoPlayerWithAddress("BdJKm16Co6M")
     }
 
@@ -61,7 +59,7 @@ class DetailsActivity : AppCompatActivity() {
         setSupportActionBar(movie_details_toolbar_id)
         with(supportActionBar!!) {
             setDisplayHomeAsUpEnabled(true)
-            title = "Fight Club"                       //movie title on collapsing bar is set here
+            title = "Fight Club" // movie title on collapsing bar is set here
         }
     }
 
@@ -77,12 +75,11 @@ class DetailsActivity : AppCompatActivity() {
 
         favourites_fab_id.setOnClickListener {
             if (buttonState == 0) {
-                //if movie is not in favourites
+                // if movie is not in favourites
                 favourites_fab_id.setImageDrawable(getDrawable((R.drawable.ic_star_full_yellow)))
                 buttonState = 1
-
             } else {
-                //if movie is in favourites already
+                // if movie is in favourites already
                 favourites_fab_id.setImageDrawable(getDrawable((R.drawable.ic_star_border_yellow)))
                 buttonState = 0
             }
@@ -131,15 +128,15 @@ class DetailsActivity : AppCompatActivity() {
         mediaSession?.setPlaybackState(playbackStateBuilder?.build())
     }
 
-    private fun exoPlayerButtons(){
+    private fun exoPlayerButtons() {
         playbackStateBuilder?.setActions(
             PlaybackStateCompat.ACTION_PLAY or
-                    PlaybackStateCompat.ACTION_PAUSE or
-                    PlaybackStateCompat.ACTION_FAST_FORWARD
+            PlaybackStateCompat.ACTION_PAUSE or
+            PlaybackStateCompat.ACTION_FAST_FORWARD
         )
     }
 
-    private fun exoPlayerSize(){
+    private fun exoPlayerSize() {
         exoPlayer?.videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
     }
 

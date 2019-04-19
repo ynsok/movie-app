@@ -33,6 +33,10 @@ android {
     dataBinding {
         enabled = true
     }
+
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
 }
 
 dependencies {
@@ -83,6 +87,10 @@ dependencies {
 
     //Exo player
     implementation 'com.google.android.exoplayer:exoplayer:2.8.2'
+    implementation 'org.jsoup:jsoup:1.10.3'
+
+    //YouTube extractor
+    implementation 'com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT'
 
     //Constraint Layout
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'

@@ -10,10 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.example.movieapp.R
-import com.example.movieapp.ui.activities.DetailsActivity
-import com.example.movieapp.ui.activities.GenresActivity
-import com.example.movieapp.view.model.Browse.BrowseViewModel
-import com.example.movieapp.view.model.Browse.BrowseViewModelFactory
+import com.example.movieapp.view.model.browse.BrowseViewModel
+import com.example.movieapp.view.model.browse.BrowseViewModelFactory
 import kotlinx.android.synthetic.main.fragment_browse.view.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware

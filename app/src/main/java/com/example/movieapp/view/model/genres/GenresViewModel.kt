@@ -1,4 +1,4 @@
-package com.example.movieapp.view.model.Genres
+package com.example.movieapp.view.model.genres
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel

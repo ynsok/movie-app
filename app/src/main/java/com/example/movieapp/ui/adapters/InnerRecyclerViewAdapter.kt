@@ -5,17 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.movieapp.R
-import com.example.movieapp.models.MovieHome
+import com.example.movieapp.models.Result
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.single_movie_item.view.*
 
 class InnerRecyclerViewAdapter : RecyclerView.Adapter<InnerRecyclerViewAdapter.MyViewHolder>() {
 
-    var listOfMovies = mutableListOf<MovieHome>()
+    var listOfMovies = listOf<Result>()
+
+    var selectedMovie: ((Int) -> Unit)? = null
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun fillItem(movie: MovieHome) {
-            Picasso.get().load(movie.imageUrl).into(itemView.poster_image_id)
+        fun fillItem(movie: Result) {
+            Picasso.get().load("https://image.tmdb.org/t/p/w500${movie.poster_path}").into(itemView.poster_image_id)
             itemView.movie_title_txt_id.text = movie.title
         }
     }
@@ -23,6 +25,9 @@ class InnerRecyclerViewAdapter : RecyclerView.Adapter<InnerRecyclerViewAdapter.M
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.run {
             fillItem(listOfMovies[position])
+            itemView.setOnClickListener {
+                selectedMovie?.invoke(listOfMovies[position].id)
+            }
         }
     }
 
@@ -36,8 +41,7 @@ class InnerRecyclerViewAdapter : RecyclerView.Adapter<InnerRecyclerViewAdapter.M
         )
     }
 
-    fun swapList(list: MutableList<MovieHome>) {
-        listOfMovies.clear()
+    fun swapList(list: List<Result>) {
         listOfMovies = list
         notifyDataSetChanged()
     }

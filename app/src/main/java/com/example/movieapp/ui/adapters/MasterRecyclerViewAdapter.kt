@@ -3,6 +3,7 @@ package com.example.movieapp.ui.adapters
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,8 +27,10 @@ class MasterRecyclerViewAdapter : RecyclerView.Adapter<MasterRecyclerViewAdapter
 
     private var items = ArrayList<String>()
 
+    var selectedMovie: ((Int) -> Unit)? = null
+
     override fun getItemCount(): Int {
-       return 4
+        return 4
     }
 
     override fun onCreateViewHolder(
@@ -50,42 +53,93 @@ class MasterRecyclerViewAdapter : RecyclerView.Adapter<MasterRecyclerViewAdapter
         notifyDataSetChanged()
     }
 
-    var createdFlag123: ((Boolean) -> Unit)? = null
+    var ifCreatedFirstRecycler: ((Boolean) -> Unit)? = null
 
-    var createdFlag4: ((Boolean) -> Unit)? = null
+    var ifCreatedSecondRecycler: ((Boolean) -> Unit)? = null
+
+    var ifCreatedThirdRecycler: ((Boolean) -> Unit)? = null
+
+    var ifCreatedFourthRecycler: ((Boolean) -> Unit)? = null
+
+    /*    var scrollXState = IntArray(4)
+
+    override fun onViewRecycled(holder: MyViewHolder) {
+         holder.itemView.scrollX = scrollXState[holder.adapterPosition]
+         super.onViewRecycled(holder)
+     }*/
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        /*
+        // TODO save state
+        holder.itemView.inner_home_rv_id.post {
+            scrollXState[holder.adapterPosition] = holder.itemView.scrollX
+            Log.i("scroll", scrollXState[0].toString())
+        }*/
+        if (items.isNullOrEmpty()) return
         holder.fillHeader(items, position)
-        when (position) {
-            0 -> {
-                popularInnerRecyclerViewAdapter = InnerRecyclerViewAdapter()
-                holder.itemView.inner_home_rv_id.adapter = popularInnerRecyclerViewAdapter
-                holder.itemView.inner_home_rv_id.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-            }
-            1 -> {
-                topRatedInnerRecyclerViewAdapter = InnerRecyclerViewAdapter()
-                holder.itemView.inner_home_rv_id.adapter = topRatedInnerRecyclerViewAdapter
-                holder.itemView.inner_home_rv_id.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-            }
-            2 -> {
-                upcomingInnerRecyclerViewAdapter = InnerRecyclerViewAdapter()
-                holder.itemView.inner_home_rv_id.adapter = upcomingInnerRecyclerViewAdapter
-                holder.itemView.inner_home_rv_id.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                createdFlag123?.invoke(true)
-            }
-            3 -> {
-                nowPlayingInnerRecyclerViewAdapter = InnerRecyclerViewAdapter()
-                holder.itemView.inner_home_rv_id.adapter = nowPlayingInnerRecyclerViewAdapter
-                holder.itemView.inner_home_rv_id.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                createdFlag4?.invoke(true)
+        holder.itemView.inner_home_rv_id.run {
+            when (position) {
+                0 -> {
+                    popularInnerRecyclerViewAdapter = InnerRecyclerViewAdapter()
+                    adapter = popularInnerRecyclerViewAdapter
+                    layoutManager = LinearLayoutManager(
+                        context,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                    )
+                    ifCreatedFirstRecycler?.invoke(true)
+                    popularInnerRecyclerViewAdapter.selectedMovie = { movieId ->
+                        selectedMovie?.invoke(movieId)
+                    }
+                }
+                1 -> {
+                    topRatedInnerRecyclerViewAdapter = InnerRecyclerViewAdapter()
+                    adapter = topRatedInnerRecyclerViewAdapter
+                    layoutManager = LinearLayoutManager(
+                        context,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                    )
+                    ifCreatedSecondRecycler?.invoke(true)
+                    topRatedInnerRecyclerViewAdapter.selectedMovie = { movieId ->
+                        selectedMovie?.invoke(movieId)
+                    }
+                }
+                2 -> {
+                    upcomingInnerRecyclerViewAdapter = InnerRecyclerViewAdapter()
+                    adapter = upcomingInnerRecyclerViewAdapter
+                    layoutManager = LinearLayoutManager(
+                        context,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                    )
+                    ifCreatedThirdRecycler?.invoke(true)
+                    upcomingInnerRecyclerViewAdapter.selectedMovie = { movieId ->
+                        selectedMovie?.invoke(movieId)
+                    }
+                }
+                3 -> {
+                    nowPlayingInnerRecyclerViewAdapter = InnerRecyclerViewAdapter()
+                    adapter = nowPlayingInnerRecyclerViewAdapter
+                    layoutManager = LinearLayoutManager(
+                        context,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                    )
+                    ifCreatedFourthRecycler?.invoke(true)
+                    nowPlayingInnerRecyclerViewAdapter.selectedMovie = { movieId ->
+                        selectedMovie?.invoke(movieId)
+                    }
+                }
+                else -> {
+                }
             }
         }
     }
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun fillHeader(item: ArrayList<String>, position: Int){
+        fun fillHeader(item: ArrayList<String>, position: Int) {
             itemView.header_txt_id.text = item[position]
         }
     }

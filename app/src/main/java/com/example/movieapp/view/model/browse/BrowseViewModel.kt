@@ -1,4 +1,4 @@
-package com.example.movieapp.view.model.Browse
+package com.example.movieapp.view.model.browse
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel

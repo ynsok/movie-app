@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import com.example.movieapp.R
-import com.example.movieapp.view.model.Genres.GenresViewModel
+import com.example.movieapp.view.model.genres.GenresViewModel
 import kotlinx.android.synthetic.main.activity_genres.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware

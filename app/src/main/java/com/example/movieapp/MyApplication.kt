@@ -4,12 +4,12 @@ import android.app.Application
 import com.example.movieapp.BuildConfig.KEY_API
 import com.example.movieapp.network.MovieApiService
 import com.example.movieapp.repositories.Repository
+import com.example.movieapp.view.model.search.SearchViewModelFactory
 import com.example.movieapp.view.model.browse.BrowseViewModelFactory
 import com.example.movieapp.view.model.detail.DetailViewModel
 import com.example.movieapp.view.model.genres.GenresViewModel
 import com.example.movieapp.view.model.home.HomeViewModelFactory
 import com.example.movieapp.view.model.search.SearchViewModel
-import com.example.movieapp.view.model.search.SearchViewModelFactory
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

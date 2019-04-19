@@ -1,4 +1,4 @@
-package com.example.movieapp.view.model.Home
+package com.example.movieapp.view.model.home
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider

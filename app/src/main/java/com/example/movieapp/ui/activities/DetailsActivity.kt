@@ -18,11 +18,8 @@ import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
-import com.google.android.exoplayer2.source.ConcatenatingMediaSource
 import com.google.android.exoplayer2.source.ExtractorMediaSource
-import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
-import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
@@ -44,18 +41,20 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
+        exoPlayerView = findViewById(R.id.exo_player_details_id)
+
         setUpDetailsToolbar()
         setUpDetailsCollapsingToolbar()
 
-        favouritesFabAction()
+        initializeFavouritesFabAction()
 
         Picasso.get().load("https://image.tmdb.org/t/p/w500/adw6Lq9FiC9zjYEpOqfq03ituwp.jpg")
             .into(movie_image_dl_img_details)
 
-        exoPlayerView = findViewById(R.id.exo_player_details_id)
-        // initializeExoPlayer()
-        initializeExoPlayerWithAddress("BdJKm16Co6M")
 
+
+        //Movie address here
+        initializeExoPlayerWithAddress("BdJKm16Co6M")
     }
 
     private fun setUpDetailsToolbar() {
@@ -73,7 +72,7 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun favouritesFabAction() {
+    private fun initializeFavouritesFabAction() {
         var buttonState = 0
 
         favourites_fab_id.setOnClickListener {
@@ -113,30 +112,35 @@ class DetailsActivity : AppCompatActivity() {
         exoPlayerView?.player = exoPlayer
 
         val userAgent = Util.getUserAgent(baseContext, "Exo")
+
         val mediaSource = ExtractorMediaSource
             .Factory(DefaultDataSourceFactory(baseContext, userAgent))
             .setExtractorsFactory(DefaultExtractorsFactory())
             .createMediaSource(Uri.parse(mediaUrl))
-        
+
         exoPlayer?.prepare(mediaSource)
         exoPlayer?.playWhenReady = true
 
-        val componentName = ComponentName(baseContext, "Exo")
-        mediaSession = MediaSessionCompat(baseContext, "ExoPlayer", componentName, null)
-
         playbackStateBuilder = PlaybackStateCompat.Builder()
 
-        //Buttons
+        exoPlayerButtons()
+        exoPlayerSize()
+
+        val componentName = ComponentName(baseContext, "Exo")
+        mediaSession = MediaSessionCompat(baseContext, "ExoPlayer", componentName, null)
+        mediaSession?.setPlaybackState(playbackStateBuilder?.build())
+    }
+
+    private fun exoPlayerButtons(){
         playbackStateBuilder?.setActions(
             PlaybackStateCompat.ACTION_PLAY or
-            PlaybackStateCompat.ACTION_PAUSE or
-            PlaybackStateCompat.ACTION_FAST_FORWARD
+                    PlaybackStateCompat.ACTION_PAUSE or
+                    PlaybackStateCompat.ACTION_FAST_FORWARD
         )
+    }
 
-        //Scaling
+    private fun exoPlayerSize(){
         exoPlayer?.videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
-
-        mediaSession?.setPlaybackState(playbackStateBuilder?.build())
     }
 
     override fun onDestroy() {

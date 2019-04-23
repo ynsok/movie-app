@@ -1,5 +1,6 @@
 package com.example.movieapp.ui.activities
 
+import android.arch.lifecycle.Observer
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -9,11 +10,13 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
+import android.util.Log
 import android.util.SparseArray
 import at.huber.youtubeExtractor.VideoMeta
 import at.huber.youtubeExtractor.YouTubeExtractor
 import at.huber.youtubeExtractor.YtFile
 import com.example.movieapp.R
+import com.example.movieapp.view.model.detail.DetailViewModel
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
@@ -25,8 +28,14 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_details.*
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
-class DetailsActivity : AppCompatActivity() {
+class DetailsActivity : AppCompatActivity(), KodeinAware {
+    override val kodein: Kodein by kodein()
+    private val detailViewModel: DetailViewModel by instance()
 
     companion object {
         fun getIntent(context: Context): Intent = Intent(context, DetailsActivity::class.java)
@@ -40,7 +49,8 @@ class DetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
-
+        startFetchingMovieById(550)
+        getSuccessRespond()
         exoPlayerView = findViewById(R.id.exo_player_details_id)
 
         setUpDetailsToolbar()
@@ -53,6 +63,11 @@ class DetailsActivity : AppCompatActivity() {
 
         // Movie address here
         initializeExoPlayerWithAddress("BdJKm16Co6M")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        releasePlayer()
     }
 
     private fun setUpDetailsToolbar() {
@@ -140,16 +155,21 @@ class DetailsActivity : AppCompatActivity() {
         exoPlayer?.videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        releasePlayer()
-    }
-
     private fun releasePlayer() {
         if (exoPlayer != null) {
             exoPlayer?.stop()
             exoPlayer?.release()
             exoPlayer = null
         }
+    }
+
+    private fun startFetchingMovieById(id: Int) {
+        detailViewModel.fetchMovieDetail(id)
+    }
+
+    private fun getSuccessRespond() {
+        detailViewModel.getMovieDetailSuccess.observe(
+            this,
+            Observer { Log.i("Detail", it.toString()) })
     }
 }

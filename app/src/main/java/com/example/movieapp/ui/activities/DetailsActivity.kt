@@ -1,5 +1,6 @@
 package com.example.movieapp.ui.activities
 
+import android.databinding.DataBindingUtil
 import android.arch.lifecycle.Observer
 import android.content.ComponentName
 import android.content.Context
@@ -15,7 +16,9 @@ import android.util.SparseArray
 import at.huber.youtubeExtractor.VideoMeta
 import at.huber.youtubeExtractor.YouTubeExtractor
 import at.huber.youtubeExtractor.YtFile
+import com.example.movieapp.BR
 import com.example.movieapp.R
+import com.example.movieapp.databinding.ActivityDetailsBinding
 import com.example.movieapp.view.model.detail.DetailViewModel
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayerFactory
@@ -26,12 +29,15 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_details.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
+
+//TODO trailer video doesnt work for some movies ID (e.g. 530,540), works for (500,550)
+//TODO revenue is often show as 0$ cos its saved as 0 in the database -> if revenue = 0, we should display that it is not known or hide revenue from view
+//TODO Fab button checked or uchecked if the movie is saved in the favourites or not
 
 class DetailsActivity : AppCompatActivity(), KodeinAware {
     override val kodein: Kodein by kodein()
@@ -41,6 +47,9 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
         fun getIntent(context: Context): Intent = Intent(context, DetailsActivity::class.java)
     }
 
+    // binding
+    private lateinit var binding: ActivityDetailsBinding
+
     private var exoPlayerView: PlayerView? = null
     private var exoPlayer: SimpleExoPlayer? = null
     private var playbackStateBuilder: PlaybackStateCompat.Builder? = null
@@ -48,21 +57,20 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details)
-        startFetchingMovieById(550)
+
+        // binding
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_details)
+
+        // pass id on click from another fragment
+        startFetchingById(550)
+
         getSuccessRespond()
+
         exoPlayerView = findViewById(R.id.exo_player_details_id)
 
         setUpDetailsToolbar()
         setUpDetailsCollapsingToolbar()
-
         initializeFavouritesFabAction()
-
-        Picasso.get().load("https://image.tmdb.org/t/p/w500/adw6Lq9FiC9zjYEpOqfq03ituwp.jpg")
-            .into(movie_image_dl_img_details)
-
-        // Movie address here
-        initializeExoPlayerWithAddress("BdJKm16Co6M")
     }
 
     override fun onDestroy() {
@@ -74,7 +82,6 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
         setSupportActionBar(movie_details_toolbar_id)
         with(supportActionBar!!) {
             setDisplayHomeAsUpEnabled(true)
-            title = "Fight Club" // movie title on collapsing bar is set here
         }
     }
 
@@ -101,8 +108,8 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
         }
     }
 
-    private fun initializeExoPlayerWithAddress(youtubeUrl: String) {
-        val youtubeLink = "http://youtube.com/watch?v=$youtubeUrl"
+    private fun initializeExoPlayerWithAddress(youtubeKey: String) {
+        val youtubeLink = "http://youtube.com/watch?v=$youtubeKey"
 
         object : YouTubeExtractor(this) {
             public override fun onExtractionComplete(
@@ -146,8 +153,8 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
     private fun exoPlayerButtons() {
         playbackStateBuilder?.setActions(
             PlaybackStateCompat.ACTION_PLAY or
-            PlaybackStateCompat.ACTION_PAUSE or
-            PlaybackStateCompat.ACTION_FAST_FORWARD
+                    PlaybackStateCompat.ACTION_PAUSE or
+                    PlaybackStateCompat.ACTION_FAST_FORWARD
         )
     }
 
@@ -163,13 +170,25 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
         }
     }
 
-    private fun startFetchingMovieById(id: Int) {
+    private fun startFetchingById(id: Int) {
         detailViewModel.fetchMovieDetail(id)
+        detailViewModel.fetchMovieDetailVideo(id)
     }
 
     private fun getSuccessRespond() {
         detailViewModel.getMovieDetailSuccess.observe(
             this,
-            Observer { Log.i("Detail", it.toString()) })
+            Observer {
+                with(binding) {
+                    setVariable(BR.movie, it!!)
+                    executePendingBindings()
+                }
+            })
+
+        detailViewModel.getMovieDetailVideoSuccess.observe(this, Observer { videoList ->
+            if (videoList?.results?.size!! >= 0) {
+                initializeExoPlayerWithAddress(videoList.results[0].key)
+            }
+        })
     }
 }

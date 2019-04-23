@@ -1,15 +1,51 @@
 <resources>
 
+    <!-- App themes. -->
     <!-- Dark application theme. -->
     <style name="DarkThemeNoActionBar" parent="Theme.AppCompat.NoActionBar">
         <item name="actionBarStyle">@style/Theme.AppCompat</item>
-    </style>
-
-    <!-- Default app theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <!-- Toolbar colours -->
+    <style name="DarkToolbarStyle">
+        <item name="android:background">@color/titleBackground</item>
+    </style>
+
+    <!-- Buttons. -->
+    <style name="FavouritesFab" parent="Widget.Design.FloatingActionButton">
+        <item name="maxImageSize">@dimen/maxFabImageSize</item>
+        <item name="android:scaleY">0.6</item>
+        <item name="android:scaleX">0.6</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:src">@drawable/ic_browse_blue</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="elevation">2dp</item>
+        <item name="borderWidth">3dp</item>
+        <item name="fabSize">normal</item>
+
+    </style>
+
+    <!-- Fonts. -->
+    <style name="ExoFont" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@font/exo_regular</item>
+    </style>
+
+    <style name="ToolbarExoFont">
+        <item name="android:fontFamily">@font/exo_regular</item>
+    </style>
+
+    <!-- Texts. -->
+    <style name="GrayedOutText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:fontFamily">@font/exo_regular</item>
+    </style>
+
+    <style name="FieldNameTxtSize" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/exo_regular</item>
+    </style>
+
+
 
 </resources>

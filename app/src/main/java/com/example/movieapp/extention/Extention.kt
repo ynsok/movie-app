@@ -1,5 +1,7 @@
 package com.example.movieapp.extention
 
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import com.example.movieapp.network.result.Result
 import retrofit2.Response
 import java.lang.Exception
@@ -16,3 +18,4 @@ suspend fun <T : Any> safeApi(call: suspend () -> Response<T>): Result<T> {
         return Result.Exception(e)
     }
 }
+fun ViewGroup.inflate(): LayoutInflater = LayoutInflater.from(context)

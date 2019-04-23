@@ -47,15 +47,15 @@ class BrowseFragment : Fragment(), KodeinAware {
 
     private fun getGenreListSuccess() =
         browseViewModel.getGenreListSuccess.observe(
-            this,
+            viewLifecycleOwner,
             Observer { Log.i("BrowserSuccess", it.toString()) })
 
     private fun getGenreListError() =
-        browseViewModel.getGenreListError.observe(this, Observer { Log.i("BrowserError", it) })
+        browseViewModel.getGenreListError.observe(viewLifecycleOwner, Observer { Log.i("BrowserError", it) })
 
     private fun getGenreListException() =
         browseViewModel.getGenreListException.observe(
-            this,
+            viewLifecycleOwner,
             Observer { Log.i("BrowserError", it?.message.toString()) })
 
     private fun instantiateBrowseViewModel() {

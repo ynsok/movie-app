@@ -33,4 +33,7 @@ class Repository(private val movieApiService: MovieApiService) {
 
     suspend fun getMovieDetailVideo(movieId: Int): Result<Video> =
         safeApi { movieApiService.getMovieDetailVideo(movieId).await() }
+
+    suspend fun getMovieBySearch(searchQuery: String): Result<Movie> =
+        safeApi { movieApiService.getMoviesBySearch(searchQuery).await() }
 }

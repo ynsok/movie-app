@@ -12,6 +12,7 @@
     <string name="search">Search</string>
     <string name="genres">Genres</string>
     <string name="home">Home</string>
+    <string name="search_toolbar">Search</string>
     <string name="poster_of_movie_desc">Poster of movie</string>
 
     <!-- Names of categories in Home Fragment -->

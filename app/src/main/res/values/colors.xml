@@ -6,5 +6,9 @@
     <color name="gray">#DDDDDD</color>
     <color name="light_blue">#42AFFF</color>
     <color name="dark_gray">#6d6d6d</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="titleBackground">#33000000</color>
+
     <color name="background_home_rv">#464545</color>
 </resources>

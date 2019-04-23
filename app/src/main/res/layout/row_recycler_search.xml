@@ -130,19 +130,5 @@
             app:layout_constraintStart_toStartOf="@+id/title_dl_txt_row_search_id"
             app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
-        <TextView
-            android:id="@+id/length_txt_dl_row_search_id"
-            style="@style/GrayedOutText"
-
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/exo_regular"
-            android:text="2h 14min"
-            app:layout_constraintBottom_toBottomOf="@+id/year_txt_dl_row_search_id"
-            app:layout_constraintEnd_toEndOf="@+id/title_dl_txt_row_search_id"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toTopOf="@+id/year_txt_dl_row_search_id" />
-
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

@@ -10,19 +10,57 @@
         android:id="@+id/search_toolbar_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@color/titleBackground"
+        android:paddingBottom="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/edit_text_search_id"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/search"
-            android:inputType="text"
-            android:maxLines="1" />
+            android:layout_height="60dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="3dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:src="@drawable/ic_launcher_background"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <EditText
+                android:id="@+id/search_txt_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/light_blue"
+                android:hint="@string/movie_title"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textAppearance="@style/ExoFont"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/search_toolbar_id" />
+
+        </LinearLayout>
+
+
     </android.support.v7.widget.Toolbar>
+
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_Search_Id"
@@ -35,6 +73,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_toolbar_id"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0" >
+
+    </android.support.v7.widget.RecyclerView>
+
 
 </android.support.constraint.ConstraintLayout>

@@ -20,5 +20,6 @@
     <string name="rating">Rating</string>
     <string name="watch_movie_trailer">Watch movie trailer:</string>
     <string name="production_company">Production company:</string>
+    <string name="movie_title">Movie title...</string>
 
 </resources>

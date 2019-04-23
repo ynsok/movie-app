@@ -68,57 +68,57 @@ class HomeFragment : Fragment(), KodeinAware {
               Popular Movie Respond
   * */
     private fun getPopularMovieSuccess() = homeViewModel.getPopularMovieSuccess.observe(
-        this,
+        viewLifecycleOwner,
         Observer { Log.i("PopularSuccess", it?.results?.size.toString()) })
 
     private fun getPopularMovieError() =
-        homeViewModel.getPopularMovieError.observe(this, Observer { Log.i("PopularError", it) })
+        homeViewModel.getPopularMovieError.observe(viewLifecycleOwner, Observer { Log.i("PopularError", it) })
 
     private fun getPopularMovieException() = homeViewModel.getPopularMovieException.observe(
-        this,
+        viewLifecycleOwner,
         Observer { Log.i("PopularException", it?.message) })
 
     /*
     TopRated Movie Respond
     * */
     private fun getTopRatedMovieSuccess() = homeViewModel.getTopRatedMovieSuccess.observe(
-        this,
+        viewLifecycleOwner,
         Observer { Log.i("TopRatedSuccess", it?.results?.size.toString()) })
 
     private fun getTopRatedMovieError() =
-        homeViewModel.getTopRatedMovieError.observe(this, Observer { Log.i("TopRatedError", it) })
+        homeViewModel.getTopRatedMovieError.observe(viewLifecycleOwner, Observer { Log.i("TopRatedError", it) })
 
     private fun getTopRatedMovieException() = homeViewModel.getTopRatedMovieException.observe(
-        this,
+        viewLifecycleOwner,
         Observer { Log.i("TopRatedException", it?.message) })
 
     /*
         Upcoming Movie Respond
  * */
     private fun getUpcomingMovieSuccess() = homeViewModel.getUpcomingMovieSuccess.observe(
-        this,
+        viewLifecycleOwner,
         Observer { Log.i("UpcomingSuccess", it?.results?.size.toString()) })
 
     private fun getUpcomingMovieError() =
-        homeViewModel.getUpcomingMovieError.observe(this, Observer { Log.i("UpcomingError", it) })
+        homeViewModel.getUpcomingMovieError.observe(viewLifecycleOwner, Observer { Log.i("UpcomingError", it) })
 
     private fun getUpcomingMovieException() = homeViewModel.getUpcomingMovieException.observe(
-        this,
+        viewLifecycleOwner,
         Observer { Log.i("UpcomingException", it?.message) })
 
     /*
          NowPlaying Movie Respond
   * */
     private fun getNowPlayingMovieSuccess() = homeViewModel.getNowPlayingMovieSuccess.observe(
-        this,
+        viewLifecycleOwner,
         Observer { Log.i("NowPlayingSuccess", it?.results?.size.toString()) })
 
     private fun getNowPlayingMovieError() =
         homeViewModel.getNowPlayingMovieError.observe(
-            this,
+            viewLifecycleOwner,
             Observer { Log.i("NowPlayingError", it) })
 
     private fun getNowPlayingMovieException() = homeViewModel.getNowPlayingMovieException.observe(
-        this,
+        viewLifecycleOwner,
         Observer { Log.i("NowPlayingException", it?.message) })
 }

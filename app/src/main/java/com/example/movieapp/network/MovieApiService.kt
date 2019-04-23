@@ -35,4 +35,7 @@ interface MovieApiService {
 
     @GET("movie/{id}/videos?")
     fun getMovieDetailVideo(@Path("id") movieId: Int): Deferred<Response<Video>>
+
+    @GET("search/movie?")
+    fun getMoviesBySearch(@Query("query") query: String): Deferred<Response<Movie>>
 }

@@ -7,14 +7,14 @@ import com.example.movieapp.R
 import com.example.movieapp.extention.inflate
 import com.example.movieapp.models.Movie
 import com.example.movieapp.models.Result
-import kotlinx.android.synthetic.main.search_item_list.view.*
+import kotlinx.android.synthetic.main.row_recycler_search.view.*
 
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
     private val movieList = mutableListOf<Movie>()
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
 
-        val view = viewGroup.inflate().inflate(R.layout.search_item_list, viewGroup, false)
+        val view = viewGroup.inflate().inflate(R.layout.row_recycler_search, viewGroup, false)
         return ViewHolder(view)
     }
 

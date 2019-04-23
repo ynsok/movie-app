@@ -21,6 +21,7 @@
     <string name="watch_movie_trailer">Watch movie trailer:</string>
     <string name="production_company">Production company:</string>
     <string name="poster_of_movie_desc">Poster of movie</string>
+    <string name="movie_title">Movie title...</string>
 
     <!-- Names of categories in Home Fragment -->
     <string name="category_popular">Popular</string>

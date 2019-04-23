@@ -34,6 +34,12 @@ class SearchFragment : Fragment(), KodeinAware {
         getSearchError()
         getSearchSuccess()
         getSearchException()
+
+        /*//TODO show keyboard and focus on search when entering the fragment, close keyboard after leaving it
+        search_txt_id.requestFocus()
+        val inputMethodManager = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+        */
         return view
     }
 
@@ -44,7 +50,7 @@ class SearchFragment : Fragment(), KodeinAware {
 
     private fun startSearching(view: View) {
         val disposable = Observable.create(ObservableOnSubscribe<String> { subscriber ->
-            view.edit_text_search_id.addTextChangedListener(object : TextWatcher {
+            view.search_txt_id.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {}
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {

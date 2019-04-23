@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
-import android.util.Log
 import android.util.SparseArray
 import at.huber.youtubeExtractor.VideoMeta
 import at.huber.youtubeExtractor.YouTubeExtractor
@@ -35,9 +34,9 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 
-//TODO trailer video doesnt work for some movies ID (e.g. 530,540), works for (500,550)
-//TODO revenue is often show as 0$ cos its saved as 0 in the database -> if revenue = 0, we should display that it is not known or hide revenue from view
-//TODO Fab button checked or uchecked if the movie is saved in the favourites or not
+// TODO trailer video doesnt work for some movies ID (e.g. 530,540), works for (500,550)
+// TODO revenue is often show as 0$ cos its saved as 0 in the database -> if revenue = 0, we should display that it is not known or hide revenue from view
+// TODO Fab button checked or uchecked if the movie is saved in the favourites or not
 
 class DetailsActivity : AppCompatActivity(), KodeinAware {
     override val kodein: Kodein by kodein()

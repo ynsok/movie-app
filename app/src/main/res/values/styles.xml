@@ -45,24 +45,4 @@
 
     </style>
 
-    <!-- Fonts. -->
-    <style name="ExoFont" parent="@android:style/TextAppearance">
-        <item name="android:fontFamily">@font/exo_regular</item>
-    </style>
-
-    <style name="ToolbarExoFont">
-        <item name="android:fontFamily">@font/exo_regular</item>
-    </style>
-
-    <!-- Texts. -->
-    <style name="GrayedOutText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/gray</item>
-        <item name="android:fontFamily">@font/exo_regular</item>
-    </style>
-
-    <style name="FieldNameTxtSize" parent="TextAppearance.AppCompat">
-        <item name="android:fontFamily">@font/exo_regular</item>
-    </style>
-
-
 </resources>

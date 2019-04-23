@@ -1,4 +1,4 @@
-package com.example.movieapp.ui
+package com.example.movieapp.ui.adapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

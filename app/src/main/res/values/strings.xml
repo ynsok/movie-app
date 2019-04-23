@@ -13,5 +13,12 @@
     <string name="genres">Genres</string>
     <string name="home">Home</string>
     <string name="search_toolbar">Search</string>
+    <string name="revenue">Revenue:</string>
+    <string name="production_country">Production country:</string>
+    <string name="star_img">star img</string>
+    <string name="poster_img">poster img</string>
+    <string name="rating">Rating</string>
+    <string name="watch_movie_trailer">Watch movie trailer:</string>
+    <string name="production_company">Production company:</string>
 
 </resources>

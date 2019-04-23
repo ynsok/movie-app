@@ -103,10 +103,6 @@ dependencies {
 
     //RxJava2
     implementation "io.reactivex.rxjava2:rxjava:2.1.14"
-
-    //Picasso
-    implementation 'com.squareup.picasso:picasso:2.71828'
-
 }
 
 task detekt(type: JavaExec) {

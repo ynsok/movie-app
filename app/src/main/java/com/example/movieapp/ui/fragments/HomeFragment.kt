@@ -40,6 +40,7 @@ class HomeFragment : Fragment(), KodeinAware {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         instantiateHomeViewModel()
+
     }
 
     override fun onCreateView(

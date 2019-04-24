@@ -28,6 +28,7 @@ class HomeFragment : Fragment(), KodeinAware {
     private val homeViewModelFactory: HomeViewModelFactory by instance()
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var homeVerticalRecyclerView: HomeVerticalRecyclerView
+    private var verticalAdapterPosition = 0
     private var adapterPosition: MutableList<Int> = mutableListOf(ZERO, ZERO, ZERO, ZERO)
     private fun headerList(): ArrayList<String> = arrayListOf(
         getString(R.string.category_popular),
@@ -58,14 +59,15 @@ class HomeFragment : Fragment(), KodeinAware {
         initializeSnackBar(view.rootView.home_container_id).dismiss()
         initializeViews()
         if (savedInstanceState != null) {
-            val position = savedInstanceState.getInt(VERTICAL_POSITION)
+             verticalAdapterPosition = savedInstanceState.getInt(VERTICAL_POSITION)
             val adapterPosition =
                 savedInstanceState.getParcelable(HORIZONTAL_POSITION) as AdapterPosition
             this.adapterPosition = adapterPosition.horizontalVerticalPosition
-            master_home_rv_id.layoutManager?.scrollToPosition(position)
+            master_home_rv_id.layoutManager?.scrollToPosition(verticalAdapterPosition)
             homeVerticalRecyclerView.horizontalListPosition = this.adapterPosition
         }
         getAdapterPositions()
+        verticalAdapterPosition = getVerticalRecyclerPosition(view.master_home_rv_id)
     }
 
     private fun initializeViews() {
@@ -130,7 +132,7 @@ class HomeFragment : Fragment(), KodeinAware {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt(VERTICAL_POSITION, getVerticalRecyclerPosition(master_home_rv_id))
+        outState.putInt(VERTICAL_POSITION, verticalAdapterPosition)
         outState.putParcelable(HORIZONTAL_POSITION, AdapterPosition(adapterPosition))
         super.onSaveInstanceState(outState)
     }

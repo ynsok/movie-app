@@ -2,20 +2,26 @@ package com.example.movieapp.ui.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import com.example.movieapp.R
+import com.example.movieapp.ui.adapters.SearchAdapter
 import com.example.movieapp.view.model.search.SearchViewModel
 import com.example.movieapp.view.model.search.SearchViewModelFactory
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -27,19 +33,19 @@ class SearchFragment : Fragment(), KodeinAware {
     override val kodein: Kodein by kodein()
     private val searchViewModelFactory: SearchViewModelFactory by instance()
     private lateinit var searchViewModel: SearchViewModel
+    private lateinit var searchRecyclerAdapter: SearchAdapter
     private val compositeDisposable = CompositeDisposable()
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
         startSearching(view)
         getSearchError()
         getSearchSuccess()
         getSearchException()
 
-        /*//TODO show keyboard and focus on search when entering the fragment, close keyboard after leaving it
-        search_txt_id.requestFocus()
-        val inputMethodManager = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
-        */
         return view
     }
 
@@ -48,11 +54,30 @@ class SearchFragment : Fragment(), KodeinAware {
         instantiateSearchViewModel()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setUpSearchAdapter(recycler_search_id)
+
+        showKeyboard()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        hideKeyboard()
+    }
+
     private fun startSearching(view: View) {
         val disposable = Observable.create(ObservableOnSubscribe<String> { subscriber ->
             view.search_txt_id.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {}
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     subscriber.onNext(s.toString())
                 }
@@ -78,7 +103,11 @@ class SearchFragment : Fragment(), KodeinAware {
     private fun getSearchSuccess() =
         searchViewModel.getSearchSuccess.observe(
             viewLifecycleOwner,
-            Observer { Log.i("SearchSuccess", it.toString()) })
+            Observer {
+                searchRecyclerAdapter.swapList(it!!.results.toMutableList())
+
+                Log.i("SearchSuccess", it.toString())
+            })
 
     private fun getSearchError() =
         searchViewModel.getSearchError.observe(
@@ -89,4 +118,29 @@ class SearchFragment : Fragment(), KodeinAware {
         searchViewModel.getSearchException.observe(
             viewLifecycleOwner,
             Observer { Log.i("SearchError", it?.message.toString()) })
+
+    private fun setUpSearchAdapter(recyclerView: RecyclerView) {
+        searchRecyclerAdapter = SearchAdapter()
+
+        with(recyclerView) {
+            adapter = searchRecyclerAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+    }
+
+    private fun showKeyboard() {
+        search_txt_id.requestFocus()
+        val inputMethodManager =
+            context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.toggleSoftInput(
+            InputMethodManager.SHOW_FORCED,
+            InputMethodManager.HIDE_IMPLICIT_ONLY
+        )
+    }
+
+    private fun hideKeyboard() {
+        val inputMethodManager =
+            context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view!!.windowToken, 0)
+    }
 }

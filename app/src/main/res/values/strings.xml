@@ -36,5 +36,7 @@
     <string name="unknown">unknown</string>
     <string name="production_date">Production date:</string>
     <string name="rating_star">rating_star</string>
+    <string name="dots">...........................</string>
+    <string name="category_title">category title</string>
 
 </resources>

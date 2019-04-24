@@ -44,6 +44,8 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
 
     companion object {
         fun getIntent(context: Context): Intent = Intent(context, DetailsActivity::class.java)
+
+
     }
 
     // binding

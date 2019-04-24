@@ -14,8 +14,8 @@ import com.example.movieapp.R
 import com.example.movieapp.models.AdapterPosition
 import com.example.movieapp.network.result.Result
 import com.example.movieapp.ui.adapters.HomeVerticalRecyclerView
-import com.example.movieapp.view.model.Home.HomeViewModel
-import com.example.movieapp.view.model.Home.HomeViewModelFactory
+import com.example.movieapp.view.model.home.HomeViewModel
+import com.example.movieapp.view.model.home.HomeViewModelFactory
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.kodein.di.Kodein

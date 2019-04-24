@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit
 class SearchFragment : Fragment(), KodeinAware {
     override val kodein: Kodein by kodein()
     private val searchViewModelFactory: SearchViewModelFactory by instance()
-    
+
     private lateinit var searchViewModel: SearchViewModel
     private lateinit var searchRecyclerAdapter: SearchAdapter
     private val compositeDisposable = CompositeDisposable()

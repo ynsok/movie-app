@@ -25,15 +25,15 @@
 
         <TextView
             android:id="@+id/rating_dl_txt_row_search_id"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
 
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:fontFamily="@font/exo_regular"
-            android:text="8.0"
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="@+id/rating_img_details2"
+            app:layout_constraintEnd_toEndOf="@+id/production_date_txt_dl_row_search_id"
             app:layout_constraintStart_toEndOf="@+id/rating_img_details2"
             app:layout_constraintTop_toTopOf="@+id/rating_img_details2" />
 
@@ -42,13 +42,17 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="8dp"
             android:cropToPadding="false"
             android:paddingEnd="-3dp"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
             app:layout_constraintBottom_toBottomOf="@+id/rating_txt_row_search"
             app:layout_constraintStart_toEndOf="@+id/rating_txt_row_search"
             app:layout_constraintTop_toTopOf="@+id/rating_txt_row_search"
-            app:srcCompat="@drawable/ic_star_full_yellow" />
+            app:srcCompat="@drawable/ic_star_full_yellow"
+            android:contentDescription="@string/rating_star"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
             android:id="@+id/rating_txt_row_search"
@@ -58,12 +62,12 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="48dp"
             android:fontFamily="@font/exo_regular"
-            android:text="Rating"
+            android:text="@string/rating"
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/year_txt_dl_row_search_id"
-            app:layout_constraintTop_toBottomOf="@+id/year_txt_dl_row_search_id" />
+            app:layout_constraintStart_toStartOf="@+id/production_date_txt_row_search_id"
+            app:layout_constraintTop_toBottomOf="@+id/production_date_txt_dl_row_search_id" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline5"
@@ -84,22 +88,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.43" />
+            app:layout_constraintGuide_percent="0.48" />
 
         <ImageView
-            android:id="@+id/picutre_dl_id_row_search"
+            android:id="@+id/poster_dl_id_row_search"
+
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="6dp"
+            android:src="@drawable/noposter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+            android:contentDescription="@string/poster_img" />
 
         <TextView
             android:id="@+id/title_dl_txt_row_search_id"
@@ -107,26 +113,39 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/exo_regular"
-            android:text="Title Title Title Title Title Title Title Title Title Title Title Title tle Title Title Title "
-            android:textSize="16sp"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/year_txt_dl_row_search_id"
+            android:id="@+id/production_date_txt_dl_row_search_id"
+            style="@style/GrayedOutText"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:fontFamily="@font/exo_regular"
+            app:layout_constraintEnd_toEndOf="@+id/title_dl_txt_row_search_id"
+            app:layout_constraintStart_toEndOf="@+id/production_date_txt_row_search_id"
+            app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+        <TextView
+            android:id="@+id/production_date_txt_row_search_id"
             style="@style/GrayedOutText"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/exo_regular"
-            android:text="2018"
+            android:text="@string/production_date"
             app:layout_constraintStart_toStartOf="@+id/title_dl_txt_row_search_id"
             app:layout_constraintTop_toTopOf="@+id/guideline3" />
 

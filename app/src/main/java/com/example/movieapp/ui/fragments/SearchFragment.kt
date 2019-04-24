@@ -32,9 +32,11 @@ import java.util.concurrent.TimeUnit
 class SearchFragment : Fragment(), KodeinAware {
     override val kodein: Kodein by kodein()
     private val searchViewModelFactory: SearchViewModelFactory by instance()
+    
     private lateinit var searchViewModel: SearchViewModel
     private lateinit var searchRecyclerAdapter: SearchAdapter
     private val compositeDisposable = CompositeDisposable()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -121,11 +123,7 @@ class SearchFragment : Fragment(), KodeinAware {
 
     private fun setUpSearchAdapter(recyclerView: RecyclerView) {
         searchRecyclerAdapter = SearchAdapter()
-
-        with(recyclerView) {
-            adapter = searchRecyclerAdapter
-            layoutManager = LinearLayoutManager(context)
-        }
+        recyclerView.adapter = searchRecyclerAdapter
     }
 
     private fun showKeyboard() {

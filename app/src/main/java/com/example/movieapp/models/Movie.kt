@@ -1,5 +1,7 @@
 package com.example.movieapp.models
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class Movie(
@@ -8,9 +10,10 @@ data class Movie(
     @SerializedName("results")
     val results: List<Result>
 )
-
+@Entity
 data class Result(
     @SerializedName("id")
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
     @SerializedName("title")
     val title: String,

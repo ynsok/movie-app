@@ -16,5 +16,4 @@ data class Result(
     val poster_path: String,
     @SerializedName("title")
     val title: String
-
 )

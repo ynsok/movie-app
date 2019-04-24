@@ -46,6 +46,12 @@ class DetailViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
+    fun addMovieToFavorite(movie: com.example.movieapp.models.Result) {
+        scope.launch {
+            repository.addMovieToDataBase(movie)
+        }
+    }
+
     override fun onCleared() {
         super.onCleared()
         cancelJob()

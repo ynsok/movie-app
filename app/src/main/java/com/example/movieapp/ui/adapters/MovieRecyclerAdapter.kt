@@ -9,8 +9,10 @@ import com.example.movieapp.models.Result
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_recycler_info.view.*
 
-class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
+class MovieRecyclerAdapter : RecyclerView.Adapter<MovieRecyclerAdapter.ViewHolder>() {
     private val movieList = mutableListOf<Result>()
+
+    var passClickedId: ((Int) -> Unit)? = null
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
 
@@ -21,7 +23,13 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
     override fun getItemCount(): Int = movieList.size
 
     override fun onBindViewHolder(rowHolder: ViewHolder, position: Int) {
-        rowHolder.bindView(movieList[position])
+        rowHolder.run {
+            bindView(movieList[position])
+        }
+
+        rowHolder.itemView.setOnClickListener {
+            passClickedId?.invoke(movieList[position].id)
+        }
     }
 
     fun swapList(resultsList: MutableList<Result>) {
@@ -31,6 +39,8 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
     }
 
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+
+
         fun bindView(movie: Result) {
             with(view) {
                 title_dl_txt_row_search_id.text = movie.title

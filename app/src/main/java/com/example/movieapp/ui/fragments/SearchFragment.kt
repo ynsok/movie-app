@@ -15,7 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.example.movieapp.R
-import com.example.movieapp.ui.adapters.SearchAdapter
+import com.example.movieapp.ui.adapters.MovieRecyclerAdapter
 import com.example.movieapp.view.model.search.SearchViewModel
 import com.example.movieapp.view.model.search.SearchViewModelFactory
 import io.reactivex.Observable
@@ -33,7 +33,7 @@ class SearchFragment : Fragment(), KodeinAware {
     override val kodein: Kodein by kodein()
     private val searchViewModelFactory: SearchViewModelFactory by instance()
     private lateinit var searchViewModel: SearchViewModel
-    private lateinit var searchRecyclerAdapter: SearchAdapter
+    private lateinit var movieRecyclerRecyclerAdapter: MovieRecyclerAdapter
     private val compositeDisposable = CompositeDisposable()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -104,7 +104,7 @@ class SearchFragment : Fragment(), KodeinAware {
         searchViewModel.getSearchSuccess.observe(
             viewLifecycleOwner,
             Observer {
-                searchRecyclerAdapter.swapList(it!!.results.toMutableList())
+                movieRecyclerRecyclerAdapter.swapList(it!!.results.toMutableList())
 
                 Log.i("SearchSuccess", it.toString())
             })
@@ -120,10 +120,10 @@ class SearchFragment : Fragment(), KodeinAware {
             Observer { Log.i("SearchError", it?.message.toString()) })
 
     private fun setUpSearchAdapter(recyclerView: RecyclerView) {
-        searchRecyclerAdapter = SearchAdapter()
+        movieRecyclerRecyclerAdapter = MovieRecyclerAdapter()
 
         with(recyclerView) {
-            adapter = searchRecyclerAdapter
+            adapter = movieRecyclerRecyclerAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }

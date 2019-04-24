@@ -1,0 +1,102 @@
+package com.example.movieapp.ui.adapters
+
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import com.example.movieapp.R
+import com.example.movieapp.extention.inflate
+import com.example.movieapp.models.Movie
+
+import kotlinx.android.synthetic.main.vertical_list_item.view.*
+
+typealias SavePositions = (Int, Int) -> Unit
+
+class HomeVerticalRecyclerView(
+    var horizontalListPosition: MutableList<Int>,
+    var header: List<String>
+) :
+    RecyclerView.Adapter<HomeVerticalRecyclerView.ViewHolder>() {
+    private var listOfTypeMovies = emptyList<Movie?>()
+    var saveData: SavePositions? = null
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        val view = viewGroup.inflate().inflate(R.layout.vertical_list_item, viewGroup, false)
+        return ViewHolder(view)
+    }
+
+    override fun getItemCount(): Int = listOfTypeMovies.size
+
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        listOfTypeMovies[position].let { movie ->
+            movie?.let { results ->
+                viewHolder.getData(
+                    results,
+                    position,
+                    saveData,
+                    horizontalListPosition[position],
+                    header[position]
+                )
+            }
+        }
+    }
+
+    fun swapMovie(movie: List<Movie?>) {
+        listOfTypeMovies = movie
+        notifyDataSetChanged()
+    }
+
+    class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+        private val mAdapter = HomeHorizontalRecyclerView()
+
+        fun getData(
+            movie: Movie,
+            position: Int,
+            lambda: SavePositions?,
+            scrollToPosition: Int,
+            header: String
+        ) {
+            initializeRecyclerView(view.inner_home_rv_id, movie)
+            scrollToPosition(getLinearLayoutManage(view.inner_home_rv_id), scrollToPosition)
+            sendPosition(lambda, position, view.inner_home_rv_id)
+            setupHeader(view.header_txt_id, header)
+        }
+
+        private fun setupHeader(textView: TextView, header: String) {
+            textView.text = header
+        }
+
+        private fun initializeRecyclerView(recyclerView: RecyclerView, movie: Movie) {
+            recyclerView.layoutManager =
+                LinearLayoutManager(recyclerView.context, LinearLayoutManager.HORIZONTAL, false)
+            recyclerView.adapter = mAdapter
+            recyclerView.setHasFixedSize(true)
+            mAdapter.swapData(movieList = movie)
+        }
+
+        private fun sendPosition(
+            lambda: SavePositions?,
+            position: Int,
+            recyclerView: RecyclerView
+        ) {
+            mAdapter.sendCurrentPosition =
+                {
+                    run {
+                        lambda?.invoke(
+                            position,
+                            getFirstVisibleItem(getLinearLayoutManage(recyclerView))
+                        )
+                    }
+                }
+        }
+
+        private fun getLinearLayoutManage(recyclerView: RecyclerView) =
+            recyclerView.layoutManager as LinearLayoutManager
+
+        private fun getFirstVisibleItem(layoutManage: LinearLayoutManager) =
+            layoutManage.findFirstVisibleItemPosition()
+
+        private fun scrollToPosition(layoutManage: LinearLayoutManager, position: Int) =
+            layoutManage.scrollToPosition(position)
+    }
+}

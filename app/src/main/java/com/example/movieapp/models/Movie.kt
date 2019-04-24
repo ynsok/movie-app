@@ -12,10 +12,10 @@ data class Movie(
 data class Result(
     @SerializedName("id")
     val id: Int,
+    @SerializedName("poster_path")
+    val poster_path: String,
     @SerializedName("title")
     val title: String,
-    @SerializedName("poster_path")
-    val poster_path: String?,
     @SerializedName("vote_average")
     val vote_average: Double,
     @SerializedName("release_date")

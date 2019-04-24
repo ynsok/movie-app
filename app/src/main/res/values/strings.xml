@@ -12,5 +12,6 @@
     <string name="search">Search</string>
     <string name="genres">Genres</string>
     <string name="home">Home</string>
+    <string name="name_category_prefereneces_language">Language</string>
 
 </resources>

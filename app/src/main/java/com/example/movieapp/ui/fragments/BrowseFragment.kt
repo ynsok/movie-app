@@ -4,62 +4,87 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
+import android.widget.Toast
 import com.example.movieapp.R
+import com.example.movieapp.models.GenreResult
+import com.example.movieapp.ui.activities.GenresActivity
+import com.example.movieapp.ui.adapters.BrowseRecyclerViewAdapter
 import com.example.movieapp.view.model.browse.BrowseViewModel
 import com.example.movieapp.view.model.browse.BrowseViewModelFactory
-import kotlinx.android.synthetic.main.fragment_browse.view.*
-import org.kodein.di.Kodein
+import kotlinx.android.synthetic.main.fragment_browse.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.support.kodein
 import org.kodein.di.generic.instance
 
 class BrowseFragment : Fragment(), KodeinAware {
-    override val kodein: Kodein by kodein()
+    lateinit var browseRecyclerViewAdapter: BrowseRecyclerViewAdapter
+    override val kodein by kodein()
     private val browseViewModelFactory: BrowseViewModelFactory by instance()
     private lateinit var browseViewModel: BrowseViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        instantiateBrowseViewModel()
-    }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_browse, container, false)
-        getGenreListError()
-        getGenreListException()
-        getGenreListSuccess()
-        return view
+        return inflater.inflate(R.layout.fragment_browse, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        runBrowseRecyclerViewAdapter()
+        instantiateBrowseViewModel()
+        getGenreListSuccess()
+        getGenreListError()
+        getGenreListException()
+        browseRecyclerViewAdapter.putGenreId = { it: Int ->
+            startGenresActivity(it)
+        }
+    }
 
-        view.button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.genresActivity))
+    private fun runBrowseRecyclerViewAdapter() {
+        recycler_view_browse_id.apply {
+            layoutManager =
+                GridLayoutManager(activity, 3) as RecyclerView.LayoutManager?
+        }
+        browseRecyclerViewAdapter = BrowseRecyclerViewAdapter()
+        recycler_view_browse_id.adapter = browseRecyclerViewAdapter
     }
 
     private fun getGenreListSuccess() =
         browseViewModel.getGenreListSuccess.observe(
-            viewLifecycleOwner,
-            Observer { Log.i("BrowserSuccess", it.toString()) })
+            this,
+            Observer { genre -> getDataFromApi(genre!!.genres) })
 
     private fun getGenreListError() =
-        browseViewModel.getGenreListError.observe(viewLifecycleOwner, Observer { Log.i("BrowserError", it) })
+        browseViewModel.getGenreListError.observe(this, Observer {
+            Toast.makeText(context, context?.getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show()
+            Log.i("BrowserError", it)
+        })
 
     private fun getGenreListException() =
         browseViewModel.getGenreListException.observe(
-            viewLifecycleOwner,
-            Observer { Log.i("BrowserError", it?.message.toString()) })
+            this,
+            Observer {
+                Log.i("BrowserError", it?.message.toString())
+                Toast.makeText(context, context?.getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show()
+            })
 
     private fun instantiateBrowseViewModel() {
         browseViewModel =
             ViewModelProviders.of(this, browseViewModelFactory).get(BrowseViewModel::class.java)
+    }
+
+    private fun getDataFromApi(genreList: List<GenreResult>) {
+        browseRecyclerViewAdapter.updateItemList(genreList)
+    }
+
+    private fun startGenresActivity(idOfGenres: Int) {
+        startActivity(GenresActivity.getIntent(context!!, idOfGenres))
     }
 }

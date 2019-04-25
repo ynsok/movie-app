@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/search_toolbar_id"
+        android:id="@+id/second_toolbar_genres_activity_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/titleBackground"
@@ -44,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_toolbar_id" />
+        app:layout_constraintTop_toBottomOf="@+id/second_toolbar_genres_activity_id" />
 
 
 </android.support.constraint.ConstraintLayout>

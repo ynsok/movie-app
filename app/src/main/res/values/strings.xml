@@ -35,6 +35,13 @@
     <string name="Retry">Retry</string>
     <string name="connection">Check Connection</string>
     <string name="again">Try Again</string>
+    <string name="no_internet_connection">"There is no internet connection"</string>
+
+    <string name="spinner_sort_popularity">Popularity</string>
+    <string name="spinner_sort_primary_release_date">Primary release date</string>
+    <string name="spinner_sort_original_title">Original title</string>
+    <string name="spinner_sort_vote_average">Average vote</string>
+    <string name="spinner_sort_vote_count">Count vote</string>
     <string name="deleted_movie_from_favorite_message">was deleted from favorite</string>
     <string name="added_movie_to_favorite_message">was added to favorite</string>
 

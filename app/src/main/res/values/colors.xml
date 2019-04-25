@@ -10,4 +10,9 @@
     <color name="dark_gray">#302F2F</color>
     <color name="titleBackground">#33000000</color>
     <color name="gray_bar">#ff303030</color>
+    <color name="colorBrowseRecyclerBackground">#540C0C0C</color>
+    <color name="colorGenresRecyclerBackground">#800C0C0C</color>
+    <color name="colorBrowseRecyclerText">#FFFEFE</color>
+    <color name="colorGenresRecyclerText">#FFF7F7</color>
+
 </resources>

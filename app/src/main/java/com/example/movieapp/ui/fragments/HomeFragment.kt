@@ -7,13 +7,13 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.movieapp.R
 import com.example.movieapp.models.AdapterPosition
 import com.example.movieapp.network.result.Result
+import com.example.movieapp.ui.activities.DetailsActivity
 import com.example.movieapp.ui.adapters.HomeVerticalRecyclerView
 import com.example.movieapp.view.model.home.HomeViewModel
 import com.example.movieapp.view.model.home.HomeViewModelFactory
@@ -69,6 +69,7 @@ class HomeFragment : Fragment(), KodeinAware {
         }
         getAdapterPositions()
         verticalAdapterPosition = getVerticalRecyclerPosition(view.master_home_rv_id)
+        startDetailActivity()
     }
 
     private fun initializeViews() {
@@ -108,7 +109,6 @@ class HomeFragment : Fragment(), KodeinAware {
                 is Result.Respond -> {
                     hideProgressBar(view)
                     setActionSnackBar(view.rootView.home_container_id, getString(R.string.again))
-                    Log.i("homeError",it.toString())
                 }
             }
         })
@@ -123,7 +123,6 @@ class HomeFragment : Fragment(), KodeinAware {
                         view.rootView.home_container_id,
                         getString(R.string.connection)
                     )
-                    Log.i("homeError",it.toString())
                 }
             }
         })
@@ -164,6 +163,9 @@ class HomeFragment : Fragment(), KodeinAware {
             message,
             Snackbar.LENGTH_INDEFINITE
         )
+    private fun startDetailActivity(){
+        homeVerticalRecyclerView.sendId = { startActivity(DetailsActivity.getIntent(this.context!!,it))}
+    }
 
     private fun startFetchingRemoteData() = homeViewModel.startFetchingMovie()
 

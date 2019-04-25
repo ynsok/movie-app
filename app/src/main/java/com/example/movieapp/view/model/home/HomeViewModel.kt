@@ -17,7 +17,6 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     private val job = Job()
     private val coroutineContext: CoroutineContext get() = job + Dispatchers.Default
     private val scope = CoroutineScope(coroutineContext)
-
     private val getPopularMovieSuccess = MutableLiveData<Movie>()
     private val getPopularMovieError = MutableLiveData<String>()
     private val getPopularMovieException = MutableLiveData<Exception>()

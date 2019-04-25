@@ -1,5 +1,6 @@
 package com.example.movieapp.repositories
 
+import com.example.movieapp.database.MovieDatabase
 import com.example.movieapp.extention.safeApi
 import com.example.movieapp.models.Detail
 import com.example.movieapp.models.Genre
@@ -8,7 +9,7 @@ import com.example.movieapp.models.Video
 import com.example.movieapp.network.MovieApiService
 import com.example.movieapp.network.result.Result
 
-class Repository(private val movieApiService: MovieApiService) {
+class Repository(private val movieApiService: MovieApiService, private val movieDatabase: MovieDatabase) {
 
     suspend fun getPopularMovie(): Result<Movie> =
         safeApi { movieApiService.getPopularMovie().await() }
@@ -36,4 +37,10 @@ class Repository(private val movieApiService: MovieApiService) {
 
     suspend fun getMovieBySearch(searchQuery: String): Result<Movie> =
         safeApi { movieApiService.getMoviesBySearch(searchQuery).await() }
+
+    fun getMovieFavorite() = movieDatabase.movieDao().all()
+
+    fun addMovieToDataBase(result: com.example.movieapp.models.Result) = movieDatabase.movieDao().insert(result)
+
+    fun removeMovieFromDataBase(result: com.example.movieapp.models.Result) = movieDatabase.movieDao().delete(result)
 }

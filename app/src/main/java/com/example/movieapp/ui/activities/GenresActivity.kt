@@ -1,11 +1,22 @@
 package com.example.movieapp.ui.activities
 
 import android.arch.lifecycle.Observer
-import android.support.v7.app.AppCompatActivity
+import android.content.Context
+import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.util.AttributeSet
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 import com.example.movieapp.R
+import com.example.movieapp.models.Result
+import com.example.movieapp.ui.adapters.GenresRecyclerViewAdapter
+import com.example.movieapp.ui.adapters.SpinnerGenres
 import com.example.movieapp.view.model.genres.GenresViewModel
 import kotlinx.android.synthetic.main.activity_genres.*
 import org.kodein.di.Kodein
@@ -15,33 +26,38 @@ import org.kodein.di.generic.instance
 
 class GenresActivity : AppCompatActivity(), KodeinAware {
     override val kodein: Kodein by kodein()
+    lateinit var genresRecyclerViewAdapter: GenresRecyclerViewAdapter
+    lateinit var spinnerGenres: SpinnerGenres
     private val genresViewModel: GenresViewModel by instance()
-    private val sorted_By = "popularity.desc"
-    private val genreId = 28
+    private var sortedBy = "popularity.desc"
+    private var idGenres = 0
+
+    companion object {
+        const val ID = "id"
+
+        fun getIntent(context: Context, id: Int): Intent {
+            return Intent(context, GenresActivity::class.java).apply {
+                putExtra(ID, id)
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_genres)
 
-        fetchMovieByGenre()
-        go_to_details_btn_id.setOnClickListener {
-            startActivity(DetailsActivity.getIntent(this))
-            Log.i("genres", "click")
-        }
+        idGenres = intent.getIntExtra(ID, 0)
+        if (idGenres != 0) fetchMovieByGenre(sortedBy, idGenres)
+
+        runGenresRecyclerViewAdapter()
+        setUpToolbarGenresActivity()
         getMovieByGenreError()
         getMovieByGenreException()
         getMovieByGenreSuccess()
-
-        setUpToolbarGenresActivity()
-    }
-
-    private fun setUpToolbarGenresActivity() {
-        setSupportActionBar(toolbar_genres_activity_id)
-        title = getString(R.string.genre_activity_title)
-
-        with(supportActionBar!!) {
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowTitleEnabled(true)
+        startSpinner()
+        sortBySelected()
+        genresRecyclerViewAdapter.putToDetailsId = {it ->
+            startDetailsActivity(it)
         }
     }
 
@@ -54,22 +70,70 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun fetchMovieByGenre() {
+    private fun setUpToolbarGenresActivity() {
+        setSupportActionBar(toolbar_genres_activity_id)
+        with(supportActionBar!!) {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowTitleEnabled(true)
+        }
+    }
+
+    private fun runGenresRecyclerViewAdapter() {
+        recycler_view_genres_id.apply {
+            layoutManager =
+                if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    GridLayoutManager(context, 2) as RecyclerView.LayoutManager?
+                } else {
+                    GridLayoutManager(context, 3) as RecyclerView.LayoutManager?
+                }
+        }
+        genresRecyclerViewAdapter = GenresRecyclerViewAdapter()
+        recycler_view_genres_id.adapter = genresRecyclerViewAdapter
+    }
+
+    private fun getDataFromApiMovies(movieList: List<Result>) {
+        genresRecyclerViewAdapter.updateItemList(movieList)
+    }
+
+    private fun fetchMovieByGenre(sorted_By: String, genreId: Int) {
         genresViewModel.fetchMovieByGenre(sorted_By, genreId)
     }
 
     private fun getMovieByGenreSuccess() = genresViewModel.getMovieByGenreSuccess.observe(
         this,
-        Observer {
+        Observer { genre ->
+            getDataFromApiMovies(genre!!.results)
             Log.i("MovieByGenre", "succes")
         })
 
     private fun getMovieByGenreError() =
         genresViewModel.getMovieByGenreError.observe(
             this,
-            Observer { Log.i("MovieByGenreError", it) })
+            Observer { it ->
+                Log.i("MovieByGenreError", it)
+                Toast.makeText(applicationContext, applicationContext.getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show()
+            })
 
     private fun getMovieByGenreException() = genresViewModel.getMovieByGenreException.observe(
         this,
-        Observer { Log.i("MovieByGenreException", it?.message) })
+        Observer { it ->
+            Log.i("MovieByGenreException", it?.message)
+            Toast.makeText(applicationContext, applicationContext.getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show()
+        })
+
+    private fun startSpinner() {
+        spinnerGenres = SpinnerGenres(genresRecyclerViewAdapter)
+        spinnerGenres.runSpinnerMenu(applicationContext, spinner_genres_id)
+    }
+
+    private fun sortBySelected () {
+        spinnerGenres.putSortByPosition = { sort ->
+            sortedBy = sort
+            fetchMovieByGenre(sortedBy, idGenres)
+        }
+    }
+
+    private fun startDetailsActivity(idOfMovie: Int) {
+        startActivity(DetailsActivity.getIntent(applicationContext, idOfMovie))
+    }
 }

@@ -11,9 +11,11 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.horizontal_list_item.view.*
 
 typealias CurrentPositionAdapter = () -> Unit
+typealias onClickMovie = (Int) -> Unit
 
 class HomeHorizontalRecyclerView : RecyclerView.Adapter<HomeHorizontalRecyclerView.ViewHolder>() {
     private var movieList: Movie? = null
+    var clickedMovie: onClickMovie? = null
     var sendCurrentPosition: CurrentPositionAdapter? = null
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
@@ -32,7 +34,7 @@ class HomeHorizontalRecyclerView : RecyclerView.Adapter<HomeHorizontalRecyclerVi
         viewHolder: ViewHolder,
         position: Int
     ) {
-        movieList?.results?.get(position)?.let { viewHolder.bindViews(it, sendCurrentPosition) }
+        movieList?.results?.get(position)?.let { viewHolder.bindViews(it, sendCurrentPosition,clickedMovie) }
     }
 
     fun swapData(movieList: Movie) {
@@ -42,13 +44,16 @@ class HomeHorizontalRecyclerView : RecyclerView.Adapter<HomeHorizontalRecyclerVi
 
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bindViews(movie: Result, lambda: CurrentPositionAdapter?) {
+        fun bindViews(movie: Result, lambda: CurrentPositionAdapter?,onClick:onClickMovie?) {
             Picasso.get().load("$URL${movie.poster_path}")
                 .into(view.poster_image_id)
             view.movie_title_txt_id.text = movie.title
             lambda?.invoke()
+            view.horizontal_cardView_id.setOnClickListener { onClick?.invoke(movie.id) }
         }
+
     }
+
     companion object {
         const val URL = "https://image.tmdb.org/t/p/w500"
     }

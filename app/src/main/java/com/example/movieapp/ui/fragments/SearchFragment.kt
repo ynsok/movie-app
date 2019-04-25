@@ -15,7 +15,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.example.movieapp.R
-import com.example.movieapp.ui.adapters.SearchAdapter
+import com.example.movieapp.ui.activities.DetailsActivity
+import com.example.movieapp.ui.adapters.MovieRecyclerAdapter
 import com.example.movieapp.view.model.search.SearchViewModel
 import com.example.movieapp.view.model.search.SearchViewModelFactory
 import io.reactivex.Observable
@@ -34,7 +35,7 @@ class SearchFragment : Fragment(), KodeinAware {
     private val searchViewModelFactory: SearchViewModelFactory by instance()
 
     private lateinit var searchViewModel: SearchViewModel
-    private lateinit var searchRecyclerAdapter: SearchAdapter
+    private lateinit var movieRecyclerRecyclerAdapter: MovieRecyclerAdapter
     private val compositeDisposable = CompositeDisposable()
 
     override fun onCreateView(
@@ -51,6 +52,11 @@ class SearchFragment : Fragment(), KodeinAware {
         return view
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.clear()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         instantiateSearchViewModel()
@@ -58,7 +64,7 @@ class SearchFragment : Fragment(), KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpSearchAdapter(recycler_search_id)
-
+        selectedMovie()
         showKeyboard()
     }
 
@@ -66,6 +72,12 @@ class SearchFragment : Fragment(), KodeinAware {
         super.onDestroyView()
 
         hideKeyboard()
+    }
+
+    private fun selectedMovie() {
+        movieRecyclerRecyclerAdapter.passClickedId = { movieId ->
+            startActivity(DetailsActivity.getIntent(this.context!!,movieId))
+        }
     }
 
     private fun startSearching(view: View) {
@@ -92,11 +104,6 @@ class SearchFragment : Fragment(), KodeinAware {
         compositeDisposable.addAll(disposable)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        compositeDisposable.clear()
-    }
-
     private fun instantiateSearchViewModel() {
         searchViewModel =
             ViewModelProviders.of(this, searchViewModelFactory).get(SearchViewModel::class.java)
@@ -106,7 +113,7 @@ class SearchFragment : Fragment(), KodeinAware {
         searchViewModel.getSearchSuccess.observe(
             viewLifecycleOwner,
             Observer {
-                searchRecyclerAdapter.swapList(it!!.results.toMutableList())
+                movieRecyclerRecyclerAdapter.swapList(it!!.results.toMutableList())
 
                 Log.i("SearchSuccess", it.toString())
             })
@@ -122,8 +129,12 @@ class SearchFragment : Fragment(), KodeinAware {
             Observer { Log.i("SearchError", it?.message.toString()) })
 
     private fun setUpSearchAdapter(recyclerView: RecyclerView) {
-        searchRecyclerAdapter = SearchAdapter()
-        recyclerView.adapter = searchRecyclerAdapter
+        movieRecyclerRecyclerAdapter = MovieRecyclerAdapter()
+
+        with(recyclerView) {
+            adapter = movieRecyclerRecyclerAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
     }
 
     private fun showKeyboard() {

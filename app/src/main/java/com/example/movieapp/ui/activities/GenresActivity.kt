@@ -25,7 +25,7 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
 
         fetchMovieByGenre()
         go_to_details_btn_id.setOnClickListener {
-            startActivity(DetailsActivity.getIntent(this))
+            startActivity(DetailsActivity.getIntent(this,23))
             Log.i("genres", "click")
         }
         getMovieByGenreError()

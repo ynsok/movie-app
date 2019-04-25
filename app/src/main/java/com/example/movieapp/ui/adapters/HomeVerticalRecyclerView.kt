@@ -12,6 +12,7 @@ import com.example.movieapp.models.Movie
 import kotlinx.android.synthetic.main.vertical_list_item.view.*
 
 typealias SavePositions = (Int, Int) -> Unit
+typealias SendIdClickedMovie = (Int) -> Unit
 
 class HomeVerticalRecyclerView(
     var horizontalListPosition: MutableList<Int>,
@@ -20,6 +21,7 @@ class HomeVerticalRecyclerView(
     RecyclerView.Adapter<HomeVerticalRecyclerView.ViewHolder>() {
     private var listOfTypeMovies = emptyList<Movie?>()
     var saveData: SavePositions? = null
+    var sendId: SendIdClickedMovie? = null
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = viewGroup.inflate().inflate(R.layout.vertical_list_item, viewGroup, false)
         return ViewHolder(view)
@@ -35,7 +37,8 @@ class HomeVerticalRecyclerView(
                     position,
                     saveData,
                     horizontalListPosition[position],
-                    header[position]
+                    header[position],
+                    sendId
                 )
             }
         }
@@ -54,12 +57,14 @@ class HomeVerticalRecyclerView(
             position: Int,
             lambda: SavePositions?,
             scrollToPosition: Int,
-            header: String
+            header: String,
+            sendId: SendIdClickedMovie?
         ) {
             initializeRecyclerView(view.inner_home_rv_id, movie)
             scrollToPosition(getLinearLayoutManage(view.inner_home_rv_id), scrollToPosition)
             sendPosition(lambda, position, view.inner_home_rv_id)
             setupHeader(view.header_txt_id, header)
+            sendIdMovie(sendId)
         }
 
         private fun setupHeader(textView: TextView, header: String) {
@@ -88,6 +93,10 @@ class HomeVerticalRecyclerView(
                         )
                     }
                 }
+        }
+
+        private fun sendIdMovie(lambda: SendIdClickedMovie?) {
+            mAdapter.clickedMovie = { lambda?.invoke(it) }
         }
 
         private fun getLinearLayoutManage(recyclerView: RecyclerView) =

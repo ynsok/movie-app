@@ -13,9 +13,10 @@ import android.view.ViewGroup
 import com.example.movieapp.R
 import com.example.movieapp.models.AdapterPosition
 import com.example.movieapp.network.result.Result
+import com.example.movieapp.ui.activities.DetailsActivity
 import com.example.movieapp.ui.adapters.HomeVerticalRecyclerView
-import com.example.movieapp.view.model.Home.HomeViewModel
-import com.example.movieapp.view.model.Home.HomeViewModelFactory
+import com.example.movieapp.view.model.home.HomeViewModel
+import com.example.movieapp.view.model.home.HomeViewModelFactory
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.kodein.di.Kodein
@@ -68,6 +69,7 @@ class HomeFragment : Fragment(), KodeinAware {
         }
         getAdapterPositions()
         verticalAdapterPosition = getVerticalRecyclerPosition(view.master_home_rv_id)
+        startDetailActivity()
     }
 
     private fun initializeViews() {
@@ -161,6 +163,9 @@ class HomeFragment : Fragment(), KodeinAware {
             message,
             Snackbar.LENGTH_INDEFINITE
         )
+    private fun startDetailActivity(){
+        homeVerticalRecyclerView.sendId = { startActivity(DetailsActivity.getIntent(this.context!!,it))}
+    }
 
     private fun startFetchingRemoteData() = homeViewModel.startFetchingMovie()
 

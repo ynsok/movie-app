@@ -45,7 +45,7 @@ class BrowseViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
     fun getGenresIcons(items: String, holder: BrowseViewHolder) {
         when(items) {
-            "Action" -> changeBackground(holder, R.drawable.animation)
+            "Action" -> changeBackground(holder, R.drawable.action)
             "Adventure" -> changeBackground(holder, R.drawable.adventure)
             "Animation" -> changeBackground(holder, R.drawable.animation)
             "Comedy" -> changeBackground(holder, R.drawable.comedy)

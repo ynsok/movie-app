@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.example.movieapp.BR
@@ -151,5 +152,14 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
             //  if (videoList?.results?.size!! >= 0) initializeExoPlayerWithAddress(videoList.results.first().key)
 
         })
+    }
+
+    override fun onBackPressed() {
+        finish()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        finish()
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -8,8 +8,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.AttributeSet
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import com.example.movieapp.R
 import com.example.movieapp.models.Result
@@ -54,6 +56,9 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
         getMovieByGenreSuccess()
         startSpinner()
         sortBySelected()
+        genresRecyclerViewAdapter.putToDetailsId = {it ->
+            startDetailsActivity(it)
+        }
     }
 
     override fun onBackPressed() {
@@ -126,5 +131,9 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
             sortedBy = sort
             fetchMovieByGenre(sortedBy, idGenres)
         }
+    }
+
+    private fun startDetailsActivity(idOfMovie: Int) {
+        startActivity(DetailsActivity.getIntent(applicationContext, idOfMovie))
     }
 }

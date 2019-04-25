@@ -9,25 +9,36 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_genres_activity_id"
         style="@style/DarkToolbarStyle"
-
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/search_toolbar_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/titleBackground"
+        android:paddingBottom="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_genres_activity_id">
 
         <Spinner
             android:id="@+id/spinner_genres_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginRight="2dp"/>
+            android:layout_marginRight="2dp" />
+
 
     </android.support.v7.widget.Toolbar>
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_genres_id"
-        android:layout_marginTop="?android:attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:padding="4dp"
@@ -35,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/search_toolbar_id" />
 
 
 </android.support.constraint.ConstraintLayout>

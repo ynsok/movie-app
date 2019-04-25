@@ -43,6 +43,7 @@ object BindingAdapter {
 
         val singleString = StringBuilder()
         stringsList?.joinToString(separator = ", ") { productionCompany: ProductionCompany ->
+        stringsList?.joinToString(separator = ", ",prefix = ",",truncated = ",") { productionCompany: ProductionCompany ->
             singleString.append(
                 productionCompany.name
             )
@@ -56,7 +57,7 @@ object BindingAdapter {
     fun bindProductionCountry(textView: TextView, stringsList: List<ProductionCountry>?) {
 
         val singleString = StringBuilder()
-        stringsList?.joinToString(separator = ", ") { productionCountry: ProductionCountry ->
+        stringsList?.joinToString(separator = ", ",prefix = ",",truncated = ",") { productionCountry: ProductionCountry ->
             singleString.append(
                 productionCountry.name
             )

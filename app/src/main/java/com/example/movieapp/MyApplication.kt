@@ -10,6 +10,11 @@ import com.example.movieapp.view.model.browse.BrowseViewModelFactory
 import com.example.movieapp.view.model.detail.DetailViewModel
 import com.example.movieapp.view.model.genres.GenresViewModel
 import com.example.movieapp.view.model.home.HomeViewModelFactory
+import com.example.movieapp.view.model.search.SearchViewModelFactory
+import com.example.movieapp.view.model.browse.BrowseViewModelFactory
+import com.example.movieapp.view.model.detail.DetailViewModel
+import com.example.movieapp.view.model.genres.GenresViewModel
+import com.example.movieapp.view.model.home.HomeViewModelFactory
 import com.example.movieapp.view.model.favorite.FavoriteViewModel
 import com.example.movieapp.view.model.favorite.FavoriteViewModelFactory
 import com.example.movieapp.view.model.search.SearchViewModel

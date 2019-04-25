@@ -15,6 +15,7 @@ import android.util.SparseArray
 import at.huber.youtubeExtractor.VideoMeta
 import at.huber.youtubeExtractor.YouTubeExtractor
 import at.huber.youtubeExtractor.YtFile
+import android.widget.EditText
 import com.example.movieapp.BR
 import com.example.movieapp.R
 import com.example.movieapp.databinding.ActivityDetailsBinding
@@ -43,30 +44,25 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
     private val detailViewModel: DetailViewModel by instance()
 
     companion object {
-        fun getIntent(context: Context): Intent = Intent(context, DetailsActivity::class.java)
+        private const val MOVIE_ID = "movieId"
+        fun getIntent(context: Context,movieId:Int): Intent = Intent(context, DetailsActivity::class.java).putExtra(MOVIE_ID,movieId)
     }
-
     // binding
     private lateinit var binding: ActivityDetailsBinding
 
-    private var exoPlayerView: PlayerView? = null
-    private var exoPlayer: SimpleExoPlayer? = null
-    private var playbackStateBuilder: PlaybackStateCompat.Builder? = null
-    private var mediaSession: MediaSessionCompat? = null
 
+    private val movieId:Int by lazy { intent.getIntExtra(MOVIE_ID,0) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
         // binding
         binding = DataBindingUtil.setContentView(this, R.layout.activity_details)
 
         // pass id on click from another fragment
-        startFetchingById(550)
+        startFetchingById(movieId)
 
         getSuccessRespond()
-
-        exoPlayerView = findViewById(R.id.exo_player_details_id)
-
         setUpDetailsToolbar()
         setUpDetailsCollapsingToolbar()
         initializeFavouritesFabAction()
@@ -74,7 +70,6 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
 
     override fun onDestroy() {
         super.onDestroy()
-        releasePlayer()
     }
 
     private fun setUpDetailsToolbar() {
@@ -107,7 +102,7 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
         }
     }
 
-    private fun initializeExoPlayerWithAddress(youtubeKey: String) {
+  /*  private fun initializeExoPlayerWithAddress(youtubeKey: String) {
         val youtubeLink = "http://youtube.com/watch?v=$youtubeKey"
 
         object : YouTubeExtractor(this) {
@@ -118,56 +113,10 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
                 if (ytFiles != null) {
                     val itag = 22
                     val downloadUrl = ytFiles.get(itag).url
-                    initializeExoPlayer(downloadUrl)
                 }
             }
         }.extract(youtubeLink, true, true)
-    }
-
-    private fun initializeExoPlayer(mediaUrl: String) {
-        val trackSelector = DefaultTrackSelector()
-        exoPlayer = ExoPlayerFactory.newSimpleInstance(baseContext, trackSelector)
-        exoPlayerView?.player = exoPlayer
-
-        val userAgent = Util.getUserAgent(baseContext, "Exo")
-
-        val mediaSource = ExtractorMediaSource
-            .Factory(DefaultDataSourceFactory(baseContext, userAgent))
-            .setExtractorsFactory(DefaultExtractorsFactory())
-            .createMediaSource(Uri.parse(mediaUrl))
-
-        exoPlayer?.prepare(mediaSource)
-        exoPlayer?.playWhenReady = true
-
-        playbackStateBuilder = PlaybackStateCompat.Builder()
-
-        exoPlayerButtons()
-        exoPlayerSize()
-
-        val componentName = ComponentName(baseContext, "Exo")
-        mediaSession = MediaSessionCompat(baseContext, "ExoPlayer", componentName, null)
-        mediaSession?.setPlaybackState(playbackStateBuilder?.build())
-    }
-
-    private fun exoPlayerButtons() {
-        playbackStateBuilder?.setActions(
-            PlaybackStateCompat.ACTION_PLAY or
-                    PlaybackStateCompat.ACTION_PAUSE or
-                    PlaybackStateCompat.ACTION_FAST_FORWARD
-        )
-    }
-
-    private fun exoPlayerSize() {
-        exoPlayer?.videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
-    }
-
-    private fun releasePlayer() {
-        if (exoPlayer != null) {
-            exoPlayer?.stop()
-            exoPlayer?.release()
-            exoPlayer = null
-        }
-    }
+    }*/
 
     private fun startFetchingById(id: Int) {
         detailViewModel.fetchMovieDetail(id)
@@ -185,9 +134,8 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
             })
 
         detailViewModel.getMovieDetailVideoSuccess.observe(this, Observer { videoList ->
-            if (videoList?.results?.size!! >= 0) {
-                initializeExoPlayerWithAddress(videoList.results[0].key)
-            }
+          //  if (videoList?.results?.size!! >= 0) initializeExoPlayerWithAddress(videoList.results.first().key)
+
         })
     }
 }

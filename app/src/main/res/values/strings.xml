@@ -20,12 +20,22 @@
     <string name="rating">Rating</string>
     <string name="watch_movie_trailer">Watch movie trailer:</string>
     <string name="production_company">Production company:</string>
-    <string name="movie_title">Movie title</string>
+    <string name="movie_title">Movie title…</string>
     <string name="unrated">Unrated</string>
     <string name="unknown">unknown</string>
     <string name="production_date">Production date:</string>
     <string name="rating_star">rating_star</string>
     <string name="poster_of_movie_desc">Poster of movie</string>
+
+    <!-- Names of categories in Home Fragment -->
+    <string name="category_popular">Popular</string>
+    <string name="category_top_rated">Top Rated</string>
+    <string name="category_upcoming">Upcoming</string>
+    <string name="category_now_playing">Now playing</string>
+    <string name="Retry">Retry</string>
+    <string name="connection">Check Connection</string>
+    <string name="again">Try Again</string>
+
 
     <!-- Names of categories in Home Fragment -->
     <string name="category_popular">Popular</string>

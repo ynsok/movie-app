@@ -11,6 +11,6 @@
         android:icon="@drawable/ic_home_white"
         android:menuCategory="container"
         android:title="User"
-        app:showAsAction="ifRoom"></item>
+        app:showAsAction="ifRoom" />
 
 </menu>

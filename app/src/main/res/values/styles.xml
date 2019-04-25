@@ -27,6 +27,17 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="DetailsActivityToolbarText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/exo_regular</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">@color/black</item>
+        <item name="android:shadowDx">6</item>
+        <item name="android:shadowDy">3</item>
+        <item name="android:shadowRadius">6</item>
+        <item name="android:textSize">26sp</item>
+    </style>
+
     <style name="ExoFontWhiteBoldShadowed" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">@font/exo_regular</item>
@@ -41,9 +52,14 @@
         <item name="android:fontFamily">@font/exo_regular</item>
     </style>
 
-    <!-- Toolbar colours -->
+    <!-- Toolbars -->
     <style name="DarkToolbarStyle">
         <item name="android:background">@color/titleBackground</item>
+    </style>
+
+    <!-- styles.xml -->
+    <style name="DetailsActivityToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:fontFamily">@font/exo_regular</item>
     </style>
 
     <!-- Buttons. -->

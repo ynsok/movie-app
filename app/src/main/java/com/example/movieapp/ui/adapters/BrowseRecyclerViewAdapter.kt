@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.movieapp.R
 import com.example.movieapp.models.GenreResult
-import kotlinx.android.synthetic.main.browse_recycler_leyout.view.*
+import kotlinx.android.synthetic.main.browse_recycler_layout.view.*
 
 class BrowseRecyclerViewAdapter : RecyclerView.Adapter<BrowseViewHolder>() {
 
@@ -17,7 +17,7 @@ class BrowseRecyclerViewAdapter : RecyclerView.Adapter<BrowseViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, p1: Int): BrowseViewHolder {
         val layoutInflater = LayoutInflater.from(viewGroup.context)
-        val jokeRow = layoutInflater.inflate(R.layout.browse_recycler_leyout, viewGroup, false)
+        val jokeRow = layoutInflater.inflate(R.layout.browse_recycler_layout, viewGroup, false)
         myContext = viewGroup.context
         return BrowseViewHolder(jokeRow)
     }

@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.navigation.findNavController
 import com.example.movieapp.BR
 import com.example.movieapp.R
 import com.example.movieapp.databinding.ActivityDetailsBinding

@@ -9,7 +9,7 @@ import com.example.movieapp.R
 import com.example.movieapp.extention.inflate
 import com.example.movieapp.models.Movie
 
-import kotlinx.android.synthetic.main.vertical_list_item.view.*
+import kotlinx.android.synthetic.main.row_recycler_home.view.*
 
 typealias SavePositions = (Int, Int) -> Unit
 typealias SendIdClickedMovie = (Int) -> Unit
@@ -23,7 +23,7 @@ class HomeVerticalRecyclerView(
     var saveData: SavePositions? = null
     var sendId: SendIdClickedMovie? = null
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val view = viewGroup.inflate().inflate(R.layout.vertical_list_item, viewGroup, false)
+        val view = viewGroup.inflate().inflate(R.layout.row_recycler_home, viewGroup, false)
         return ViewHolder(view)
     }
 

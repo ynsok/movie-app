@@ -5,10 +5,10 @@
     android:id="@+id/card_view_browse_id"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    app:cardCornerRadius="7dp"
+    app:cardCornerRadius="8dp"
     app:cardElevation="0dp"
     app:cardMaxElevation="0dp"
-    android:layout_margin="7dp"
+    android:layout_margin="4dp"
     tools:ignore="MissingConstraints">
 
     <android.support.constraint.ConstraintLayout
@@ -21,10 +21,12 @@
             android:background="@color/gray"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
+            android:contentDescription="@string/browse_recycler_poster" />
 
         <TextView
             android:id="@+id/card_view_txt_browser_id"
+            style="@style/ExoFontWhiteBold"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -33,9 +35,7 @@
             android:gravity="center"
             android:padding="5dp"
             android:textAllCaps="true"
-            android:textColor="@color/colorBrowseRecyclerText"
             android:textSize="12sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

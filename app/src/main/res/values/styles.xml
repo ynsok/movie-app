@@ -45,7 +45,6 @@
     <style name="DarkToolbarStyle">
         <item name="android:background">@color/titleBackground</item>
     </style>
-<<<<<<< HEAD
 
     <!-- Buttons. -->
     <style name="FavouritesFab" parent="Widget.Design.FloatingActionButton">
@@ -60,22 +59,6 @@
         <item name="borderWidth">3dp</item>
         <item name="fabSize">normal</item>
 
-=======
-
-    <!-- Buttons. -->
-    <style name="FavouritesFab" parent="Widget.Design.FloatingActionButton">
-        <item name="maxImageSize">@dimen/maxFabImageSize</item>
-        <item name="android:scaleY">0.6</item>
-        <item name="android:scaleX">0.6</item>
-        <item name="android:scaleType">center</item>
-        <item name="android:src">@drawable/ic_star_border_yellow</item>
-        <item name="android:clickable">true</item>
-        <item name="android:focusable">true</item>
-        <item name="elevation">2dp</item>
-        <item name="borderWidth">3dp</item>
-        <item name="fabSize">normal</item>
-
->>>>>>> f867d1ad99367a384cac01160280c88c9675fa1f
     </style>
 
 </resources>

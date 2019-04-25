@@ -8,11 +8,7 @@
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-<<<<<<< HEAD
         android:label="@string/nav_home_fragment_name"
-=======
-        android:label="@string/main_activity_name"
->>>>>>> f867d1ad99367a384cac01160280c88c9675fa1f
         tools:replace="android:label"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"

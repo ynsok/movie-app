@@ -12,7 +12,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.movieapp.R
-<<<<<<< HEAD
 import com.example.movieapp.models.AdapterPosition
 import com.example.movieapp.network.result.Result
 import com.example.movieapp.ui.adapters.HomeVerticalRecyclerView
@@ -20,10 +19,6 @@ import com.example.movieapp.view.model.home.HomeViewModel
 import com.example.movieapp.view.model.home.HomeViewModelFactory
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
-=======
-import com.example.movieapp.view.model.home.HomeViewModel
-import com.example.movieapp.view.model.home.HomeViewModelFactory
->>>>>>> f867d1ad99367a384cac01160280c88c9675fa1f
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.support.kodein

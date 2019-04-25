@@ -2,7 +2,6 @@ package com.example.movieapp.ui.adapters
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,14 +45,14 @@ class BrowseViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
     fun getGenresIcons(items: String, holder: BrowseViewHolder) {
         when(items) {
-            "Action" -> changeBackground(holder, R.drawable.action)
+            "Action" -> changeBackground(holder, R.drawable.animation)
             "Adventure" -> changeBackground(holder, R.drawable.adventure)
-            "animation" -> changeBackground(holder, R.drawable.animation)
-            "comedy" -> changeBackground(holder, R.drawable.comedy)
-            "crime" -> changeBackground(holder, R.drawable.crime)
-            "documentary" -> changeBackground(holder, R.drawable.documentary)
-            "drama" -> changeBackground(holder, R.drawable.drama)
-            "family" -> changeBackground(holder, R.drawable.family)
+            "Animation" -> changeBackground(holder, R.drawable.animation)
+            "Comedy" -> changeBackground(holder, R.drawable.comedy)
+            "Crime" -> changeBackground(holder, R.drawable.crime)
+            "Documentary" -> changeBackground(holder, R.drawable.documentary)
+            "Drama" -> changeBackground(holder, R.drawable.drama)
+            "Family" -> changeBackground(holder, R.drawable.family)
             "Fantasy" -> changeBackground(holder, R.drawable.fantasy)
             "History" -> changeBackground(holder, R.drawable.history)
             "Horror" -> changeBackground(holder, R.drawable.horror)

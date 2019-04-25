@@ -27,7 +27,11 @@
         android:id="@+id/navigation_menu_search_id"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_background"
+<<<<<<< HEAD
         android:title="@string/search_fragment_title"
+=======
+        android:title="@string/search"
+>>>>>>> f867d1ad99367a384cac01160280c88c9675fa1f
         app:showAsAction="ifRoom" />
 
 </menu>

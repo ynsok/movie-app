@@ -36,7 +36,10 @@ class SearchFragment : Fragment(), KodeinAware {
     private lateinit var searchViewModel: SearchViewModel
     private lateinit var searchRecyclerAdapter: SearchAdapter
     private val compositeDisposable = CompositeDisposable()
+<<<<<<< HEAD
 
+=======
+>>>>>>> f867d1ad99367a384cac01160280c88c9675fa1f
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -123,7 +126,15 @@ class SearchFragment : Fragment(), KodeinAware {
 
     private fun setUpSearchAdapter(recyclerView: RecyclerView) {
         searchRecyclerAdapter = SearchAdapter()
+<<<<<<< HEAD
         recyclerView.adapter = searchRecyclerAdapter
+=======
+
+        with(recyclerView) {
+            adapter = searchRecyclerAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+>>>>>>> f867d1ad99367a384cac01160280c88c9675fa1f
     }
 
     private fun showKeyboard() {

@@ -21,6 +21,22 @@
         <item name="android:fontFamily">@font/exo_regular</item>
     </style>
 
+    <style name="ExoFontWhiteBold" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/exo_regular</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ExoFontWhiteBoldShadowed" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/exo_regular</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">@color/black</item>
+        <item name="android:shadowDx">6</item>
+        <item name="android:shadowDy">3</item>
+        <item name="android:shadowRadius">6</item>
+    </style>
+
     <style name="FieldNameTxtSize" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/exo_regular</item>
     </style>
@@ -33,8 +49,8 @@
     <!-- Buttons. -->
     <style name="FavouritesFab" parent="Widget.Design.FloatingActionButton">
         <item name="maxImageSize">@dimen/maxFabImageSize</item>
-        <item name="android:scaleY">0.6</item>
-        <item name="android:scaleX">0.6</item>
+        <item name="android:scaleY">0.85</item>
+        <item name="android:scaleX">0.85</item>
         <item name="android:scaleType">center</item>
         <item name="android:src">@drawable/ic_star_border_yellow</item>
         <item name="android:clickable">true</item>

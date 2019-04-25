@@ -6,28 +6,28 @@
         android:id="@+id/navigation_menu_home_id"
         android:enabled="true"
         android:icon="@drawable/ic_home_blue"
-        android:title="@string/home"
+        android:title="@string/nav_home_fragment_name"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/navigation_menu_browse_id"
         android:enabled="true"
         android:icon="@drawable/ic_browse_blue"
-        android:title="@string/browse_movies"
+        android:title="@string/nav_browse_fragment_name"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/navigation_menu_favourite_id"
         android:enabled="true"
         android:icon="@drawable/ic_favourite_blue"
-        android:title="@string/favourites"
+        android:title="@string/nav_favourites_fragment_name"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/navigation_menu_search_id"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_background"
-        android:title="@string/search"
+        android:title="@string/search_fragment_title"
         app:showAsAction="ifRoom" />
 
 </menu>

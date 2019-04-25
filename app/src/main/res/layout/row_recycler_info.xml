@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
@@ -12,10 +11,17 @@
     android:layout_marginEnd="12dp"
     android:layout_marginBottom="4dp"
     android:elevation="8dp"
-    app:cardCornerRadius="4dp"
+    app:cardCornerRadius="6dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/card_view_background"
+        android:scaleType="fitXY"
+        android:src="@drawable/card_view_search_fragment_bg" />
 
 
     <android.support.constraint.ConstraintLayout
@@ -25,13 +31,12 @@
 
         <TextView
             android:id="@+id/rating_dl_txt_row_search_id"
-            android:layout_width="0dp"
+            style="@style/ExoFontWhiteBold"
 
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:fontFamily="@font/exo_regular"
             android:textSize="14sp"
-            android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="@+id/rating_img_details2"
             app:layout_constraintEnd_toEndOf="@+id/production_date_txt_dl_row_search_id"
             app:layout_constraintStart_toEndOf="@+id/rating_img_details2"
@@ -43,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:contentDescription="@string/rating_star_desc"
             android:cropToPadding="false"
             android:paddingEnd="-3dp"
             android:scaleX="0.9"
@@ -51,20 +57,18 @@
             app:layout_constraintStart_toEndOf="@+id/rating_txt_row_search"
             app:layout_constraintTop_toTopOf="@+id/rating_txt_row_search"
             app:srcCompat="@drawable/ic_star_full_yellow"
-            android:contentDescription="@string/rating_star"
             tools:ignore="RtlSymmetry" />
 
         <TextView
             android:id="@+id/rating_txt_row_search"
-            android:layout_width="wrap_content"
+            style="@style/ExoFontWhiteBold"
 
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="48dp"
-            android:fontFamily="@font/exo_regular"
             android:text="@string/rating"
             android:textSize="14sp"
-            android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/production_date_txt_row_search_id"
             app:layout_constraintTop_toBottomOf="@+id/production_date_txt_dl_row_search_id" />
@@ -90,25 +94,41 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.48" />
 
-        <ImageView
-            android:id="@+id/poster_dl_id_row_search"
-
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view2"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="6dp"
-            android:src="@drawable/noposter"
+            android:layout_marginBottom="4dp"
+            android:elevation="8dp"
+            app:cardCornerRadius="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/poster_img" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/poster_dl_id_row_search"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:background="@color/dark_gray"
+                android:contentDescription="@string/poster_img_desc"
+                android:padding="3dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/no_poster_available"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.v7.widget.CardView>
 
         <TextView
             android:id="@+id/title_dl_txt_row_search_id"
+            style="@style/ExoFontWhiteBold"
 
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -116,20 +136,16 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:fontFamily="@font/exo_regular"
             android:gravity="center_vertical"
             android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/production_date_txt_dl_row_search_id"
-            style="@style/GrayedOutText"
+            style="@style/ExoFontWhiteBold"
 
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -141,7 +157,7 @@
 
         <TextView
             android:id="@+id/production_date_txt_row_search_id"
-            style="@style/GrayedOutText"
+            style="@style/ExoFontWhiteBold"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -107,6 +108,7 @@ class HomeFragment : Fragment(), KodeinAware {
                 is Result.Respond -> {
                     hideProgressBar(view)
                     setActionSnackBar(view.rootView.home_container_id, getString(R.string.again))
+                    Log.i("homeError",it.toString())
                 }
             }
         })
@@ -121,6 +123,7 @@ class HomeFragment : Fragment(), KodeinAware {
                         view.rootView.home_container_id,
                         getString(R.string.connection)
                     )
+                    Log.i("homeError",it.toString())
                 }
             }
         })

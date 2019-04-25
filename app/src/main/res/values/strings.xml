@@ -1,33 +1,39 @@
 <resources>
 
     <!-- Toolbar titles -->
-    <string name="main_activity_name">Movie App</string>
+    <string name="home_fragment_title">Home</string>
     <string name="genre_activity_title">Genres</string>
+    <string name="favourite_movies_fragment_title">Favourite movies</string>
+    <string name="search_fragment_title">Search</string>
+    <string name="search_toolbar_text">Search</string>
 
-    <!-- Strings -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="favourites">Favourites</string>
-    <string name="favourite_movies">Favourite movies</string>
-    <string name="browse_movies">Browse movies</string>
-    <string name="search">Search</string>
-    <string name="genres">Genres</string>
-    <string name="home">Home</string>
-    <string name="search_toolbar">Search</string>
-    <string name="poster_of_movie_desc">Poster of movie</string>
+    <!-- Bottom navigation view titles -->
+    <string name="nav_favourites_fragment_name">Favourites</string>
+    <string name="nav_browse_fragment_name">Browse</string>
+    <string name="nav_home_fragment_name">Home</string>
+    <string name="nav_graph_genres">Genres</string>
 
     <!-- Names of categories in Home Fragment -->
     <string name="category_popular">Popular</string>
     <string name="category_top_rated">Top Rated</string>
     <string name="category_upcoming">Upcoming</string>
     <string name="category_now_playing">Now playing</string>
+
+    <!-- SnackBar dialogues -->
     <string name="Retry">Retry</string>
     <string name="connection">Check Connection</string>
     <string name="again">Try Again</string>
 
+    <!-- ImageView descriptions -->
+    <string name="poster_of_movie_desc">Poster of movie</string>
+    <string name="star_img_desc">star img</string>
+    <string name="poster_img_desc">poster img</string>
+    <string name="rating_star_desc">rating_star</string>
+
+    <!-- Other strings -->
+    <string name="dots">...........................</string>
     <string name="revenue">Revenue:</string>
     <string name="production_country">Production country:</string>
-    <string name="star_img">star img</string>
-    <string name="poster_img">poster img</string>
     <string name="rating">Rating</string>
     <string name="watch_movie_trailer">Watch movie trailer:</string>
     <string name="production_company">Production company:</string>
@@ -35,8 +41,8 @@
     <string name="unrated">Unrated</string>
     <string name="unknown">unknown</string>
     <string name="production_date">Production date:</string>
-    <string name="rating_star">rating_star</string>
-    <string name="dots">...........................</string>
     <string name="category_title">category title</string>
+    <string name="card_view_background">card view background</string>
+
 
 </resources>

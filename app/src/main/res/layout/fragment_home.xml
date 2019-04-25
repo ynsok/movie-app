@@ -24,7 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:scaleX="4"
-        android:scaleY="4"/>
+        android:scaleX="6"
+        android:scaleY="6"/>
 
 </android.support.constraint.ConstraintLayout>

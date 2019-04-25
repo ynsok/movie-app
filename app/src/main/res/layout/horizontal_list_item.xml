@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="130dp"
-    android:layout_height="176dp">
+    android:layout_width="126dp"
+    android:layout_height="176dp"
+    android:layout_marginEnd="3dp"
+    app:cardCornerRadius="6dp">
+
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingEnd="3dp"
         tools:ignore="RtlSymmetry">
 
         <ImageView
@@ -16,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/poster_of_movie_desc"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             tools:src="@tools:sample/avatars" />
 
         <TextView
@@ -32,5 +34,6 @@
             android:textColor="@android:color/white"
             android:textSize="14sp"
             tools:text="@tools:sample/full_names" />
+
     </FrameLayout>
 </android.support.v7.widget.CardView>

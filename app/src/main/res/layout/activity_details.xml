@@ -16,13 +16,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <android.support.design.widget.AppBarLayout
             android:id="@+id/app_bar_layout"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true">
+
 
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/movie_details_collapsing_toolbar_id"
@@ -43,16 +43,29 @@
                     android:layout_height="200dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
+                    android:contentDescription="@string/poster_img_desc"
                     android:src="@mipmap/ic_launcher"
                     app:layout_collapseMode="parallax"
-                    app:layout_collapseParallaxMultiplier="0.5"
-                    android:contentDescription="@string/poster_img" />
+                    app:layout_collapseParallaxMultiplier="0.5" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_gravity="bottom"
                     android:background="@color/titleBackground" />
+
+
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/favourites_fab_id"
+                    style="@style/FavouritesFab"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/titleBackground"
+                    app:backgroundTint="@color/light_blue"
+                    android:layout_gravity="bottom|end"/>
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/movie_details_toolbar_id"
@@ -82,7 +95,7 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@android:color/darker_gray"
+                    android:background="@drawable/card_view_search_fragment_bg"
                     app:layout_constraintBottom_toTopOf="@+id/overview_dl_txt_details"
                     app:layout_constraintTop_toBottomOf="@+id/rating_dl_txt_details"
                     tools:layout_editor_absoluteX="8dp" />
@@ -93,7 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="8dp"
-                    android:background="@android:color/darker_gray"
+                    android:background="@drawable/card_view_search_fragment_bg"
                     app:layout_constraintTop_toBottomOf="@+id/overview_dl_txt_details"
                     tools:layout_editor_absoluteX="46dp" />
 
@@ -103,7 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="4dp"
-                    android:background="@android:color/darker_gray"
+                    android:background="@drawable/card_view_search_fragment_bg"
                     app:layout_constraintBottom_toTopOf="@+id/watch_trailer_txt_details"
                     app:layout_constraintTop_toBottomOf="@+id/revenue_dl_txt_details"
                     app:layout_constraintVertical_bias="0.0"
@@ -224,7 +237,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="6dp"
-                    android:contentDescription="@string/star_img"
+                    android:contentDescription="@string/star_img_desc"
                     android:cropToPadding="false"
                     android:paddingEnd="-3dp"
                     app:layout_constraintBottom_toBottomOf="@+id/rating_dl_txt_details"
@@ -249,8 +262,9 @@
 
                 <TextView
                     android:id="@+id/watch_trailer_txt_details"
-                    android:layout_width="0dp"
+                    style="@style/ExoFontWhiteBoldShadowed"
 
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/exo_regular"
@@ -350,19 +364,6 @@
 
 
         </android.support.v4.widget.NestedScrollView>
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/favourites_fab_id"
-            style="@style/FavouritesFab"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/titleBackground"
-            app:backgroundTint="@color/light_blue"
-            app:layout_anchor="@id/app_bar_layout"
-            app:layout_anchorGravity="bottom|right|end" />
-
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

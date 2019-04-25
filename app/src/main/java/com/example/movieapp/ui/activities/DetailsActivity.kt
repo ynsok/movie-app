@@ -39,7 +39,6 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
     // binding
     private lateinit var binding: ActivityDetailsBinding
 
-
     private val movieId: Int by lazy { intent.getIntExtra(MOVIE_ID, 0) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +52,6 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
         getSuccessRespond()
         setUpDetailsToolbar()
         setUpDetailsCollapsingToolbar()
-        //setupFAB()
         initializeFavouritesFabAction()
     }
 
@@ -85,16 +83,6 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
         })
     }
 
-    private fun setupFAB() {
-        isInFavorite = { result ->
-            if (result == true) {
-                favourites_fab_id.setImageDrawable(getDrawable((R.drawable.ic_star_full_yellow)))
-            } else {
-                favourites_fab_id.setImageDrawable(getDrawable((R.drawable.ic_star_border_yellow)))
-            }
-        }
-    }
-
     private fun initializeFavouritesFabAction() {
         isInFavorite = { result ->
             if (result) {
@@ -109,7 +97,7 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
                     favourites_fab_id.setImageDrawable(getDrawable((R.drawable.ic_star_border_yellow)))
                     Toast.makeText(
                         this,
-                        "Deleted from favorite ${resultMovieObject.title}",
+                        "${resultMovieObject.title} ${getString(R.string.deleted_movie_from_favorite_message)}",
                         Toast.LENGTH_LONG
                     ).show()
                 } else {
@@ -117,14 +105,13 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
                     favourites_fab_id.setImageDrawable(getDrawable((R.drawable.ic_star_full_yellow)))
                     Toast.makeText(
                         this,
-                        "Added to favorite ${resultMovieObject.title}",
+                        " ${resultMovieObject.title} ${getString(R.string.added_movie_to_favorite_message)}",
                         Toast.LENGTH_LONG
                     ).show()
                 }
             }
         }
     }
-
 
     /*  private fun initializeExoPlayerWithAddress(youtubeKey: String) {
           val youtubeLink = "http://youtube.com/watch?v=$youtubeKey"

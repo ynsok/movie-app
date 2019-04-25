@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.example.movieapp.R
+import com.example.movieapp.ui.activities.DetailsActivity
 import com.example.movieapp.ui.adapters.MovieRecyclerAdapter
 import com.example.movieapp.view.model.search.SearchViewModel
 import com.example.movieapp.view.model.search.SearchViewModelFactory
@@ -49,6 +50,11 @@ class SearchFragment : Fragment(), KodeinAware {
         return view
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.clear()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         instantiateSearchViewModel()
@@ -56,7 +62,7 @@ class SearchFragment : Fragment(), KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpSearchAdapter(recycler_search_id)
-
+        selectedMovie()
         showKeyboard()
     }
 
@@ -64,6 +70,12 @@ class SearchFragment : Fragment(), KodeinAware {
         super.onDestroyView()
 
         hideKeyboard()
+    }
+
+    private fun selectedMovie() {
+        movieRecyclerRecyclerAdapter.passClickedId = { movieId ->
+            startActivity(DetailsActivity.getIntent(this.context!!,movieId))
+        }
     }
 
     private fun startSearching(view: View) {
@@ -88,11 +100,6 @@ class SearchFragment : Fragment(), KodeinAware {
             .subscribe { searchViewModel.getMoviesBySearch(it) }
 
         compositeDisposable.addAll(disposable)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        compositeDisposable.clear()
     }
 
     private fun instantiateSearchViewModel() {

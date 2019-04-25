@@ -10,7 +10,7 @@ interface MovieDao {
     fun all(): LiveData<MutableList<Result>>
 
     @Insert
-    fun insert(movie: Result): Long
+    fun insert(movie: Result)
 
     @Delete
     fun delete(movie: Result)

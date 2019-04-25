@@ -35,5 +35,7 @@
     <string name="Retry">Retry</string>
     <string name="connection">Check Connection</string>
     <string name="again">Try Again</string>
+    <string name="deleted_movie_from_favorite_message">was deleted from favorite</string>
+    <string name="added_movie_to_favorite_message">was added to favorite</string>
 
 </resources>

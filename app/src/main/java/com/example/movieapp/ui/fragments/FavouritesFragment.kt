@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.movieapp.R
 import com.example.movieapp.models.Result
+import com.example.movieapp.ui.activities.DetailsActivity
 import com.example.movieapp.ui.adapters.MovieRecyclerAdapter
 import com.example.movieapp.view.model.favorite.FavoriteViewModel
 import com.example.movieapp.view.model.favorite.FavoriteViewModelFactory
@@ -35,7 +36,6 @@ class FavouritesFragment : Fragment(), KodeinAware {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_favourites, container, false)
         favoriteViewModel = ViewModelProviders.of(this, favoriteViewModelFactory).get(FavoriteViewModel::class.java)
-        //favoriteViewModel.addToDatabase(Result(1,"xxx", "/4VXECCSovzeF3TxpPnKs8L193FS.jpg", 1.0, "30-02-32" ))
         getFavoriteMovies()
         return view
     }
@@ -48,7 +48,7 @@ class FavouritesFragment : Fragment(), KodeinAware {
 
     private fun selectedMovie() {
         favoriteRecyclerAdapter.passClickedId = { movieId ->
-            Toast.makeText(context, movieId.toString(), Toast.LENGTH_LONG).show()
+            startActivity(DetailsActivity.getIntent(this.context!!,movieId))
         }
     }
 
@@ -63,7 +63,6 @@ class FavouritesFragment : Fragment(), KodeinAware {
     private fun getFavoriteMovies() {
         favoriteViewModel.getAllFavoriteMovies().observe(this, Observer {
             favoriteRecyclerAdapter.swapList(it!!)
-            Log.i("test", it.toString())
         })
     }
 }

@@ -33,9 +33,7 @@
             android:layout_gravity="end"
             android:layout_marginRight="2dp" />
 
-
     </android.support.v7.widget.Toolbar>
-
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_genres_id"

@@ -10,6 +10,8 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.example.movieapp.R
 import com.example.movieapp.models.Result
@@ -87,6 +89,9 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
         }
         genresRecyclerViewAdapter = GenresRecyclerViewAdapter()
         recycler_view_genres_id.adapter = genresRecyclerViewAdapter
+        var anim = AnimationUtils.loadAnimation(applicationContext, R.anim.fly_in_from_top_corner)
+        recycler_view_genres_id.animation = anim
+        anim.start()
     }
 
     private fun getDataFromApiMovies(movieList: List<Result>) {
@@ -132,7 +137,7 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
         spinnerGenres.runSpinnerMenu(applicationContext, spinner_genres_id)
     }
 
-    private fun sortBySelected() {
+    private fun sortBySelected () {
         spinnerGenres.putSortByPosition = { sort ->
             sortedBy = sort
             fetchMovieByGenre(sortedBy, idGenres)

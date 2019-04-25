@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.example.movieapp.R
 import com.example.movieapp.models.GenreResult
@@ -17,6 +18,7 @@ import com.example.movieapp.ui.activities.GenresActivity
 import com.example.movieapp.ui.adapters.BrowseRecyclerViewAdapter
 import com.example.movieapp.view.model.browse.BrowseViewModel
 import com.example.movieapp.view.model.browse.BrowseViewModelFactory
+import kotlinx.android.synthetic.main.activity_genres.*
 import kotlinx.android.synthetic.main.fragment_browse.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.support.kodein
@@ -54,6 +56,9 @@ class BrowseFragment : Fragment(), KodeinAware {
         }
         browseRecyclerViewAdapter = BrowseRecyclerViewAdapter()
         recycler_view_browse_id.adapter = browseRecyclerViewAdapter
+        var anim = AnimationUtils.loadAnimation(context, R.anim.fly_in_from_center)
+        recycler_view_browse_id.animation = anim
+        anim.start()
     }
 
     private fun getGenreListSuccess() =

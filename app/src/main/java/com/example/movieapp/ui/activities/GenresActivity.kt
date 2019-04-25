@@ -12,6 +12,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.example.movieapp.R
 import com.example.movieapp.models.Result
@@ -89,6 +90,9 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
         }
         genresRecyclerViewAdapter = GenresRecyclerViewAdapter()
         recycler_view_genres_id.adapter = genresRecyclerViewAdapter
+        var anim = AnimationUtils.loadAnimation(applicationContext, R.anim.fly_in_from_top_corner)
+        recycler_view_genres_id.animation = anim
+        anim.start()
     }
 
     private fun getDataFromApiMovies(movieList: List<Result>) {

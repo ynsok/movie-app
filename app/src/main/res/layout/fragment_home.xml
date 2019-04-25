@@ -2,8 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/home_container_id"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.HomeFragment">
 
@@ -20,11 +20,11 @@
 
         android:layout_height="wrap_content"
         android:indeterminateDrawable="@drawable/progress_home_fragment"
+        android:scaleX="6"
+        android:scaleY="6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scaleX="6"
-        android:scaleY="6"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

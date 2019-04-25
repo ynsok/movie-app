@@ -1,8 +1,13 @@
 package com.example.movieapp.ui.adapters
 
+import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
+import android.view.animation.ScaleAnimation
 import com.example.movieapp.R
 import com.example.movieapp.extention.inflate
 import com.example.movieapp.models.Result
@@ -15,8 +20,8 @@ class MovieRecyclerAdapter : RecyclerView.Adapter<MovieRecyclerAdapter.ViewHolde
     var passClickedId: ((Int) -> Unit)? = null
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-
         val view = viewGroup.inflate().inflate(R.layout.row_recycler_info, viewGroup, false)
+
         return ViewHolder(view)
     }
 
@@ -39,8 +44,6 @@ class MovieRecyclerAdapter : RecyclerView.Adapter<MovieRecyclerAdapter.ViewHolde
     }
 
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-
-
         fun bindView(movie: Result) {
             with(view) {
                 title_dl_txt_row_search_id.text = movie.title

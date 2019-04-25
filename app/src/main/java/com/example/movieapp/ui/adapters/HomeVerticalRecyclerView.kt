@@ -65,6 +65,7 @@ class HomeVerticalRecyclerView(
             sendPosition(lambda, position, view.inner_home_rv_id)
             setupHeader(view.header_txt_id, header)
             sendIdMovie(sendId)
+            //view.inner_home_rv_id.scheduleLayoutAnimation()
         }
 
         private fun setupHeader(textView: TextView, header: String) {
@@ -77,6 +78,7 @@ class HomeVerticalRecyclerView(
             recyclerView.adapter = mAdapter
             recyclerView.setHasFixedSize(true)
             mAdapter.swapData(movieList = movie)
+            //recyclerView.scheduleLayoutAnimation()
         }
 
         private fun sendPosition(

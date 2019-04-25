@@ -114,7 +114,7 @@ class SearchFragment : Fragment(), KodeinAware {
             viewLifecycleOwner,
             Observer {
                 movieRecyclerRecyclerAdapter.swapList(it!!.results.toMutableList())
-
+                recycler_search_id.scheduleLayoutAnimation()
                 Log.i("SearchSuccess", it.toString())
             })
 

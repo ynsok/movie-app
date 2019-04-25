@@ -13,14 +13,6 @@ class FavoriteViewModel(private val repository: Repository) : ViewModel() {
 
     fun getAllFavoriteMovies() = repository.getMovieFavorite()
 
-    fun removeFromDatabase(result: Result) = scope.launch {
-        repository.removeMovieFromDataBase(result)
-    }
-
-    fun addToDatabase(result: Result) = scope.launch {
-        repository.addMovieToDataBase(result)
-    }
-
     override fun onCleared() {
         super.onCleared()
         cancelJob()

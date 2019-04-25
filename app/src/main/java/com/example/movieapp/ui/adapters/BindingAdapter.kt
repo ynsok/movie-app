@@ -43,26 +43,34 @@ object BindingAdapter {
 
         val singleString = StringBuilder()
         stringsList?.joinToString(separator = ", ") { productionCompany: ProductionCompany ->
-        stringsList?.joinToString(separator = ", ",prefix = ",",truncated = ",") { productionCompany: ProductionCompany ->
-            singleString.append(
-                productionCompany.name
-            )
+            stringsList?.joinToString(
+                separator = ", ",
+                prefix = ",",
+                truncated = ","
+            ) { productionCompany: ProductionCompany ->
+                singleString.append(
+                    productionCompany.name
+                )
+            }
         }
-
         textView.text = singleString
     }
 
-    @JvmStatic
-    @BindingAdapter("bindProductionCountry")
-    fun bindProductionCountry(textView: TextView, stringsList: List<ProductionCountry>?) {
+        @JvmStatic
+        @BindingAdapter("bindProductionCountry")
+        fun bindProductionCountry(textView: TextView, stringsList: List<ProductionCountry>?) {
 
-        val singleString = StringBuilder()
-        stringsList?.joinToString(separator = ", ",prefix = ",",truncated = ",") { productionCountry: ProductionCountry ->
-            singleString.append(
-                productionCountry.name
-            )
+            val singleString = StringBuilder()
+            stringsList?.joinToString(
+                separator = ", ",
+                prefix = ",",
+                truncated = ","
+            ) { productionCountry: ProductionCountry ->
+                singleString.append(
+                    productionCountry.name
+                )
+            }
+
+            textView.text = singleString
         }
-
-        textView.text = singleString
     }
-}

@@ -89,9 +89,7 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
         }
         genresRecyclerViewAdapter = GenresRecyclerViewAdapter()
         recycler_view_genres_id.adapter = genresRecyclerViewAdapter
-        var anim = AnimationUtils.loadAnimation(applicationContext, R.anim.fly_in_from_top_corner)
-        recycler_view_genres_id.animation = anim
-        anim.start()
+        startAnimation()
     }
 
     private fun getDataFromApiMovies(movieList: List<Result>) {
@@ -141,10 +139,17 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
         spinnerGenres.putSortByPosition = { sort ->
             sortedBy = sort
             fetchMovieByGenre(sortedBy, idGenres)
+            startAnimation()
         }
     }
 
     private fun startDetailsActivity(idOfMovie: Int) {
         startActivity(DetailsActivity.getIntent(applicationContext, idOfMovie))
+    }
+
+    private fun startAnimation() {
+        var anim = AnimationUtils.loadAnimation(applicationContext, R.anim.fly_in_from_top_corner)
+        recycler_view_genres_id.animation = anim
+        anim.start()
     }
 }

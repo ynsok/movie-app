@@ -56,9 +56,7 @@ class BrowseFragment : Fragment(), KodeinAware {
         }
         browseRecyclerViewAdapter = BrowseRecyclerViewAdapter()
         recycler_view_browse_id.adapter = browseRecyclerViewAdapter
-        var anim = AnimationUtils.loadAnimation(context, R.anim.fly_in_from_center)
-        recycler_view_browse_id.animation = anim
-        anim.start()
+        startAnimation()
     }
 
     private fun getGenreListSuccess() =
@@ -99,5 +97,11 @@ class BrowseFragment : Fragment(), KodeinAware {
 
     private fun startGenresActivity(idOfGenres: Int) {
         startActivity(GenresActivity.getIntent(context!!, idOfGenres))
+    }
+
+    private fun startAnimation() {
+        var anim = AnimationUtils.loadAnimation(context, R.anim.fly_in_from_center)
+        recycler_view_browse_id.animation = anim
+        anim.start()
     }
 }

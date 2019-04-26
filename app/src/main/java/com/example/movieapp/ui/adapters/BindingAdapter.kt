@@ -41,35 +41,45 @@ object BindingAdapter {
     @BindingAdapter("bindProductionCompany")
     fun bindProductionCompany(textView: TextView, stringsList: List<ProductionCompany>?) {
 
-        val singleString = StringBuilder()
-        stringsList?.joinToString(
-            separator = ", ",
-            prefix = ",",
-            truncated = ","
-        ) { productionCompany: ProductionCompany ->
-            singleString.append(
-                productionCompany.name
-            )
-        }
-
-        textView.text = singleString
-    }
-
-        @JvmStatic
-        @BindingAdapter("bindProductionCountry")
-        fun bindProductionCountry(textView: TextView, stringsList: List<ProductionCountry>?) {
-
-        val singleString = StringBuilder()
-        stringsList?.joinToString(
-            separator = ", ",
-            prefix = ",",
-            truncated = ","
-        ) { productionCountry: ProductionCountry ->
-            singleString.append(
-                productionCountry.name
-            )
-        }
-
-            textView.text = singleString
+        if (stringsList != null) {
+            textView.text = forrmaterStringCompany(stringsList)
         }
     }
+
+    @JvmStatic
+    @BindingAdapter("bindProductionCountry")
+    fun bindProductionCountry(textView: TextView, stringsList: List<ProductionCountry>?) {
+
+        if (stringsList != null) {
+            textView.text = forrmaterStringCountry(stringsList)
+        }
+    }
+
+    private fun forrmaterStringCompany(stringsList: List<ProductionCompany>): String {
+        val singleString = StringBuilder()
+        if (stringsList.size > 1) {
+            for (i in stringsList.indices) {
+                if (i == stringsList.lastIndex) {
+                    singleString.appendln("${stringsList[i].name} ")
+                } else {
+                    singleString.appendln("${stringsList[i].name}, ")
+                }
+            }
+        } else stringsList.joinToString { item -> singleString.appendln("${item.name} ") }
+        return singleString.toString()
+    }
+
+    private fun forrmaterStringCountry(stringsList: List<ProductionCountry>): String {
+        val singleString = StringBuilder()
+        if (stringsList.size > 1) {
+            for (i in stringsList.indices) {
+                if (i == stringsList.lastIndex) {
+                    singleString.appendln("${stringsList[i].name} ")
+                } else {
+                    singleString.appendln("${stringsList[i].name}, ")
+                }
+            }
+        } else stringsList.joinToString { item -> singleString.appendln("${item.name} ") }
+        return singleString.toString()
+    }
+}

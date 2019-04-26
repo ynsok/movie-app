@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -51,13 +52,13 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
         getSuccessRespond()
         setUpDetailsToolbar()
         setUpDetailsCollapsingToolbar()
-        //initializeFavouritesFabAction()
+        if (checkOrientation()) initializeFavouritesFabAction()
         exo_player_details_id.player = exoPlayer.getPlayerView()?.player
         getConvertedMovieKey(savedInstanceState)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStop() {
+        super.onStop()
         exoPlayer.release()
         mainYouTubeExtractor.releaseExtractor()
     }
@@ -92,59 +93,56 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun initializeFavouritesFabAction() {
-       // if (TODO do if in portrait mode only)
-        {
 
-            isInFavorite = { result ->
+        isInFavorite = { result ->
+            if (result) {
+                favourites_fab_id.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this.applicationContext,
+                        R.drawable.ic_star_full_yellow
+                    )
+                )
+            } else {
+
+                favourites_fab_id.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this.applicationContext,
+                        R.drawable.ic_star_border_yellow
+                    )
+                )
+            }
+
+            favourites_fab_id.setOnClickListener {
                 if (result) {
+                    detailViewModel.removeFromDatabase(resultMovieObject)
                     favourites_fab_id.setImageDrawable(
                         ContextCompat.getDrawable(
                             this.applicationContext,
                             R.drawable.ic_star_full_yellow
                         )
                     )
+                    Toast.makeText(
+                        this,
+                        "${resultMovieObject.title} ${getString(R.string.deleted_movie_from_favorite_message)}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 } else {
-
+                    detailViewModel.addToDatabase(resultMovieObject)
                     favourites_fab_id.setImageDrawable(
                         ContextCompat.getDrawable(
                             this.applicationContext,
                             R.drawable.ic_star_border_yellow
                         )
                     )
-                }
 
-                favourites_fab_id.setOnClickListener {
-                    if (result) {
-                        detailViewModel.removeFromDatabase(resultMovieObject)
-                        favourites_fab_id.setImageDrawable(
-                            ContextCompat.getDrawable(
-                                this.applicationContext,
-                                R.drawable.ic_star_full_yellow
-                            )
-                        )
-                        Toast.makeText(
-                            this,
-                            "${resultMovieObject.title} ${getString(R.string.deleted_movie_from_favorite_message)}",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    } else {
-                        detailViewModel.addToDatabase(resultMovieObject)
-                        favourites_fab_id.setImageDrawable(
-                            ContextCompat.getDrawable(
-                                this.applicationContext,
-                                R.drawable.ic_star_border_yellow
-                            )
-                        )
-
-                        Toast.makeText(
-                            this,
-                            "${resultMovieObject.title} ${getString(R.string.added_movie_to_favorite_message)}",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
+                    Toast.makeText(
+                        this,
+                        "${resultMovieObject.title} ${getString(R.string.added_movie_to_favorite_message)}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
-    }
+        }
     }
 
     private fun startFetchingById(id: Int) {
@@ -183,6 +181,11 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         finish()
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun checkOrientation(): Boolean {
+        val orientation = resources.configuration.orientation
+        return orientation == Configuration.ORIENTATION_PORTRAIT
     }
 
     private fun startDisplayMovie(movieMp4: String, bundle: Bundle?) {

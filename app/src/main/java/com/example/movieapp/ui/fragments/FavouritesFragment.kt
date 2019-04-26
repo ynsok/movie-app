@@ -64,6 +64,7 @@ class FavouritesFragment : Fragment(), KodeinAware {
     private fun getFavoriteMovies() {
         favoriteViewModel.getAllFavoriteMovies().observe(this, Observer {
             favoriteRecyclerAdapter.swapList(it!!)
+            recycler_favorite_id.scheduleLayoutAnimation()
         })
     }
 }

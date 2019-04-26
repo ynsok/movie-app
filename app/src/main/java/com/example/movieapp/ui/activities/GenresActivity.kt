@@ -7,11 +7,8 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.util.AttributeSet
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.example.movieapp.R
@@ -136,7 +133,7 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
         spinnerGenres.runSpinnerMenu(applicationContext, spinner_genres_id)
     }
 
-    private fun sortBySelected () {
+    private fun sortBySelected() {
         spinnerGenres.putSortByPosition = { sort ->
             sortedBy = sort
             fetchMovieByGenre(sortedBy, idGenres)

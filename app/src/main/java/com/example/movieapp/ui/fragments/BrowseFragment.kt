@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +17,6 @@ import com.example.movieapp.ui.activities.GenresActivity
 import com.example.movieapp.ui.adapters.BrowseRecyclerViewAdapter
 import com.example.movieapp.view.model.browse.BrowseViewModel
 import com.example.movieapp.view.model.browse.BrowseViewModelFactory
-import kotlinx.android.synthetic.main.activity_genres.*
 import kotlinx.android.synthetic.main.fragment_browse.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.support.kodein

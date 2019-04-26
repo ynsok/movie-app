@@ -4,7 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragment_browse_id"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/card_view_home_bg">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_browse_id"

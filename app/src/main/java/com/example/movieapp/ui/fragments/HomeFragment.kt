@@ -24,6 +24,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.support.kodein
 import org.kodein.di.generic.instance
 
+@Suppress("DUPLICATE_LABEL_IN_WHEN")
 class HomeFragment : Fragment(), KodeinAware {
     override val kodein: Kodein by kodein()
     private val homeViewModelFactory: HomeViewModelFactory by instance()

@@ -45,7 +45,7 @@ class HomeVerticalRecyclerView(
             }
 
             viewHolder.mAdapter.animationMarker = { marker ->
-                if(marker) {
+                if (marker) {
                     animationMarker?.invoke(marker)
                     viewHolder.startAnimation()
                 }
@@ -57,8 +57,6 @@ class HomeVerticalRecyclerView(
         listOfTypeMovies = movie
         notifyDataSetChanged()
     }
-
-
 
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val mAdapter = HomeHorizontalRecyclerView()

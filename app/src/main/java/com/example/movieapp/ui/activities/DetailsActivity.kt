@@ -107,7 +107,7 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
                     favourites_fab_id.setImageDrawable(getDrawable((R.drawable.ic_star_full_yellow)))
                     Toast.makeText(
                         this,
-                        " ${resultMovieObject.title} ${getString(R.string.added_movie_to_favorite_message)}",
+                        "${resultMovieObject.title} ${getString(R.string.added_movie_to_favorite_message)}",
                         Toast.LENGTH_LONG
                     ).show()
                 }

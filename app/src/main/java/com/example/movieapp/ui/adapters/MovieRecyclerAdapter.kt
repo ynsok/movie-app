@@ -57,7 +57,7 @@ class MovieRecyclerAdapter : RecyclerView.Adapter<MovieRecyclerAdapter.ViewHolde
                 }
 
                 if (movie.poster_path != null) {
-                    Picasso.get().load("https://image.tmdb.org/t/p/w600${movie.poster_path}")
+                    Picasso.get().load("https://image.tmdb.org/t/p/w500${movie.poster_path}")
                         .into(poster_dl_id_row_search)
                 }
             }

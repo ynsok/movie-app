@@ -1,7 +1,6 @@
 package com.example.movieapp.view.model.favorite
 
 import android.arch.lifecycle.ViewModel
-import com.example.movieapp.models.Result
 import com.example.movieapp.repositories.Repository
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext

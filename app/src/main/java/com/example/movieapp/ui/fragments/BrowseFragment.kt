@@ -50,7 +50,7 @@ class BrowseFragment : Fragment(), KodeinAware {
     private fun runBrowseRecyclerViewAdapter() {
         recycler_view_browse_id.apply {
             layoutManager =
-                GridLayoutManager(activity, 3) as RecyclerView.LayoutManager?
+                GridLayoutManager(activity, 3)
         }
         browseRecyclerViewAdapter = BrowseRecyclerViewAdapter()
         recycler_view_browse_id.adapter = browseRecyclerViewAdapter
@@ -63,7 +63,11 @@ class BrowseFragment : Fragment(), KodeinAware {
 
     private fun getGenreListError() =
         browseViewModel.getGenreListError.observe(this, Observer {
-            Toast.makeText(context, context?.getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                context,
+                context?.getString(R.string.no_internet_connection),
+                Toast.LENGTH_LONG
+            ).show()
             Log.i("BrowserError", it)
         })
 
@@ -72,7 +76,11 @@ class BrowseFragment : Fragment(), KodeinAware {
             this,
             Observer {
                 Log.i("BrowserError", it?.message.toString())
-                Toast.makeText(context, context?.getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    context,
+                    context?.getString(R.string.no_internet_connection),
+                    Toast.LENGTH_LONG
+                ).show()
             })
 
     private fun instantiateBrowseViewModel() {

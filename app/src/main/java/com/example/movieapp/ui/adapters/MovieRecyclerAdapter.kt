@@ -40,7 +40,6 @@ class MovieRecyclerAdapter : RecyclerView.Adapter<MovieRecyclerAdapter.ViewHolde
 
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-
         fun bindView(movie: Result) {
             with(view) {
                 title_dl_txt_row_search_id.text = movie.title

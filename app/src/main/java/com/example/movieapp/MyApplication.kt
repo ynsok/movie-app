@@ -73,7 +73,7 @@ class MyApplication : Application(), KodeinAware {
                 .build()
         }
         bind() from singleton { instance<Retrofit>().create(MovieApiService::class.java) }
-        bind() from singleton { Repository(instance(),instance()) }
+        bind() from singleton { Repository(instance(), instance()) }
         bind() from provider { HomeViewModelFactory(instance()) }
         bind() from provider { BrowseViewModelFactory(instance()) }
         bind() from provider { FavoriteViewModelFactory(instance()) }

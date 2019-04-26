@@ -15,7 +15,7 @@ import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 
-class ExoPlayer (private val context: Context):
+class ExoPlayer(private val context: Context) :
     ExoPlayerCallback {
     private var exoPlayerView: PlayerView? = null
     var exoPlayer: SimpleExoPlayer? = null
@@ -23,10 +23,9 @@ class ExoPlayer (private val context: Context):
     private var mediaSession: MediaSessionCompat? = null
 
 
-    override fun initialize(mediaUrl: String)  =initializeExoPlayer(mediaUrl)
+    override fun initialize(mediaUrl: String) = initializeExoPlayer(mediaUrl)
 
-    override fun release() =releasePlayer()
-
+    override fun release() = releasePlayer()
 
     private fun initializeExoPlayer(mediaUrl: String) {
         val trackSelector = DefaultTrackSelector()
@@ -72,5 +71,4 @@ class ExoPlayer (private val context: Context):
             exoPlayer = null
         }
     }
-
 }

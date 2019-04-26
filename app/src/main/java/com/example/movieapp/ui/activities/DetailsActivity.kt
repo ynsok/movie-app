@@ -7,12 +7,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
-import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
-import androidx.navigation.findNavController
 import com.example.movieapp.BR
 import com.example.movieapp.R
 import com.example.movieapp.databinding.ActivityDetailsBinding
@@ -24,7 +20,6 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 
-// TODO trailer video doesnt work for some movies ID (e.g. 530,540), works for (500,550)
 // TODO revenue is often show as 0$ cos its saved as 0 in the database -> if revenue = 0, we should display that it is not known or hide revenue from view
 
 class DetailsActivity : AppCompatActivity(), KodeinAware {
@@ -32,6 +27,7 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
     private val detailViewModel: DetailViewModel by instance()
     lateinit var resultMovieObject: Result
     var isInFavorite: ((Boolean) -> Unit)? = null
+
     companion object {
         private const val MOVIE_ID = "movieId"
         fun getIntent(context: Context, movieId: Int): Intent =

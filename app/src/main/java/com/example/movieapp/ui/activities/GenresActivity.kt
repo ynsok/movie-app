@@ -8,10 +8,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.AttributeSet
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import com.example.movieapp.R
 import com.example.movieapp.models.Result
@@ -56,7 +54,7 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
         getMovieByGenreSuccess()
         startSpinner()
         sortBySelected()
-        genresRecyclerViewAdapter.putToDetailsId = {it ->
+        genresRecyclerViewAdapter.putToDetailsId = { it ->
             startDetailsActivity(it)
         }
     }
@@ -82,9 +80,9 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
         recycler_view_genres_id.apply {
             layoutManager =
                 if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    GridLayoutManager(context, 2) as RecyclerView.LayoutManager?
+                    GridLayoutManager(context, 2)
                 } else {
-                    GridLayoutManager(context, 3) as RecyclerView.LayoutManager?
+                    GridLayoutManager(context, 3)
                 }
         }
         genresRecyclerViewAdapter = GenresRecyclerViewAdapter()
@@ -111,14 +109,22 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
             this,
             Observer { it ->
                 Log.i("MovieByGenreError", it)
-                Toast.makeText(applicationContext, applicationContext.getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    applicationContext,
+                    applicationContext.getString(R.string.no_internet_connection),
+                    Toast.LENGTH_LONG
+                ).show()
             })
 
     private fun getMovieByGenreException() = genresViewModel.getMovieByGenreException.observe(
         this,
         Observer { it ->
             Log.i("MovieByGenreException", it?.message)
-            Toast.makeText(applicationContext, applicationContext.getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                applicationContext,
+                applicationContext.getString(R.string.no_internet_connection),
+                Toast.LENGTH_LONG
+            ).show()
         })
 
     private fun startSpinner() {
@@ -126,7 +132,7 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
         spinnerGenres.runSpinnerMenu(applicationContext, spinner_genres_id)
     }
 
-    private fun sortBySelected () {
+    private fun sortBySelected() {
         spinnerGenres.putSortByPosition = { sort ->
             sortedBy = sort
             fetchMovieByGenre(sortedBy, idGenres)

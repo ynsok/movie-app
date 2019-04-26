@@ -2,7 +2,6 @@ package com.example.movieapp.database
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
-import android.support.design.circularreveal.CircularRevealHelper
 import com.example.movieapp.models.Result
 
 @Dao

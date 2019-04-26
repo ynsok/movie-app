@@ -49,7 +49,7 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
         getSuccessRespond()
         setUpDetailsToolbar()
         setUpDetailsCollapsingToolbar()
-        initializeFavouritesFabAction()
+        // initializeFavouritesFabAction()
         exo_player_details_id.player = exoPlayer.getPlayerView()?.player
         getConvertedMovieKey()
     }
@@ -89,16 +89,31 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
     private fun initializeFavouritesFabAction() {
         isInFavorite = { result ->
             if (result) {
-                favourites_fab_id.setImageDrawable(ContextCompat.getDrawable(this.applicationContext,R.drawable.ic_star_full_yellow))
+                favourites_fab_id.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this.applicationContext,
+                        R.drawable.ic_star_full_yellow
+                    )
+                )
             } else {
 
-                favourites_fab_id.setImageDrawable(ContextCompat.getDrawable(this.applicationContext,R.drawable.ic_star_border_yellow))
+                favourites_fab_id.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this.applicationContext,
+                        R.drawable.ic_star_border_yellow
+                    )
+                )
             }
 
             favourites_fab_id.setOnClickListener {
                 if (result) {
                     detailViewModel.removeFromDatabase(resultMovieObject)
-                    favourites_fab_id.setImageDrawable(ContextCompat.getDrawable(this.applicationContext,R.drawable.ic_star_full_yellow))
+                    favourites_fab_id.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            this.applicationContext,
+                            R.drawable.ic_star_full_yellow
+                        )
+                    )
                     favourites_fab_id.show()
                     Toast.makeText(
                         this,
@@ -107,7 +122,12 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
                     ).show()
                 } else {
                     detailViewModel.addToDatabase(resultMovieObject)
-                    favourites_fab_id.setImageDrawable(ContextCompat.getDrawable(this.applicationContext,R.drawable.ic_star_border_yellow))
+                    favourites_fab_id.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            this.applicationContext,
+                            R.drawable.ic_star_border_yellow
+                        )
+                    )
                     favourites_fab_id.show()
 
                     Toast.makeText(

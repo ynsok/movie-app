@@ -8,4 +8,6 @@ interface ExoPlayerCallback {
     fun setPlayerState(state: Boolean)
     fun setMovieKey(movieKey: String)
     fun getPlayerView(): PlayerView?
+    fun getPositionOfMoviePlay(): Long?
+    fun setPositionOfPlay(position: Long): Unit?
 }

@@ -48,10 +48,8 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
                         view.context.getString(R.string.unknown)
                 }
 
-                if (movie.poster_path != null) {
-                    Picasso.get().load("https://image.tmdb.org/t/p/w500${movie.poster_path}")
-                        .into(poster_dl_id_row_search)
-                }
+                Picasso.get().load("https://image.tmdb.org/t/p/w500${movie.poster_path}")
+                    .into(poster_dl_id_row_search)
             }
         }
     }

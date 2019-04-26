@@ -76,7 +76,7 @@ class SearchFragment : Fragment(), KodeinAware {
 
     private fun selectedMovie() {
         movieRecyclerRecyclerAdapter.passClickedId = { movieId ->
-            startActivity(DetailsActivity.getIntent(this.context!!,movieId))
+            startActivity(DetailsActivity.getIntent(this.context!!, movieId))
         }
     }
 

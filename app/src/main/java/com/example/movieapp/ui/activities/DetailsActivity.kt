@@ -13,6 +13,8 @@ import com.example.movieapp.BR
 import com.example.movieapp.R
 import com.example.movieapp.databinding.ActivityDetailsBinding
 import com.example.movieapp.models.Result
+import com.example.movieapp.ui.exoplayer.ExoPlayer
+import com.example.movieapp.ui.youtubeExtractor.MainYouTubeExtractor
 import com.example.movieapp.view.model.detail.DetailViewModel
 import kotlinx.android.synthetic.main.activity_details.*
 import org.kodein.di.Kodein
@@ -25,39 +27,41 @@ import org.kodein.di.generic.instance
 class DetailsActivity : AppCompatActivity(), KodeinAware {
     override val kodein: Kodein by kodein()
     private val detailViewModel: DetailViewModel by instance()
-    lateinit var resultMovieObject: Result
     var isInFavorite: ((Boolean) -> Unit)? = null
-
-    companion object {
-        private const val MOVIE_ID = "movieId"
-        fun getIntent(context: Context, movieId: Int): Intent =
-            Intent(context, DetailsActivity::class.java).putExtra(MOVIE_ID, movieId)
-    }
+    private lateinit var resultMovieObject: Result
 
     // binding
     private lateinit var binding: ActivityDetailsBinding
-
+    private val exoPlayer: ExoPlayer by instance()
+    private val mainYouTubeExtractor: MainYouTubeExtractor by instance()
     private val movieId: Int by lazy { intent.getIntExtra(MOVIE_ID, 0) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         // binding
         binding = DataBindingUtil.setContentView(this, R.layout.activity_details)
-
         // pass id on click from another fragment
         startFetchingById(movieId)
+
         isMovieInFavorite(movieId)
+
         getSuccessRespond()
         setUpDetailsToolbar()
         setUpDetailsCollapsingToolbar()
         initializeFavouritesFabAction()
+        exo_player_details_id.player = exoPlayer.getPlayerView()?.player
+        getConvertedMovieKey()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        exoPlayer.release()
+        mainYouTubeExtractor.releaseExtractor()
     }
 
     private fun setUpDetailsToolbar() {
         setSupportActionBar(movie_details_toolbar_id)
-        with(supportActionBar!!) {
-            setDisplayHomeAsUpEnabled(true)
-        }
+        with(supportActionBar!!) { setDisplayHomeAsUpEnabled(true) }
     }
 
     private fun setUpDetailsCollapsingToolbar() {
@@ -111,44 +115,33 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
         }
     }
 
-    /*  private fun initializeExoPlayerWithAddress(youtubeKey: String) {
-          val youtubeLink = "http://youtube.com/watch?v=$youtubeKey"
-
-          object : YouTubeExtractor(this) {
-              public override fun onExtractionComplete(
-                  ytFiles: SparseArray<YtFile>?,
-                  vMeta: VideoMeta
-              ) {
-                  if (ytFiles != null) {
-                      val itag = 22
-                      val downloadUrl = ytFiles.get(itag).url
-                  }
-              }
-          }.extract(youtubeLink, true, true)
-      }*/
-
     private fun startFetchingById(id: Int) {
         detailViewModel.fetchMovieDetail(id)
         detailViewModel.fetchMovieDetailVideo(id)
-        //Log.i("movie", resultMovieObject.toString())
     }
 
     private fun getSuccessRespond() {
-        detailViewModel.getMovieDetailSuccess.observe(
-            this,
-            Observer {
-                with(binding) {
-                    setVariable(BR.movie, it!!)
-                    executePendingBindings()
-                }
-                resultMovieObject =
-                    Result(it!!.id, it.title, it.poster_path, it.vote_average, it.release_date)
-            })
+        detailViewModel.getMovieDetailSuccess.observe(this, Observer {
+            with(binding) {
+                setVariable(BR.movie, it!!)
+                executePendingBindings()
+            }
+
+            resultMovieObject =
+                Result(it!!.id, it.title, it.poster_path, it.vote_average, it.release_date)
+        })
 
         detailViewModel.getMovieDetailVideoSuccess.observe(this, Observer { videoList ->
-            //  if (videoList?.results?.size!! >= 0) initializeExoPlayerWithAddress(videoList.results.first().key)
-
+            val results = videoList?.results
+            if (results?.isNotEmpty()!! && results.size >= 0) convertMovieKeyToMp4(results.first().key)
         })
+    }
+
+    private fun convertMovieKeyToMp4(movieKey: String) =
+        mainYouTubeExtractor.convertMovieKey(movieKey)
+
+    private fun getConvertedMovieKey() {
+        mainYouTubeExtractor.getMovieMp4 = { mp4: String -> startDisplayMovie(mp4) }
     }
 
     override fun onBackPressed() {
@@ -158,5 +151,16 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         finish()
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun startDisplayMovie(movieMp4: String) {
+        exoPlayer.setMovieKey(movieMp4)
+        exoPlayer.startPlayMovie()
+    }
+
+    companion object {
+        private const val MOVIE_ID = "movieId"
+        fun getIntent(context: Context, movieId: Int): Intent =
+            Intent(context, DetailsActivity::class.java).putExtra(MOVIE_ID, movieId)
     }
 }

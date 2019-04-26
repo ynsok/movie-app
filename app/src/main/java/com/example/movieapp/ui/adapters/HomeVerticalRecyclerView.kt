@@ -22,6 +22,8 @@ class HomeVerticalRecyclerView(
     private var listOfTypeMovies = emptyList<Movie?>()
     var saveData: SavePositions? = null
     var sendId: SendIdClickedMovie? = null
+    var animationMarker: ((Boolean) -> Unit)? = null
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = viewGroup.inflate().inflate(R.layout.vertical_list_item, viewGroup, false)
         return ViewHolder(view)
@@ -41,6 +43,13 @@ class HomeVerticalRecyclerView(
                     sendId
                 )
             }
+
+            viewHolder.mAdapter.animationMarker = { marker ->
+                if(marker) {
+                    animationMarker?.invoke(marker)
+                    viewHolder.startAnimation()
+                }
+            }
         }
     }
 
@@ -49,8 +58,10 @@ class HomeVerticalRecyclerView(
         notifyDataSetChanged()
     }
 
+
+
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        private val mAdapter = HomeHorizontalRecyclerView()
+        val mAdapter = HomeHorizontalRecyclerView()
 
         fun getData(
             movie: Movie,
@@ -65,6 +76,10 @@ class HomeVerticalRecyclerView(
             sendPosition(lambda, position, view.inner_home_rv_id)
             setupHeader(view.header_txt_id, header)
             sendIdMovie(sendId)
+        }
+
+        fun startAnimation() {
+            itemView.inner_home_rv_id.scheduleLayoutAnimation()
         }
 
         private fun setupHeader(textView: TextView, header: String) {

@@ -77,10 +77,8 @@ class MyApplication : Application(), KodeinAware {
         bind() from provider { HomeViewModelFactory(instance()) }
         bind() from provider { BrowseViewModelFactory(instance()) }
         bind() from provider { FavoriteViewModelFactory(instance()) }
-        bind() from provider { FavoriteViewModel(instance()) }
         bind() from provider { GenresViewModel(instance()) }
         bind() from provider { DetailViewModel(instance()) }
-        bind() from provider { SearchViewModel(instance()) }
         bind() from provider { SearchViewModelFactory(instance()) }
     }
 }

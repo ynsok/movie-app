@@ -51,7 +51,7 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
         setUpDetailsCollapsingToolbar()
         initializeFavouritesFabAction()
         exo_player_details_id.player = exoPlayer.getPlayerView()?.player
-        getConvertedMovieKey()
+        getConvertedMovieKey(savedInstanceState)
     }
 
     override fun onDestroy() {
@@ -62,7 +62,9 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
 
     private fun setUpDetailsToolbar() {
         setSupportActionBar(movie_details_toolbar_id)
-        with(supportActionBar!!) { setDisplayHomeAsUpEnabled(true) }
+        with(supportActionBar!!) {   setDisplayHomeAsUpEnabled(true)
+            setDisplayShowTitleEnabled(false)
+        }
     }
 
     private fun setUpDetailsCollapsingToolbar() {
@@ -145,8 +147,8 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
     private fun convertMovieKeyToMp4(movieKey: String) =
         mainYouTubeExtractor.convertMovieKey(movieKey)
 
-    private fun getConvertedMovieKey() {
-        mainYouTubeExtractor.getMovieMp4 = { mp4: String -> startDisplayMovie(mp4) }
+    private fun getConvertedMovieKey(bundle: Bundle?) {
+        mainYouTubeExtractor.getMovieMp4 = { mp4: String -> startDisplayMovie(mp4,bundle) }
     }
 
     override fun onBackPressed() {
@@ -158,12 +160,18 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun startDisplayMovie(movieMp4: String) {
+    private fun startDisplayMovie(movieMp4: String,bundle: Bundle?) {
         exoPlayer.setMovieKey(movieMp4)
         exoPlayer.startPlayMovie()
+        bundle?.let { exoPlayer.setPositionOfPlay(it.getLong(CURRENT_POSITION)) }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        exoPlayer.getPositionOfMoviePlay()?.let { outState.putLong(CURRENT_POSITION, it) }
+    }
     companion object {
+        private const val CURRENT_POSITION = "position"
         private const val MOVIE_ID = "movieId"
         fun getIntent(context: Context, movieId: Int): Intent =
             Intent(context, DetailsActivity::class.java).putExtra(MOVIE_ID, movieId)

@@ -81,7 +81,6 @@ class MyApplication : Application(), KodeinAware {
         bind() from provider { DetailViewModel(instance()) }
         bind() from provider { ExoPlayer(this@MyApplication) }
         bind() from provider { MainYouTubeExtractor(this@MyApplication) }
-
         bind() from provider { SearchViewModelFactory(instance()) }
     }
 }

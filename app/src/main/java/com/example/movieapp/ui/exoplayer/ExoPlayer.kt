@@ -19,7 +19,6 @@ import com.google.android.exoplayer2.util.Util
 
 class ExoPlayer(private val context: Context) :
     ExoPlayerCallback {
-
     private var mPlayerView: PlayerView? = null
     var mPlayer: SimpleExoPlayer? = null
     private var playbackStateBuilder: PlaybackStateCompat.Builder? = playbackStateCompat()
@@ -35,9 +34,12 @@ class ExoPlayer(private val context: Context) :
     }
 
     override fun startPlayMovie() = playMovie()
-
     override fun release() = releasePlayer()
     override fun getPlayerView() = mPlayerView
+    override fun getPositionOfMoviePlay(): Long? = getCurrentPosition()
+    override fun setPositionOfPlay(position: Long) = seekTo(position)
+
+
 
     init {
         mPlayer = instantiatePlayer(context, defaultTrackSelector())
@@ -63,6 +65,13 @@ class ExoPlayer(private val context: Context) :
     private fun exoPlayerSize() {
         mPlayer?.videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
     }
+
+    // Returns the playback position in the current window, in milliseconds.
+    private fun getCurrentPosition() = mPlayer?.currentPosition
+
+    // Seeks to a position specified in milliseconds in the current window.
+    private fun seekTo(positionToSeek: Long) = mPlayer?.seekTo(positionToSeek)
+
 
     // Constructs an instance that uses a factory to create adaptive track selections.
     private fun defaultTrackSelector() = DefaultTrackSelector(adaptiveTrackSelecto())

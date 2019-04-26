@@ -8,7 +8,7 @@ import com.example.movieapp.extention.inflate
 import com.example.movieapp.models.Movie
 import com.example.movieapp.models.Result
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.horizontal_list_item.view.*
+import kotlinx.android.synthetic.main.item_recycler_home.view.*
 
 typealias CurrentPositionAdapter = () -> Unit
 typealias onClickMovie = (Int) -> Unit
@@ -22,7 +22,7 @@ class HomeHorizontalRecyclerView : RecyclerView.Adapter<HomeHorizontalRecyclerVi
         viewGroup: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val view = viewGroup.inflate().inflate(R.layout.horizontal_list_item, viewGroup, false)
+        val view = viewGroup.inflate().inflate(R.layout.item_recycler_home, viewGroup, false)
         return ViewHolder(view)
     }
 
@@ -54,8 +54,6 @@ class HomeHorizontalRecyclerView : RecyclerView.Adapter<HomeHorizontalRecyclerVi
             lambda?.invoke()
             view.horizontal_cardView_id.setOnClickListener { onClick?.invoke(movie.id) }
         }
-
-
     }
 
     companion object {

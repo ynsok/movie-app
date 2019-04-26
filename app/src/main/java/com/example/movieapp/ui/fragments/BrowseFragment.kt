@@ -5,11 +5,11 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.example.movieapp.R
 import com.example.movieapp.models.GenreResult
@@ -28,11 +28,7 @@ class BrowseFragment : Fragment(), KodeinAware {
     private val browseViewModelFactory: BrowseViewModelFactory by instance()
     private lateinit var browseViewModel: BrowseViewModel
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_browse, container, false)
     }
 
@@ -50,10 +46,11 @@ class BrowseFragment : Fragment(), KodeinAware {
     private fun runBrowseRecyclerViewAdapter() {
         recycler_view_browse_id.apply {
             layoutManager =
-                GridLayoutManager(activity, 3) as RecyclerView.LayoutManager?
+                GridLayoutManager(activity, 3)
         }
         browseRecyclerViewAdapter = BrowseRecyclerViewAdapter()
         recycler_view_browse_id.adapter = browseRecyclerViewAdapter
+        startAnimation()
     }
 
     private fun getGenreListSuccess() =
@@ -63,7 +60,11 @@ class BrowseFragment : Fragment(), KodeinAware {
 
     private fun getGenreListError() =
         browseViewModel.getGenreListError.observe(this, Observer {
-            Toast.makeText(context, context?.getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                context,
+                context?.getString(R.string.no_internet_connection),
+                Toast.LENGTH_LONG
+            ).show()
             Log.i("BrowserError", it)
         })
 
@@ -72,7 +73,11 @@ class BrowseFragment : Fragment(), KodeinAware {
             this,
             Observer {
                 Log.i("BrowserError", it?.message.toString())
-                Toast.makeText(context, context?.getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    context,
+                    context?.getString(R.string.no_internet_connection),
+                    Toast.LENGTH_LONG
+                ).show()
             })
 
     private fun instantiateBrowseViewModel() {
@@ -86,5 +91,11 @@ class BrowseFragment : Fragment(), KodeinAware {
 
     private fun startGenresActivity(idOfGenres: Int) {
         startActivity(GenresActivity.getIntent(context!!, idOfGenres))
+    }
+
+    private fun startAnimation() {
+        var anim = AnimationUtils.loadAnimation(context, R.anim.fly_in_from_center)
+        recycler_view_browse_id.animation = anim
+        anim.start()
     }
 }

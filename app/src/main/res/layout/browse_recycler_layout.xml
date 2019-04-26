@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view_browse_id"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="0dp"
+    tools:ignore="MissingConstraints">
+
+    <ImageView
+        android:id="@+id/card_view_browse_background_id"
+        android:layout_width="112dp"
+        android:layout_height="112dp"
+        android:background="@color/dark_gray"
+        android:contentDescription="@string/browse_recycler_poster"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/card_view_txt_browser_id"
+        style="@style/ExoFontWhiteBold"
+
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorBrowseRecyclerBackground"
+        android:gravity="center"
+        android:padding="5dp"
+        android:textAllCaps="true"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.v7.widget.CardView>

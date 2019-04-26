@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.example.movieapp.R
 import com.example.movieapp.models.Result
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.genres_recycler_leyout.view.*
+import kotlinx.android.synthetic.main.genres_recycler_layout.view.*
 
 class GenresRecyclerViewAdapter : RecyclerView.Adapter<GenresViewHolder>() {
 
@@ -16,7 +16,7 @@ class GenresRecyclerViewAdapter : RecyclerView.Adapter<GenresViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, p1: Int): GenresViewHolder {
         val layoutInflater = LayoutInflater.from(viewGroup.context)
-        val genreRow = layoutInflater.inflate(R.layout.genres_recycler_leyout, viewGroup, false)
+        val genreRow = layoutInflater.inflate(R.layout.genres_recycler_layout, viewGroup, false)
         return GenresViewHolder(genreRow)
     }
 

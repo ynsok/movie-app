@@ -26,12 +26,13 @@
 
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/movie_details_collapsing_toolbar_id"
-                android:layout_width="match_parent"
 
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleGravity="bottom|center"
-                app:expandedTitleMarginBottom="18dp"
+                app:expandedTitleMarginBottom="19dp"
+                app:expandedTitleTextAppearance="@style/DetailsActivityToolbarText"
                 app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed|snap"
                 app:title="@{movie.title}">
 
@@ -54,8 +55,6 @@
                     android:layout_gravity="bottom"
                     android:background="@color/titleBackground" />
 
-
-
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/favourites_fab_id"
                     style="@style/FavouritesFab"
@@ -69,7 +68,6 @@
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/movie_details_toolbar_id"
-                    style="@style/ToolbarExoFont"
 
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"

@@ -62,7 +62,8 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
 
     private fun setUpDetailsToolbar() {
         setSupportActionBar(movie_details_toolbar_id)
-        with(supportActionBar!!) {   setDisplayHomeAsUpEnabled(true)
+        with(supportActionBar!!) {
+            setDisplayHomeAsUpEnabled(true)
             setDisplayShowTitleEnabled(false)
         }
     }
@@ -91,16 +92,31 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
     private fun initializeFavouritesFabAction() {
         isInFavorite = { result ->
             if (result) {
-                favourites_fab_id.setImageDrawable(ContextCompat.getDrawable(this.applicationContext,R.drawable.ic_star_full_yellow))
+                favourites_fab_id.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this.applicationContext,
+                        R.drawable.ic_star_full_yellow
+                    )
+                )
             } else {
 
-                favourites_fab_id.setImageDrawable(ContextCompat.getDrawable(this.applicationContext,R.drawable.ic_star_border_yellow))
+                favourites_fab_id.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this.applicationContext,
+                        R.drawable.ic_star_border_yellow
+                    )
+                )
             }
 
             favourites_fab_id.setOnClickListener {
                 if (result) {
                     detailViewModel.removeFromDatabase(resultMovieObject)
-                    favourites_fab_id.setImageDrawable(ContextCompat.getDrawable(this.applicationContext,R.drawable.ic_star_full_yellow))
+                    favourites_fab_id.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            this.applicationContext,
+                            R.drawable.ic_star_full_yellow
+                        )
+                    )
                     favourites_fab_id.show()
                     Toast.makeText(
                         this,
@@ -109,7 +125,12 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
                     ).show()
                 } else {
                     detailViewModel.addToDatabase(resultMovieObject)
-                    favourites_fab_id.setImageDrawable(ContextCompat.getDrawable(this.applicationContext,R.drawable.ic_star_border_yellow))
+                    favourites_fab_id.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            this.applicationContext,
+                            R.drawable.ic_star_border_yellow
+                        )
+                    )
                     favourites_fab_id.show()
 
                     Toast.makeText(
@@ -148,7 +169,7 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
         mainYouTubeExtractor.convertMovieKey(movieKey)
 
     private fun getConvertedMovieKey(bundle: Bundle?) {
-        mainYouTubeExtractor.getMovieMp4 = { mp4: String -> startDisplayMovie(mp4,bundle) }
+        mainYouTubeExtractor.getMovieMp4 = { mp4: String -> startDisplayMovie(mp4, bundle) }
     }
 
     override fun onBackPressed() {
@@ -160,7 +181,7 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun startDisplayMovie(movieMp4: String,bundle: Bundle?) {
+    private fun startDisplayMovie(movieMp4: String, bundle: Bundle?) {
         exoPlayer.setMovieKey(movieMp4)
         exoPlayer.startPlayMovie()
         bundle?.let { exoPlayer.setPositionOfPlay(it.getLong(CURRENT_POSITION)) }
@@ -170,6 +191,7 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
         super.onSaveInstanceState(outState)
         exoPlayer.getPositionOfMoviePlay()?.let { outState.putLong(CURRENT_POSITION, it) }
     }
+
     companion object {
         private const val CURRENT_POSITION = "position"
         private const val MOVIE_ID = "movieId"

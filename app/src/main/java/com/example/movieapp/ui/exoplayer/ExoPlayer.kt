@@ -39,8 +39,6 @@ class ExoPlayer(private val context: Context) :
     override fun getPositionOfMoviePlay(): Long? = getCurrentPosition()
     override fun setPositionOfPlay(position: Long) = seekTo(position)
 
-
-
     init {
         mPlayer = instantiatePlayer(context, defaultTrackSelector())
         mPlayerView = getPlayerView(context)
@@ -71,7 +69,6 @@ class ExoPlayer(private val context: Context) :
 
     // Seeks to a position specified in milliseconds in the current window.
     private fun seekTo(positionToSeek: Long) = mPlayer?.seekTo(positionToSeek)
-
 
     // Constructs an instance that uses a factory to create adaptive track selections.
     private fun defaultTrackSelector() = DefaultTrackSelector(adaptiveTrackSelecto())

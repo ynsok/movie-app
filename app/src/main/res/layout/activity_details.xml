@@ -40,9 +40,6 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
-                    app:layout_constraintEnd_toEndOf="@+id/watch_trailer_txt_details"
-                    app:layout_constraintStart_toStartOf="@+id/watch_trailer_txt_details"
-                    app:layout_constraintTop_toBottomOf="@+id/watch_trailer_txt_details"
                     app:resize_mode="fill"
                     android:fitsSystemWindows="true"
                     android:scaleType="centerCrop"
@@ -73,7 +70,7 @@
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
             app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
 

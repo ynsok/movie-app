@@ -24,6 +24,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.support.kodein
 import org.kodein.di.generic.instance
 
+@Suppress("DUPLICATE_LABEL_IN_WHEN")
 class HomeFragment : Fragment(), KodeinAware {
     override val kodein: Kodein by kodein()
     private val homeViewModelFactory: HomeViewModelFactory by instance()
@@ -40,7 +41,6 @@ class HomeFragment : Fragment(), KodeinAware {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        instantiateHomeViewModel()
     }
 
     override fun onCreateView(
@@ -49,6 +49,7 @@ class HomeFragment : Fragment(), KodeinAware {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
+        instantiateHomeViewModel()
         getErrorRespond(view)
         getExceptionRespond(view)
         getSuccessRespond(view)
@@ -70,6 +71,7 @@ class HomeFragment : Fragment(), KodeinAware {
         getAdapterPositions()
         verticalAdapterPosition = getVerticalRecyclerPosition(view.master_home_rv_id)
         startDetailActivity()
+        startAnimation()
     }
 
     private fun initializeViews() {
@@ -88,10 +90,12 @@ class HomeFragment : Fragment(), KodeinAware {
                 is Result.Success -> {
                     hideProgressBar(view)
                     homeVerticalRecyclerView.swapMovie(it.data)
-
                 }
             }
         })
+    }
+    private fun startAnimation() {
+        homeVerticalRecyclerView.animationMarker
     }
 
     private fun hideProgressBar(view: View) {

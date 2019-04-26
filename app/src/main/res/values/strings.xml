@@ -1,4 +1,6 @@
 <resources>
+    <!-- Application name -->
+    <string name="application_name">Best movie app ever!</string>
 
     <!-- Toolbar titles -->
     <string name="home_fragment_title">Home</string>
@@ -78,5 +80,6 @@
     <string name="added_movie_to_favorite_message">was added to favorite</string>
     <string name="no_internet_connection">No internet connection</string>
     <string name="browse_recycler_poster">browse_recycler_poster</string>
+
 
 </resources>

@@ -14,7 +14,7 @@ import com.example.movieapp.R
 import com.example.movieapp.databinding.ActivityDetailsBinding
 import com.example.movieapp.models.Result
 import com.example.movieapp.ui.exoplayer.ExoPlayer
-import com.example.movieapp.ui.extractor.MainYouTubeExtractor
+import com.example.movieapp.ui.youtubeExtractor.MainYouTubeExtractor
 import com.example.movieapp.view.model.detail.DetailViewModel
 import kotlinx.android.synthetic.main.activity_details.*
 import org.kodein.di.Kodein
@@ -27,8 +27,9 @@ import org.kodein.di.generic.instance
 class DetailsActivity : AppCompatActivity(), KodeinAware {
     override val kodein: Kodein by kodein()
     private val detailViewModel: DetailViewModel by instance()
-    lateinit var resultMovieObject: Result
     var isInFavorite: ((Boolean) -> Unit)? = null
+    private lateinit var resultMovieObject: Result
+
     // binding
     private lateinit var binding: ActivityDetailsBinding
     private val exoPlayer: ExoPlayer by instance()
@@ -41,7 +42,9 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_details)
         // pass id on click from another fragment
         startFetchingById(movieId)
+
         isMovieInFavorite(movieId)
+
         getSuccessRespond()
         setUpDetailsToolbar()
         setUpDetailsCollapsingToolbar()
@@ -123,6 +126,7 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
                 setVariable(BR.movie, it!!)
                 executePendingBindings()
             }
+
             resultMovieObject =
                 Result(it!!.id, it.title, it.poster_path, it.vote_average, it.release_date)
         })

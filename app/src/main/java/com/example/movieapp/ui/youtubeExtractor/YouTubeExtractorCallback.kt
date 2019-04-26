@@ -1,4 +1,4 @@
-package com.example.movieapp.ui.YoutubeExtractor
+package com.example.movieapp.ui.youtubeExtractor
 
 interface YouTubeExtractorCallback {
     fun convertMovieKey(movieKey: String)

@@ -1,11 +1,10 @@
-package com.example.movieapp.ui.extractor
+package com.example.movieapp.ui.youtubeExtractor
 
 import android.content.Context
 import at.huber.youtubeExtractor.VideoMeta
 import at.huber.youtubeExtractor.YtFile
 import android.util.SparseArray
 import at.huber.youtubeExtractor.YouTubeExtractor
-import com.example.movieapp.ui.YoutubeExtractor.YouTubeExtractorCallback
 
 typealias SendExtractedURL = (String) -> Unit
 

@@ -58,7 +58,6 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
             startDetailsActivity(it)
         }
     }
-
     override fun onBackPressed() {
         finish()
     }

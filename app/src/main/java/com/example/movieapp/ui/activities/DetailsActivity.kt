@@ -117,7 +117,6 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
                             R.drawable.ic_star_full_yellow
                         )
                     )
-                    favourites_fab_id.show()
                     Toast.makeText(
                         this,
                         "${resultMovieObject.title} ${getString(R.string.deleted_movie_from_favorite_message)}",
@@ -131,7 +130,6 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
                             R.drawable.ic_star_border_yellow
                         )
                     )
-                    favourites_fab_id.show()
 
                     Toast.makeText(
                         this,

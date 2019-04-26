@@ -34,7 +34,8 @@ class HomeHorizontalRecyclerView : RecyclerView.Adapter<HomeHorizontalRecyclerVi
         viewHolder: ViewHolder,
         position: Int
     ) {
-        movieList?.results?.get(position)?.let { viewHolder.bindViews(it, sendCurrentPosition,clickedMovie) }
+        movieList?.results?.get(position)
+            ?.let { viewHolder.bindViews(it, sendCurrentPosition, clickedMovie) }
     }
 
     fun swapData(movieList: Movie) {
@@ -44,15 +45,13 @@ class HomeHorizontalRecyclerView : RecyclerView.Adapter<HomeHorizontalRecyclerVi
 
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bindViews(movie: Result, lambda: CurrentPositionAdapter?,onClick:onClickMovie?) {
+        fun bindViews(movie: Result, lambda: CurrentPositionAdapter?, onClick: onClickMovie?) {
             Picasso.get().load("$URL${movie.poster_path}")
                 .into(view.poster_image_id)
             view.movie_title_txt_id.text = movie.title
             lambda?.invoke()
             view.horizontal_cardView_id.setOnClickListener { onClick?.invoke(movie.id) }
         }
-
-
     }
 
     companion object {

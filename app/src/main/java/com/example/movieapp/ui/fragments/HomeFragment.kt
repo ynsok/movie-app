@@ -88,7 +88,6 @@ class HomeFragment : Fragment(), KodeinAware {
                 is Result.Success -> {
                     hideProgressBar(view)
                     homeVerticalRecyclerView.swapMovie(it.data)
-
                 }
             }
         })

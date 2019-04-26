@@ -30,11 +30,7 @@ class BrowseFragment : Fragment(), KodeinAware {
     private val browseViewModelFactory: BrowseViewModelFactory by instance()
     private lateinit var browseViewModel: BrowseViewModel
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_browse, container, false)
     }
 

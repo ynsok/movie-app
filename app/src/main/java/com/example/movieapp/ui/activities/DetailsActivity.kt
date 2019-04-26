@@ -12,9 +12,9 @@ import android.widget.Toast
 import com.example.movieapp.BR
 import com.example.movieapp.R
 import com.example.movieapp.databinding.ActivityDetailsBinding
-import com.example.movieapp.ui.ExoPlayer.ExoPlayer
-import com.example.movieapp.ui.YoutubeExtractor.MainYouTubeExtractor
 import com.example.movieapp.models.Result
+import com.example.movieapp.ui.exoplayer.ExoPlayer
+import com.example.movieapp.ui.extractor.MainYouTubeExtractor
 import com.example.movieapp.view.model.detail.DetailViewModel
 import kotlinx.android.synthetic.main.activity_details.*
 import org.kodein.di.Kodein
@@ -29,12 +29,6 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
     private val detailViewModel: DetailViewModel by instance()
     lateinit var resultMovieObject: Result
     var isInFavorite: ((Boolean) -> Unit)? = null
-    companion object {
-        private const val MOVIE_ID = "movieId"
-        fun getIntent(context: Context, movieId: Int): Intent =
-            Intent(context, DetailsActivity::class.java).putExtra(MOVIE_ID, movieId)
-    }
-
     // binding
     private lateinit var binding: ActivityDetailsBinding
     private val exoPlayer: ExoPlayer by instance()
@@ -129,6 +123,8 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
                 setVariable(BR.movie, it!!)
                 executePendingBindings()
             }
+            resultMovieObject =
+                Result(it!!.id, it.title, it.poster_path, it.vote_average, it.release_date)
         })
 
         detailViewModel.getMovieDetailVideoSuccess.observe(this, Observer { videoList ->
@@ -152,7 +148,6 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
         finish()
         return super.onOptionsItemSelected(item)
     }
-}
 
     private fun startDisplayMovie(movieMp4: String) {
         exoPlayer.setMovieKey(movieMp4)

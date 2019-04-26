@@ -1,13 +1,8 @@
 package com.example.movieapp.ui.adapters
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.view.animation.LayoutAnimationController
-import android.view.animation.ScaleAnimation
 import com.example.movieapp.R
 import com.example.movieapp.extention.inflate
 import com.example.movieapp.models.Result
@@ -62,7 +57,7 @@ class MovieRecyclerAdapter : RecyclerView.Adapter<MovieRecyclerAdapter.ViewHolde
                 }
 
                 if (movie.poster_path != null) {
-                    Picasso.get().load("https://image.tmdb.org/t/p/w500${movie.poster_path}")
+                    Picasso.get().load("https://image.tmdb.org/t/p/w600${movie.poster_path}")
                         .into(poster_dl_id_row_search)
                 }
             }

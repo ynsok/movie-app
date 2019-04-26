@@ -52,7 +52,6 @@ class HomeHorizontalRecyclerView : RecyclerView.Adapter<HomeHorizontalRecyclerVi
             lambda?.invoke()
             view.horizontal_cardView_id.setOnClickListener { onClick?.invoke(movie.id) }
         }
-
     }
 
     companion object {

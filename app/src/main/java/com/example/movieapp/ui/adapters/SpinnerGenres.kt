@@ -18,9 +18,10 @@ class SpinnerGenres(private val genresRecyclerViewAdapter: GenresRecyclerViewAda
         context.run {
             listOfSortNames = arrayOf(
                 getString(R.string.spinner_sort_popularity),
-                getString(R.string.spinner_sort_primary_release_date),
                 getString(R.string.spinner_sort_vote_average),
-                getString(R.string.spinner_sort_vote_count)
+                getString(R.string.spinner_sort_vote_count),
+                getString(R.string.spinner_sort_primary_release_date)
+
             )
         }
 
@@ -45,9 +46,10 @@ class SpinnerGenres(private val genresRecyclerViewAdapter: GenresRecyclerViewAda
     fun sortByPopularity() {
         val listOfSortPossibilities = arrayOf(
             "popularity.desc",
-            "primary_release_date.desc",
             "vote_average.desc",
-            "vote_count.desc"
+            "vote_count.desc",
+            "primary_release_date.desc"
+
         )
         putSortByPosition?.invoke(listOfSortPossibilities[positionOnList])
     }

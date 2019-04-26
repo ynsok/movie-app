@@ -168,11 +168,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="24dp"
                     android:fontFamily="@font/exo_regular"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/guideline_h"
                     app:layout_constraintStart_toStartOf="@+id/movie_length_dl_txt_details"
                     app:layout_constraintTop_toBottomOf="@+id/movie_length_dl_txt_details" />
 

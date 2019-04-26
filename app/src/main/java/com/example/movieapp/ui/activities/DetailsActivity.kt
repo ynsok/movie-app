@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.view.MenuItem
 import android.widget.Toast
 import com.example.movieapp.BR
@@ -88,15 +89,17 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
     private fun initializeFavouritesFabAction() {
         isInFavorite = { result ->
             if (result) {
-                favourites_fab_id.setImageDrawable(getDrawable((R.drawable.ic_star_full_yellow)))
+                favourites_fab_id.setImageDrawable(ContextCompat.getDrawable(this.applicationContext,R.drawable.ic_star_full_yellow))
             } else {
-                favourites_fab_id.setImageDrawable(getDrawable((R.drawable.ic_star_border_yellow)))
+
+                favourites_fab_id.setImageDrawable(ContextCompat.getDrawable(this.applicationContext,R.drawable.ic_star_border_yellow))
             }
 
             favourites_fab_id.setOnClickListener {
                 if (result) {
                     detailViewModel.removeFromDatabase(resultMovieObject)
-                    favourites_fab_id.setImageDrawable(getDrawable((R.drawable.ic_star_border_yellow)))
+                    favourites_fab_id.setImageDrawable(ContextCompat.getDrawable(this.applicationContext,R.drawable.ic_star_full_yellow))
+                    favourites_fab_id.show()
                     Toast.makeText(
                         this,
                         "${resultMovieObject.title} ${getString(R.string.deleted_movie_from_favorite_message)}",
@@ -104,7 +107,9 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
                     ).show()
                 } else {
                     detailViewModel.addToDatabase(resultMovieObject)
-                    favourites_fab_id.setImageDrawable(getDrawable((R.drawable.ic_star_full_yellow)))
+                    favourites_fab_id.setImageDrawable(ContextCompat.getDrawable(this.applicationContext,R.drawable.ic_star_border_yellow))
+                    favourites_fab_id.show()
+
                     Toast.makeText(
                         this,
                         "${resultMovieObject.title} ${getString(R.string.added_movie_to_favorite_message)}",

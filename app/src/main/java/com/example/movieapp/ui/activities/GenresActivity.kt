@@ -148,7 +148,7 @@ class GenresActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun startAnimation() {
-        var anim = AnimationUtils.loadAnimation(applicationContext, R.anim.fly_in_from_top_corner)
+        val anim = AnimationUtils.loadAnimation(applicationContext, R.anim.fly_in_from_top_corner)
         recycler_view_genres_id.animation = anim
         anim.start()
     }

@@ -43,27 +43,29 @@ class BrowseRecyclerViewAdapter : RecyclerView.Adapter<BrowseViewHolder>() {
 
 class BrowseViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
+    private fun genresNames(id: Int) = view.context.getString(id)
+
     fun getGenresIcons(items: String, holder: BrowseViewHolder) {
         when (items) {
-            "Action" -> changeBackground(holder, R.drawable.action)
-            "Adventure" -> changeBackground(holder, R.drawable.adventure)
-            "Animation" -> changeBackground(holder, R.drawable.animation)
-            "Comedy" -> changeBackground(holder, R.drawable.comedy)
-            "Crime" -> changeBackground(holder, R.drawable.crime)
-            "Documentary" -> changeBackground(holder, R.drawable.documentary)
-            "Drama" -> changeBackground(holder, R.drawable.drama)
-            "Family" -> changeBackground(holder, R.drawable.family)
-            "Fantasy" -> changeBackground(holder, R.drawable.fantasy)
-            "History" -> changeBackground(holder, R.drawable.history)
-            "Horror" -> changeBackground(holder, R.drawable.horror)
-            "Music" -> changeBackground(holder, R.drawable.music)
-            "Mystery" -> changeBackground(holder, R.drawable.mystery)
-            "Romance" -> changeBackground(holder, R.drawable.romance)
-            "Science Fiction" -> changeBackground(holder, R.drawable.sciencefiction)
-            "TV Movie" -> changeBackground(holder, R.drawable.tvmovie)
-            "Thriller" -> changeBackground(holder, R.drawable.thriller)
-            "War" -> changeBackground(holder, R.drawable.war)
-            "Western" -> changeBackground(holder, R.drawable.western)
+            genresNames(R.string.genres_action) -> changeBackground(holder, R.drawable.action)
+            genresNames(R.string.genres_adventure) -> changeBackground(holder, R.drawable.adventure)
+            genresNames(R.string.genres_animation) -> changeBackground(holder, R.drawable.animation)
+            genresNames(R.string.genres_comedy) -> changeBackground(holder, R.drawable.comedy)
+            genresNames(R.string.genres_crime) -> changeBackground(holder, R.drawable.crime)
+            genresNames(R.string.genres_documentary) -> changeBackground(holder, R.drawable.documentary)
+            genresNames(R.string.genres_drama) -> changeBackground(holder, R.drawable.drama)
+            genresNames(R.string.genres_family) -> changeBackground(holder, R.drawable.family)
+            genresNames(R.string.genres_fantasy) -> changeBackground(holder, R.drawable.fantasy)
+            genresNames(R.string.genres_history) -> changeBackground(holder, R.drawable.history)
+            genresNames(R.string.genres_horror) -> changeBackground(holder, R.drawable.horror)
+            genresNames(R.string.genres_music) -> changeBackground(holder, R.drawable.music)
+            genresNames(R.string.genres_mystery) -> changeBackground(holder, R.drawable.mystery)
+            genresNames(R.string.genres_romance) -> changeBackground(holder, R.drawable.romance)
+            genresNames(R.string.genres_science_fiction) -> changeBackground(holder, R.drawable.sciencefiction)
+            genresNames(R.string.genres_tv_movie) -> changeBackground(holder, R.drawable.tvmovie)
+            genresNames(R.string.genres_thriller) -> changeBackground(holder, R.drawable.thriller)
+            genresNames(R.string.genres_war) -> changeBackground(holder, R.drawable.war)
+            genresNames(R.string.genres_western) -> changeBackground(holder, R.drawable.western)
             else -> changeBackground(holder, R.drawable.other)
         }
     }

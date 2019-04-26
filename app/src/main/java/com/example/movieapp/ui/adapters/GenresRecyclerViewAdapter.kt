@@ -27,8 +27,10 @@ class GenresRecyclerViewAdapter : RecyclerView.Adapter<GenresViewHolder>() {
     override fun onBindViewHolder(holder: GenresViewHolder, position: Int) {
         holder.itemView.run {
             card_view_txt_genres_id.text = items[position].title
-            Picasso.get().load("https://image.tmdb.org/t/p/w500${items[position].poster_path}").into(
-                card_view_genres_background_id)
+            if (items[position].poster_path != null) {
+                Picasso.get().load("https://image.tmdb.org/t/p/w500${items[position].poster_path}").into(
+                    card_view_genres_background_id)
+            }
         }
         holder.itemView.card_view_genres_id.setOnClickListener {
             putToDetailsId?.invoke(items[position].id)

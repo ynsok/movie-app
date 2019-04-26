@@ -67,6 +67,18 @@
 
         </android.support.design.widget.AppBarLayout>
 
+        <ImageButton
+            android:id="@+id/favourites_fab_id"
+            style="@style/FavouritesFab"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/titleBackground"
+            app:backgroundTint="@color/light_blue"
+            app:layout_anchor="@id/app_bar_layout"
+            android:elevation="10dp"
+            app:layout_anchorGravity="bottom|right|end" />
+
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -320,16 +332,6 @@
         </android.support.v4.widget.NestedScrollView>
 
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/favourites_fab_id"
-            style="@style/FavouritesFab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/titleBackground"
-            app:backgroundTint="@color/light_blue"
-            app:layout_anchor="@id/app_bar_layout"
-            app:layout_anchorGravity="bottom|right|end" />
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

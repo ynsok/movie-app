@@ -24,6 +24,8 @@ import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 
 // TODO revenue is often show as 0$ cos its saved as 0 in the database -> if revenue = 0, we should display that it is not known or hide revenue from view
+// TODO turn fab 'on' only when the app is in portrait mode
+// TODO nicer 'fab' button 
 
 class DetailsActivity : AppCompatActivity(), KodeinAware {
     override val kodein: Kodein by kodein()
@@ -49,7 +51,7 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
         getSuccessRespond()
         setUpDetailsToolbar()
         setUpDetailsCollapsingToolbar()
-        // initializeFavouritesFabAction()
+        //initializeFavouritesFabAction()
         exo_player_details_id.player = exoPlayer.getPlayerView()?.player
         getConvertedMovieKey(savedInstanceState)
     }
@@ -90,55 +92,59 @@ class DetailsActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun initializeFavouritesFabAction() {
-        isInFavorite = { result ->
-            if (result) {
-                favourites_fab_id.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this.applicationContext,
-                        R.drawable.ic_star_full_yellow
-                    )
-                )
-            } else {
+       // if (TODO do if in portrait mode only)
+        {
 
-                favourites_fab_id.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this.applicationContext,
-                        R.drawable.ic_star_border_yellow
-                    )
-                )
-            }
-
-            favourites_fab_id.setOnClickListener {
+            isInFavorite = { result ->
                 if (result) {
-                    detailViewModel.removeFromDatabase(resultMovieObject)
                     favourites_fab_id.setImageDrawable(
                         ContextCompat.getDrawable(
                             this.applicationContext,
                             R.drawable.ic_star_full_yellow
                         )
                     )
-                    Toast.makeText(
-                        this,
-                        "${resultMovieObject.title} ${getString(R.string.deleted_movie_from_favorite_message)}",
-                        Toast.LENGTH_LONG
-                    ).show()
                 } else {
-                    detailViewModel.addToDatabase(resultMovieObject)
+
                     favourites_fab_id.setImageDrawable(
                         ContextCompat.getDrawable(
                             this.applicationContext,
                             R.drawable.ic_star_border_yellow
                         )
                     )
+                }
 
-                    Toast.makeText(
-                        this,
-                        "${resultMovieObject.title} ${getString(R.string.added_movie_to_favorite_message)}",
-                        Toast.LENGTH_LONG
-                    ).show()
+                favourites_fab_id.setOnClickListener {
+                    if (result) {
+                        detailViewModel.removeFromDatabase(resultMovieObject)
+                        favourites_fab_id.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                this.applicationContext,
+                                R.drawable.ic_star_full_yellow
+                            )
+                        )
+                        Toast.makeText(
+                            this,
+                            "${resultMovieObject.title} ${getString(R.string.deleted_movie_from_favorite_message)}",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        detailViewModel.addToDatabase(resultMovieObject)
+                        favourites_fab_id.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                this.applicationContext,
+                                R.drawable.ic_star_border_yellow
+                            )
+                        )
+
+                        Toast.makeText(
+                            this,
+                            "${resultMovieObject.title} ${getString(R.string.added_movie_to_favorite_message)}",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
             }
-        }
+    }
     }
 
     private fun startFetchingById(id: Int) {

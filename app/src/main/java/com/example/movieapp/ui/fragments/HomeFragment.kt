@@ -60,7 +60,7 @@ class HomeFragment : Fragment(), KodeinAware {
         initializeSnackBar(view.rootView.home_container_id).dismiss()
         initializeViews()
         if (savedInstanceState != null) {
-             verticalAdapterPosition = savedInstanceState.getInt(VERTICAL_POSITION)
+            verticalAdapterPosition = savedInstanceState.getInt(VERTICAL_POSITION)
             val adapterPosition =
                 savedInstanceState.getParcelable(HORIZONTAL_POSITION) as AdapterPosition
             this.adapterPosition = adapterPosition.horizontalVerticalPosition
@@ -163,8 +163,10 @@ class HomeFragment : Fragment(), KodeinAware {
             message,
             Snackbar.LENGTH_INDEFINITE
         )
-    private fun startDetailActivity(){
-        homeVerticalRecyclerView.sendId = { startActivity(DetailsActivity.getIntent(this.context!!,it))}
+
+    private fun startDetailActivity() {
+        homeVerticalRecyclerView.sendId =
+            { startActivity(DetailsActivity.getIntent(this.context!!, it)) }
     }
 
     private fun startFetchingRemoteData() = homeViewModel.startFetchingMovie()

@@ -4,6 +4,8 @@ import android.app.Application
 import com.example.movieapp.BuildConfig.KEY_API
 import com.example.movieapp.network.MovieApiService
 import com.example.movieapp.repositories.Repository
+import com.example.movieapp.ui.ExoPlayer.ExoPlayer
+import com.example.movieapp.ui.YoutubeExtractor.MainYouTubeExtractor
 import com.example.movieapp.view.model.browse.BrowseViewModelFactory
 import com.example.movieapp.view.model.detail.DetailViewModel
 import com.example.movieapp.view.model.genres.GenresViewModel
@@ -69,5 +71,7 @@ class MyApplication : Application(), KodeinAware {
         bind() from provider { SearchViewModelFactory(instance()) }
         bind() from provider { GenresViewModel(instance()) }
         bind() from provider { DetailViewModel(instance()) }
+        bind() from provider { ExoPlayer(this@MyApplication) }
+        bind() from provider { MainYouTubeExtractor(this@MyApplication) }
     }
 }

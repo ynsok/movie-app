@@ -94,7 +94,7 @@ class BrowseFragment : Fragment(), KodeinAware {
     }
 
     private fun startAnimation() {
-        var anim = AnimationUtils.loadAnimation(context, R.anim.fly_in_from_center)
+        val anim = AnimationUtils.loadAnimation(context, R.anim.fly_in_from_center)
         recycler_view_browse_id.animation = anim
         anim.start()
     }

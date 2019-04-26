@@ -20,6 +20,7 @@
             android:id="@+id/card_view_genres_background_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:src="@drawable/no_poster_available"
             android:scaleType="fitXY" />
 
         <TextView
